@@ -9,4 +9,5 @@ dist/
 .env
 .env.*
 .inst/
+.institutional-workbench/
 .DS_Store

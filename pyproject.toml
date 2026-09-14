@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "institutional-workbench"
+version = "0.1.0"
+description = "A bounded Claude and Codex engineering CLI"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.10,<3"]
+
+[project.scripts]
+inst = "institutional_workbench.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/institutional_workbench"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
