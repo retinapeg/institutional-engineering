@@ -13,7 +13,9 @@ T = TypeVar("T", bound=BaseModel)
 
 
 class Provider(Protocol):
-    def ask(self, provider: str, prompt: str, schema: type[T]) -> T: ...
+    def ask(
+        self, provider: str, prompt: str, schema: type[T], *, model: str | None = None
+    ) -> T: ...
 
 
 class CliProviders:
@@ -24,9 +26,11 @@ class CliProviders:
         self.models = {"claude": claude_model, "codex": codex_model}
         self.last_usage: dict[str, Any] = {}
 
-    def ask(self, provider: str, prompt: str, schema: type[T]) -> T:
+    def ask(self, provider: str, prompt: str, schema: type[T], *, model: str | None = None) -> T:
         if provider not in self.models:
             raise Blocked(f"Unsupported provider: {provider}")
+        self.last_usage = {}
+        selected_model = model or self.models[provider]
         prompt = (
             "Use only the supplied repository snapshot and evidence. Do not use tools or access "
             "other files. Return one JSON object, no markdown fences, matching this schema:\n"
@@ -52,7 +56,7 @@ class CliProviders:
                     "--permission-mode",
                     "dontAsk",
                     "--model",
-                    self.models[provider],
+                    selected_model,
                 ]
             else:
                 argv = [
@@ -76,7 +80,7 @@ class CliProviders:
                     "-c",
                     'model_reasoning_effort="medium"',
                     "--model",
-                    self.models[provider],
+                    selected_model,
                 ]
                 for feature in (
                     "hooks",
@@ -108,6 +112,8 @@ class CliProviders:
                 self.last_usage = {
                     "models": envelope.get("modelUsage", {}),
                     "usage": envelope.get("usage", {}),
+                    "reported_cost_usd": envelope.get("total_cost_usd"),
+                    "monetary_spend": None,  # CLI estimate is not subscription marginal spend.
                 }
             else:
                 events = [json.loads(line) for line in stdout.splitlines() if line.strip()]
@@ -132,7 +138,7 @@ class CliProviders:
                         completed = True
                         self.last_usage = {
                             "usage": event.get("usage", {}),
-                            "selected_model": self.models[provider],
+                            "selected_model": selected_model,
                         }
                 if not completed or len(messages) != 1:
                     raise Blocked("Codex did not return exactly one completed response")
@@ -140,5 +146,5 @@ class CliProviders:
             return schema.model_validate_json(payload)
         except (ValueError, KeyError, TypeError) as exc:
             raise Blocked(
-                f"Malformed {provider} output for {schema.__name__}; no retry or fallback"
+                f"Malformed {provider} output for {schema.__name__}; adapter failed closed"
             ) from exc

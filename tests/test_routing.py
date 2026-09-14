@@ -1,0 +1,243 @@
+import json
+import unittest
+
+import test_workbench as fixtures
+from test_workbench import FakeProvider
+
+from institutional_workbench.models import Challenge
+from institutional_workbench.providers import CliProviders
+from institutional_workbench.routing import (
+    WEIGHTS,
+    Router,
+    model_registry,
+    profile_task,
+    select_specialists,
+)
+from institutional_workbench.runner import Blocked
+
+
+class RoutingPolicyTests(unittest.TestCase):
+    def test_domain_selection_cases(self):
+        cases = [
+            (
+                "Add farewell(name), test it. No other features; preserve input validation.",
+                "engineering",
+                {"Software Engineer", "Product Engineer"},
+                {"Data Scientist", "Statistician", "Physicist"},
+            ),
+            (
+                "Implement responsive waitlist landing page",
+                "engineering",
+                {"UX / Human Factors", "Software Engineer"},
+                {"Physicist", "Mathematician", "Statistician"},
+            ),
+            (
+                "Build relativistic starfield rendering with Doppler shift and aberration",
+                "engineering",
+                {"Physicist", "Mathematician", "Software Engineer"},
+                {"Statistician"},
+            ),
+            (
+                "Evaluate whether this classifier improvement is genuine",
+                "engineering",
+                {"Statistician", "Data Scientist"},
+                {"Physicist"},
+            ),
+            (
+                "Fix distributed queue bug",
+                "engineering",
+                {"Systems Engineer", "Security / Reliability"},
+                {"Physicist"},
+            ),
+            (
+                "Three hours left. Demo is unstable; rubric rewards wow factor",
+                "hackathon",
+                {"Hackathon Strategist / Judge", "Software Engineer", "Security / Reliability"},
+                {"Physicist"},
+            ),
+        ]
+        for task, mode, required, excluded in cases:
+            with self.subTest(task=task):
+                selected = select_specialists(profile_task(task, mode, has_tests=True), mode)
+                names = {item.role for item in selected}
+                self.assertTrue(required <= names)
+                self.assertFalse(excluded & names)
+                self.assertLessEqual(len(selected), 4)
+                self.assertTrue(all(item.jurisdiction and item.question for item in selected))
+
+    def test_specialist_cap_and_economy_rename(self):
+        profile = profile_task(
+            "Rename API field across five files with exhaustive tests", "economy", has_tests=True
+        )
+        self.assertEqual(select_specialists(profile, "economy"), [])
+        with self.assertRaises(ValueError):
+            select_specialists(profile, "engineering", maximum=5)
+        self.assertTrue(profile.explanation)
+
+    def test_modes_differ_and_economy_is_cheapest_sufficient(self):
+        self.assertEqual(len({json.dumps(w, sort_keys=True) for w in WEIGHTS.values()}), 3)
+        profile = profile_task(
+            "Rename an API field with exhaustive tests", "economy", has_tests=True
+        )
+        route = Router("economy").choose(profile, "BUILD", "Software Engineer")
+        self.assertEqual(route.selected_tier, 1)
+        self.assertEqual(route.relative_cost_class, "low")
+        self.assertIn(route.selected_model, {"haiku", "gpt-5.6-luna"})
+
+    def test_hackathon_ignores_cost_and_prefers_fast_reliable_route(self):
+        profile = profile_task(
+            "Build the strongest demo before the deadline", "hackathon", has_tests=True
+        )
+        registry = model_registry()
+        first = Router("hackathon", registry).choose(profile, "DECIDE", "Hackathon Strategist")
+        for model in registry:
+            model.cost_class = "premium" if model.model == first.selected_model else "very_low"
+        second = Router("hackathon", registry).choose(profile, "DECIDE", "Hackathon Strategist")
+        self.assertEqual(first.selected_model, second.selected_model)
+        self.assertEqual(WEIGHTS["hackathon"]["cost"], 0)
+
+    def test_roles_and_models_independent_manual_override(self):
+        profile = profile_task("Numerical solver stability", "engineering", has_tests=True)
+        for provider, model in (("claude", "sonnet"), ("codex", "gpt-5.6-terra")):
+            route = Router("engineering", overrides={provider: model}).choose(
+                profile, "ANALYSE", "Mathematician", pinned_provider=provider
+            )
+            self.assertEqual(route.specialist_role, "Mathematician")
+            self.assertEqual(route.selected_provider, provider)
+            self.assertEqual(route.selected_model, model)
+            self.assertFalse(route.escalation_allowed)
+            self.assertIn("Manual", route.rationale)
+
+    def test_escalation_one_level_no_cycles_and_no_unconfigured_tiers(self):
+        registry = [m for m in model_registry() if m.tier in {1, 3}]
+        router = Router("economy", registry)
+        profile = profile_task("Rename field", "economy", has_tests=True)
+        first = router.choose(profile, "BUILD", "Builder")
+        second = router.choose(profile, "FIX", "Builder", previous=first, trigger="test failed")
+        self.assertEqual((first.selected_tier, second.selected_tier), (1, 3))
+        self.assertEqual(second.escalation_trigger, "test failed")
+        with self.assertRaises(Blocked):
+            router.choose(profile, "FIX", "Builder", previous=second)
+
+    def test_adapter_passes_exact_overridden_model(self):
+        class Runner:
+            def __init__(self):
+                self.args = []
+
+            def run(self, argv, *args):
+                self.args = argv
+                return (
+                    0,
+                    json.dumps(
+                        {
+                            "subtype": "success",
+                            "result": '{"major_flaw":"","disagreement":"","missing_fact":""}',
+                        }
+                    ),
+                    "",
+                )
+
+        runner = Runner()
+        CliProviders(runner).ask("claude", "question", Challenge, model="opus")
+        self.assertEqual(runner.args[runner.args.index("--model") + 1], "opus")
+
+
+class RoutedFake(FakeProvider):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.models = []
+
+    def ask(self, provider, prompt, schema, *, model=None):
+        self.models.append(model)
+        return super().ask(provider, prompt, schema)
+
+
+class RoutedDeliveryTests(unittest.TestCase):
+    def setUp(self):
+        self.fixture = fixtures.WorkbenchTests()
+        self.fixture.setUp()
+        self.addCleanup(self.fixture.doCleanups)
+
+    def test_original_path_remains_available(self):
+        fake = FakeProvider()
+        result = self.fixture.bench(fake, routing=False).run()
+        self.assertEqual(result["status"], "DELIVERED")
+        self.assertEqual(
+            [c[0] for c in fake.calls],
+            ["codex", "claude", "codex", "claude", "codex", "claude", "codex"],
+        )
+
+    def test_routing_logged_and_independence_preserved(self):
+        fake = RoutedFake()
+        bench = self.fixture.bench(fake, routing=True, mode="engineering")
+        result = bench.run()
+        self.assertEqual(result["status"], "DELIVERED")
+        self.assertEqual(result["calls"], 7)
+        rows = json.loads((bench.run_dir / "invocations.json").read_text())
+        self.assertEqual(len(rows), len(fake.calls))
+        self.assertTrue(
+            all(
+                row["rationale"] and row["schema_success"] and row["wall_seconds"] >= 0
+                for row in rows
+            )
+        )
+        self.assertTrue(all("reports" not in call[2] for call in fake.calls[:2]))
+        self.assertTrue(all(model for model in fake.models))
+        self.assertTrue(all(row["actual_monetary_spend"] is None for row in rows))
+
+    def test_failed_verification_escalates_only_builder(self):
+        bench = self.fixture.bench(RoutedFake(bad_build=True), routing=True, mode="economy")
+        result = bench.run()
+        self.assertEqual(result["status"], "DELIVERED")
+        builders = [r for r in bench.invocations if r["specialist_role"] == "Builder"]
+        self.assertEqual(len(builders), 2)
+        self.assertEqual(builders[1]["selected_tier"], builders[0]["selected_tier"] + 1)
+        self.assertFalse(builders[0]["acceptance_result"])
+        self.assertTrue(builders[1]["acceptance_result"])
+        self.assertEqual(result["repairs"], 1)
+
+    def test_failed_route_escalates_once_then_stops(self):
+        class Failing(RoutedFake):
+            def ask(self, *args, **kwargs):
+                raise Blocked("Malformed response")
+
+        bench = self.fixture.bench(Failing(), routing=True)
+        result = bench.run()
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertEqual(result["calls"], 2)
+        self.assertTrue(bench.invocations[1]["escalation_from"])
+
+    def test_deterministic_tests_bypass_models_and_preserve_main_tag(self):
+        (self.fixture.repo / "app.py").write_text("VALUE = 42\n")
+        self.fixture.git("add", "app.py")
+        self.fixture.git("commit", "-m", "passing fixture")
+        self.fixture.git("tag", "v0.1.0")
+        before = self.fixture.git("rev-parse", "main", "v0.1.0")
+        fake = RoutedFake()
+        bench = self.fixture.bench(fake, routing=True, mode="economy")
+        bench.objective = "Run existing tests"
+        result = bench.run()
+        self.assertEqual(result["status"], "DELIVERED")
+        self.assertEqual(result["calls"], 0)
+        self.assertEqual(fake.calls, [])
+        self.assertEqual(before, self.fixture.git("rev-parse", "main", "v0.1.0"))
+
+    def test_hackathon_limits_survive_router(self):
+        bench = self.fixture.bench(
+            RoutedFake(bad_build=True, repairs_fail=True), routing=True, mode="hackathon"
+        )
+        result = bench.run()
+        self.assertEqual(result["status"], "BLOCKED")
+        self.assertLessEqual(result["calls"], 16)
+        self.assertLessEqual(result["repairs"], 2)
+        self.assertEqual(sum(r["task_or_phase"] == "6/7 RED TEAM" for r in bench.invocations), 1)
+
+    def test_deadline_never_becomes_an_escalation(self):
+        bench = self.fixture.bench(RoutedFake(), routing=True)
+        bench.runner.deadline = 0
+        self.assertEqual(bench.run()["status"], "BLOCKED")
+        self.assertEqual(bench.state["calls"], 0)
+
+
+if __name__ == "__main__":
+    unittest.main()

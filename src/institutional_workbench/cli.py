@@ -8,18 +8,28 @@ from pathlib import Path
 
 from .orchestrator import Workbench
 from .providers import CliProviders
+from .routing import ALIASES, Router
 from .runner import Blocked, Runner
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Decide, build, test, deliver, stop.")
-    parser.add_argument("command", choices=["dev", "hack", "status", "cancel"])
+    parser.add_argument(
+        "command",
+        choices=["engineering", "hackathon", "economy", "dev", "hack", "status", "cancel"],
+    )
     parser.add_argument("task", nargs="?")
     parser.add_argument("--repo", type=Path, default=Path.cwd())
-    parser.add_argument("--builder", choices=["claude", "codex"], default="claude")
-    parser.add_argument("--reviewer", choices=["claude", "codex"], default="codex")
-    parser.add_argument("--claude-model", default="sonnet")
-    parser.add_argument("--codex-model", default="gpt-5.6-terra")
+    parser.add_argument("--builder", choices=["claude", "codex"])
+    parser.add_argument("--reviewer", choices=["claude", "codex"])
+    parser.add_argument("--claude-model")
+    parser.add_argument("--codex-model")
+    parser.add_argument(
+        "--no-routing", action="store_true", help="Use the v0.1 fixed-provider path"
+    )
+    parser.add_argument(
+        "--explain-routing", action="store_true", help="Show specialist/model selection reasons"
+    )
     parser.add_argument(
         "--quick", action="store_true", help="Routine task: builder only, no expert roundtable"
     )
@@ -66,7 +76,7 @@ def main() -> int:
                 print(json.dumps(state, indent=2))
             return 0
         if not args.task or not args.task.strip():
-            parser.error("dev/hack require a task")
+            parser.error("engineering/hackathon/economy require a task")
         with (root / "run.lock").open("a") as lock:
             try:
                 fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -80,7 +90,9 @@ def main() -> int:
             runner = Runner(run_dir / "cancel", args.minutes * 60)
             signal.signal(signal.SIGINT, lambda *_: runner.cancel_file.touch())
             signal.signal(signal.SIGTERM, lambda *_: runner.cancel_file.touch())
-            providers = CliProviders(runner, args.claude_model, args.codex_model)
+            providers = CliProviders(
+                runner, args.claude_model or "sonnet", args.codex_model or "gpt-5.6-terra"
+            )
             state = Workbench(
                 repo,
                 run_dir,
@@ -88,10 +100,25 @@ def main() -> int:
                 providers,
                 mode=args.command,
                 objective=args.task,
-                builder=args.builder,
-                reviewer=args.reviewer,
+                builder=args.builder or "claude",
+                reviewer=args.reviewer or "codex",
                 quick=args.quick,
                 tests=args.test,
+                routing=not args.no_routing,
+                router=Router(
+                    ALIASES.get(args.command, args.command),
+                    overrides={
+                        key: value
+                        for key, value in (
+                            ("claude", args.claude_model),
+                            ("codex", args.codex_model),
+                        )
+                        if value
+                    },
+                ),
+                pinned_builder=args.builder is not None,
+                pinned_reviewer=args.reviewer is not None,
+                explain_routing=args.explain_routing,
             ).run()
             print("\n" + state["status"])
             if state["status"] == "DELIVERED":
@@ -103,7 +130,7 @@ def main() -> int:
                 print("Run: " + state["run_command"])
                 print("Files changed: " + ", ".join(state["files_changed"]))
                 print("Known limitations: " + ("; ".join(state["limitations"]) or "None reported"))
-                if args.command == "hack":
+                if args.command in {"hack", "hackathon"}:
                     print("Pitch: " + " → ".join(state["pitch_outline"]))
                     print("Fallback: " + state["fallback"])
             else:

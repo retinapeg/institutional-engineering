@@ -7,18 +7,28 @@ import shlex
 import sys
 import time
 from pathlib import Path
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from pydantic import BaseModel
 
 from .models import BuildTask, Challenge, Decision, ExpertReport, FileChange, QAResult, RepairResult
 from .providers import Provider
+from .routing import (
+    ALIASES,
+    MODE_TEXT,
+    Mode,
+    Router,
+    RoutingDecision,
+    profile_task,
+    select_specialists,
+)
 from .runner import Blocked, Runner
 
 T = TypeVar("T", bound=BaseModel)
 POLICIES = {
-    "dev": "Ship the smallest correct implementation. Prioritise working behaviour, correctness, reliability and maintainability. No speculative refactoring.",
-    "hack": "Optimise the supplied judging rubric, deadline, sponsor stack and visible user value. Rank scoring opportunities. Choose ONE winning demo moment. Verify the demo path. Freeze stable code. Return pitch and fallback; mark missing rubric details UNKNOWN.",
+    **MODE_TEXT,
+    "dev": MODE_TEXT["engineering"],
+    "hack": MODE_TEXT["hackathon"],
 }
 REASONING = "Identify objective and constraints. Reduce the problem; look for invariants, symmetry and the highest-leverage change where relevant. Make claims testable. Evidence outranks confidence. Do not imitate or automatically agree with the user. Build a vertical slice and stop."
 
@@ -38,9 +48,22 @@ class Workbench:
         quick: bool = False,
         tests: list[str] | None = None,
         experts: list[tuple[str, str, str]] | None = None,
+        routing: bool = False,
+        router: Router | None = None,
+        pinned_builder: bool = False,
+        pinned_reviewer: bool = False,
+        explain_routing: bool = False,
     ):
         self.repo, self.run_dir, self.runner, self.provider = repo, run_dir, runner, provider
-        self.mode, self.objective = mode, objective
+        self.mode, self.objective = cast(Mode, ALIASES.get(mode, mode)), objective
+        self.routing = routing
+        self.router = router or Router(self.mode)
+        self.pinned_builder, self.pinned_reviewer = pinned_builder, pinned_reviewer
+        self.explain_routing = explain_routing
+        self.explicit_experts = experts is not None
+        self.profile = profile_task(objective, self.mode)
+        self.last_routes: dict[str, RoutingDecision] = {}
+        self.invocations: list[dict[str, Any]] = []
         self.builder, self.reviewer, self.quick = builder, reviewer, quick
         self.commands = [shlex.split(command) for command in (tests or [])]
         self.experts = experts if experts is not None else self.select_experts()
@@ -80,7 +103,7 @@ class Workbench:
                 "What is the smallest correct change and its failure test?",
             )
         ]
-        if self.mode == "hack":
+        if self.mode == "hackathon":
             roles.append(
                 (
                     "Hackathon Strategist",
@@ -129,6 +152,8 @@ class Workbench:
         )
 
     def ask(self, phase: str, provider: str, context: dict[str, Any], schema: type[T]) -> T:
+        if self.routing:
+            return self.ask_routed(phase, provider, context, schema)
         self.runner.check()
         if self.state["calls"] >= self.state["max_calls"]:
             raise Blocked("Model-call cap reached; no further consultation")
@@ -148,6 +173,128 @@ class Workbench:
         )
         self.event(phase, f"{provider} finished", usage=getattr(self.provider, "last_usage", {}))
         return result
+
+    def ask_routed(self, phase: str, preferred: str, context: dict[str, Any], schema: type[T]) -> T:
+        role = str(
+            context.get(
+                "role",
+                "Builder"
+                if schema in {BuildTask, RepairResult}
+                else "Decision Authority"
+                if schema is Decision
+                else "Security / Reliability",
+            )
+        )
+        pinned = (
+            self.builder
+            if role == "Builder" and (self.pinned_builder or self.quick)
+            else self.reviewer
+            if (schema in {Decision, QAResult} and self.pinned_reviewer)
+            else self.builder
+            if self.quick
+            else None
+        )
+        previous = self.last_routes.get("Builder") if schema is RepairResult else None
+        trigger = "failed executable verification or QA finding" if previous else None
+        if previous and not previous.escalation_allowed:
+            raise Blocked("Builder route cannot escalate; refusing to repeat a failed model")
+        local_profile = (
+            self.profile.model_copy(update={"latency_sensitivity": "critical"})
+            if self.runner.deadline - time.monotonic() < 180
+            else self.profile
+        )
+        for attempt in range(2):  # At most one local escalation; never recurse or restart a round.
+            self.runner.check()
+            if self.state["calls"] >= self.state["max_calls"]:
+                raise Blocked("Model-call cap reached; no further routing")
+            route = self.router.choose(
+                local_profile,
+                phase,
+                role,
+                preferred=preferred,
+                pinned_provider=pinned,
+                previous=previous,
+                trigger=trigger,
+            )
+            self.state["calls"] += 1
+            call_id = self.state["calls"]
+            self.event(
+                phase,
+                f"{role} · {route.selected_provider}/{route.selected_model}",
+                routing=route.model_dump(),
+            )
+            if self.explain_routing:
+                print("  " + route.rationale, flush=True)
+            started = time.time()
+            record: dict[str, Any] = {
+                "run_id": self.run_dir.name,
+                "call_id": call_id,
+                **route.model_dump(),
+                "started": started,
+                "ended": None,
+                "wall_seconds": None,
+                "success": False,
+                "schema_success": False,
+                "acceptance_result": None,
+                "repair_required": None,
+                "input_tokens": None,
+                "output_tokens": None,
+                "reported_cost_usd": None,
+                "actual_monetary_spend": None,
+            }
+            self.invocations.append(record)
+            self.write_telemetry()
+            prompt = json.dumps(
+                {
+                    "objective": self.objective,
+                    "policy": POLICIES[self.mode],
+                    "reasoning": REASONING,
+                    **context,
+                }
+            )
+            try:
+                result = self.provider.ask(
+                    route.selected_provider, prompt, schema, model=route.selected_model
+                )
+                record["schema_success"] = True
+                if (
+                    isinstance(result, ExpertReport)
+                    and local_profile.verification_strength == "weak"
+                    and (result.confidence < 0.55 or not result.evidence)
+                ):
+                    raise Blocked(
+                        "Insufficient independent evidence/confidence under weak verification"
+                    )
+                record["success"] = True
+                self.last_routes[role] = route
+                (self.run_dir / "reports" / f"{call_id:02d}-{schema.__name__}.json").write_text(
+                    result.model_dump_json(indent=2)
+                )
+                return result
+            except Blocked as exc:
+                record["failure"] = str(exc)
+                self.runner.check()  # Cancellation/deadline never becomes a model escalation.
+                if attempt or not route.escalation_allowed:
+                    raise
+                previous, trigger = route, str(exc)
+            finally:
+                record.update(ended=time.time(), wall_seconds=round(time.time() - started, 3))
+                usage = getattr(self.provider, "last_usage", {})
+                tokens = usage.get("usage", {})
+                record.update(
+                    input_tokens=tokens.get("input_tokens"),
+                    output_tokens=tokens.get("output_tokens"),
+                    reported_cost_usd=usage.get("reported_cost_usd"),
+                    provider_metadata=usage,
+                )
+                self.write_telemetry()
+        raise Blocked("Bounded route exhausted")
+
+    def write_telemetry(self) -> None:
+        target = self.run_dir / "invocations.json"
+        temporary = target.with_suffix(".tmp")
+        temporary.write_text(json.dumps(self.invocations, indent=2) + "\n")
+        os.replace(temporary, target)
 
     def snapshot(self, directory: Path) -> dict[str, str]:
         paths = self.git(
@@ -210,10 +357,17 @@ class Workbench:
             result = {"command": command, "exit_code": code, "output": (out + err)[-20000:]}
             self.test_results.append(result)
         (self.run_dir / "output/tests.json").write_text(json.dumps(self.test_results, indent=2))
-        return all(
+        passed = all(
             item["exit_code"] == 0 and "Ran 0 tests" not in item["output"]
             for item in self.test_results
         )
+        if self.routing:
+            for record in reversed(self.invocations):
+                if record["specialist_role"] == "Builder" and record["success"]:
+                    record.update(acceptance_result=passed, repair_required=not passed)
+                    break
+            self.write_telemetry()
+        return passed
 
     def apply(self, files: list[FileChange], *, protected: set[str] | None = None) -> None:
         names = [change.path for change in files]
@@ -258,6 +412,48 @@ class Workbench:
             self.git("worktree", "add", "--detach", str(self.work), base)
             self.test_commands()
             before = self.snapshot(self.work)
+            if self.routing:
+                self.profile = profile_task(
+                    self.objective,
+                    self.mode,
+                    context_chars=sum(map(len, before.values())),
+                    has_tests=bool(self.commands),
+                    remaining_seconds=self.runner.deadline - time.monotonic(),
+                )
+                self.state["task_profile"] = self.profile.model_dump()
+                if not self.explicit_experts:
+                    selected = [] if self.quick else select_specialists(self.profile, self.mode)
+                    self.experts = [
+                        (s.role, "claude" if i % 2 else "codex", s.jurisdiction + ". " + s.question)
+                        for i, s in enumerate(selected)
+                    ]
+                self.state["experts"] = [
+                    {"role": role, "preferred_provider": pref, "question": question}
+                    for role, pref, question in self.experts
+                ]
+                self.event("PROFILE", "; ".join(self.profile.explanation))
+                if self.profile.deterministic_action == "test":
+                    self.state.update(
+                        deliverable="Verified existing tests",
+                        acceptance_criteria=["Existing frozen test commands pass"],
+                    )
+                    if not self.test():
+                        raise Blocked(
+                            "Existing tests failed; deterministic verification does not authorise code repair"
+                        )
+                    self.state.update(
+                        status="DELIVERED",
+                        files_changed=[],
+                        tests=self.test_results,
+                        run_command=shlex.join(self.commands[0]),
+                        limitations=[],
+                        pitch_outline=[],
+                        fallback="",
+                    )
+                    self.event("7/7 DELIVERED", "Tier 0: existing tests verified; zero model calls")
+                    self.state["elapsed_seconds"] = round(time.time() - self.state["started"], 1)
+                    self.save()
+                    return self.state
             reports = []
             for role, provider, question in self.experts:
                 reports.append(
@@ -314,7 +510,7 @@ class Workbench:
                 "snapshot": before,
                 "decision": decision.model_dump(),
                 "acceptance_commands": self.commands,
-                "instruction": "BUILD NOW. Return complete contents of only changed files, plus relevant tests. No deletions, hidden files, new dependencies or unrelated features. Never weaken existing tests. No prose-only deliverable.",
+                "instruction": "BUILD NOW. Return complete contents of only changed files, plus relevant tests. No deletions, hidden files, new dependencies or unrelated features. Existing test files are IMMUTABLE: do not include them in files, even to add tests. Add coverage in NEW test files. No prose-only deliverable.",
             }
             build = self.ask("4/7 BUILD", self.builder, context, BuildTask)
             if build.question:
@@ -373,6 +569,12 @@ class Workbench:
                     + "; ".join(qa.critical_findings)
                 )
             needs_fix = not passed or qa.verdict == "FIX" or not qa.acceptance_met
+            if self.routing and needs_fix:
+                for record in reversed(self.invocations):
+                    if record["specialist_role"] == "Builder" and record["success"]:
+                        record["repair_required"] = True
+                        break
+                self.write_telemetry()
             for _ in range(2):
                 if not needs_fix:
                     break
