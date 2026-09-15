@@ -1,0 +1,167 @@
+{
+  "key": "9bca637a33419f8406c69639",
+  "run_id": "20260915-023138",
+  "task_id": "software_merge_intervals",
+  "domain": "software",
+  "condition": "matched",
+  "role": "Software Engineer",
+  "provider": "claude",
+  "model": "sonnet",
+  "repeat": 2,
+  "sweep": "primary",
+  "task_text": "Fix merge_intervals(intervals) in solution.py. Inputs are lists of [start,end] integer CLOSED intervals. Merge overlaps AND touching endpoints, sort by start, return fresh list-of-lists, never mutate input (including inner lists). Empty list returns[]. Reversed interval start>end raises ValueError before producing a result. Degenerate [x,x] is valid. No imports or dependencies. Return full solution.py in files, with only pure functions; allowed built-ins len/range/enumerate/zip/sorted/list/tuple/str/int/float/bool/abs/min/max/sum/round/ValueError; the only allowed method call is list.append. Do not include tests. Inputs have at most12 intervals with coordinates -20..20.",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "bugs_fixed": [
+        "input intervals mutated via intervals.sort() (method call also disallowed)",
+        "strict '<' comparison missed touching endpoints like [1,2] and [2,3]",
+        "unconditional overwrite of merged[-1][1] could shrink a merged interval when a contained interval had a smaller end (e.g. [1,10],[2,3])",
+        "no validation that start<=end, so reversed intervals silently passed through instead of raising ValueError"
+      ],
+      "file": "solution.py"
+    },
+    "concise_method_summary": "Rewrote merge_intervals as a single pure function using only allowed builtins/method calls. First pass copies each [start,end] pair into a brand-new list after validating start<=end (raising ValueError immediately on violation, before any merged output exists), so the original input and its inner lists are never touched. Uses the builtin sorted() (not the disallowed list.sort() method) on the list of fresh [start,end] pairs; Python's list comparison naturally sorts by start then end. A second pass builds the merged result: a new interval starts a fresh group unless its start is <= the current group's end (this covers both overlapping and touching intervals, e.g. [1,2]+[2,3] -> [1,3]); when continuing a group, the end is only extended to the max of the two ends via 'if end > merged[-1][1]', so fully-contained intervals (e.g. [2,3] inside [1,10]) don't shrink the merged result. The only method call used anywhere is list.append; all other operations are plain builtins, subscripting, or assignment.",
+    "assumptions": [
+      "Each inner element of intervals is a 2-element sequence [start, end] of ints (interval[0], interval[1] indexing is valid)",
+      "'Touching endpoints' means merged[-1][1] == next start should merge (closed intervals sharing a boundary point)",
+      "Sorting ties (equal start) by end ascending, as produced by default list/tuple comparison in sorted(), is acceptable since the task only specifies 'sort by start'",
+      "Raising ValueError as soon as any invalid interval is found (before merging begins) satisfies 'raises ValueError before producing a result'",
+      "list[list[int]] type annotations are permitted since they are not function/method calls and appear in the original snapshot"
+    ],
+    "confidence": 0.93,
+    "proposed_verification": [
+      "merge_intervals([]) == []",
+      "merge_intervals([[1,3],[2,6],[8,10],[15,18]]) == [[1,6],[8,10],[15,18]]",
+      "merge_intervals([[1,2],[2,3]]) == [[1,3]] (touching endpoints merge)",
+      "merge_intervals([[1,10],[2,3]]) == [[1,10]] (contained interval must not shrink the end)",
+      "merge_intervals([[5,5]]) == [[5,5]] and original input list/inner lists are unchanged after the call (identity/equality check against a pre-call deep copy)",
+      "merge_intervals([[3,1]]) raises ValueError"
+    ],
+    "files": [
+      {
+        "path": "solution.py",
+        "content": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    copied: list[list[int]] = []\n    for interval in intervals:\n        start = interval[0]\n        end = interval[1]\n        if start > end:\n            raise ValueError(\"interval start must not exceed end\")\n        copied.append([start, end])\n    ordered = sorted(copied)\n    merged: list[list[int]] = []\n    for start, end in ordered:\n        if merged and start <= merged[-1][1]:\n            if end > merged[-1][1]:\n                merged[-1][1] = end\n        else:\n            merged.append([start, end])\n    return merged\n"
+      }
+    ]
+  },
+  "response_text": "{\"answer\":{\"bugs_fixed\":[\"input intervals mutated via intervals.sort() (method call also disallowed)\",\"strict '<' comparison missed touching endpoints like [1,2] and [2,3]\",\"unconditional overwrite of merged[-1][1] could shrink a merged interval when a contained interval had a smaller end (e.g. [1,10],[2,3])\",\"no validation that start<=end, so reversed intervals silently passed through instead of raising ValueError\"],\"file\":\"solution.py\"},\"concise_method_summary\":\"Rewrote merge_intervals as a single pure function using only allowed builtins/method calls. First pass copies each [start,end] pair into a brand-new list after validating start<=end (raising ValueError immediately on violation, before any merged output exists), so the original input and its inner lists are never touched. Uses the builtin sorted() (not the disallowed list.sort() method) on the list of fresh [start,end] pairs; Python's list comparison naturally sorts by start then end. A second pass builds the merged result: a new interval starts a fresh group unless its start is <= the current group's end (this covers both overlapping and touching intervals, e.g. [1,2]+[2,3] -> [1,3]); when continuing a group, the end is only extended to the max of the two ends via 'if end > merged[-1][1]', so fully-contained intervals (e.g. [2,3] inside [1,10]) don't shrink the merged result. The only method call used anywhere is list.append; all other operations are plain builtins, subscripting, or assignment.\",\"assumptions\":[\"Each inner element of intervals is a 2-element sequence [start, end] of ints (interval[0], interval[1] indexing is valid)\",\"'Touching endpoints' means merged[-1][1] == next start should merge (closed intervals sharing a boundary point)\",\"Sorting ties (equal start) by end ascending, as produced by default list/tuple comparison in sorted(), is acceptable since the task only specifies 'sort by start'\",\"Raising ValueError as soon as any invalid interval is found (before merging begins) satisfies 'raises ValueError before producing a result'\",\"list[list[int]] type annotations are permitted since they are not function/method calls and appear in the original snapshot\"],\"confidence\":0.93,\"proposed_verification\":[\"merge_intervals([]) == []\",\"merge_intervals([[1,3],[2,6],[8,10],[15,18]]) == [[1,6],[8,10],[15,18]]\",\"merge_intervals([[1,2],[2,3]]) == [[1,3]] (touching endpoints merge)\",\"merge_intervals([[1,10],[2,3]]) == [[1,10]] (contained interval must not shrink the end)\",\"merge_intervals([[5,5]]) == [[5,5]] and original input list/inner lists are unchanged after the call (identity/equality check against a pre-call deep copy)\",\"merge_intervals([[3,1]]) raises ValueError\"],\"files\":[{\"path\":\"solution.py\",\"content\":\"def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\\n    copied: list[list[int]] = []\\n    for interval in intervals:\\n        start = interval[0]\\n        end = interval[1]\\n        if start > end:\\n            raise ValueError(\\\"interval start must not exceed end\\\")\\n        copied.append([start, end])\\n    ordered = sorted(copied)\\n    merged: list[list[int]] = []\\n    for start, end in ordered:\\n        if merged and start <= merged[-1][1]:\\n            if end > merged[-1][1]:\\n                merged[-1][1] = end\\n        else:\\n            merged.append([start, end])\\n    return merged\\n\"}]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 11,
+  "tests_total": 11,
+  "verification_details": [
+    {
+      "case": "empty",
+      "passed": true,
+      "actual": "[]"
+    },
+    {
+      "case": "single_fresh",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "unsorted",
+      "passed": true,
+      "actual": "[[1, 6], [8, 9]]"
+    },
+    {
+      "case": "touching",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "containment",
+      "passed": true,
+      "actual": "[[1, 10]]"
+    },
+    {
+      "case": "duplicate",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "points",
+      "passed": true,
+      "actual": "[[1, 1], [2, 2]]"
+    },
+    {
+      "case": "negative",
+      "passed": true,
+      "actual": "[[-5, 1]]"
+    },
+    {
+      "case": "bridge",
+      "passed": true,
+      "actual": "[[1, 5]]"
+    },
+    {
+      "case": "reversed",
+      "passed": true,
+      "actual": "ValueError"
+    },
+    {
+      "case": "reversed_later",
+      "passed": true,
+      "actual": "ValueError"
+    }
+  ],
+  "latency_seconds": 77.277,
+  "input_tokens": 6,
+  "output_tokens": 3650,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 6,
+      "cache_creation_input_tokens": 5747,
+      "cache_read_input_tokens": 24120,
+      "output_tokens": 3650
+    },
+    "models": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 1713,
+        "outputTokens": 13,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.0017779999999999998,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0
+      },
+      "claude-sonnet-5": {
+        "inputTokens": 6,
+        "outputTokens": 3650,
+        "cacheReadInputTokens": 24120,
+        "cacheCreationInputTokens": 5747,
+        "webSearchRequests": 0,
+        "costUSD": 0.059209,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 2346
+      },
+      "claude-fable-5-1": {
+        "inputTokens": 23575,
+        "outputTokens": 2853,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.3784,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 0
+      }
+    },
+    "reported_cost_usd": 0.439387
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789438046.351705,
+  "ended_at": 1789438123.694541,
+  "repairs": 0,
+  "model_call_attempted": true
+}

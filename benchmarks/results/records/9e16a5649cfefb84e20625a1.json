@@ -1,0 +1,118 @@
+{
+  "key": "9e16a5649cfefb84e20625a1",
+  "run_id": "20260915-023138",
+  "task_id": "stats_base_rate",
+  "domain": "statistics",
+  "condition": "baseline",
+  "role": "None",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 1,
+  "sweep": "primary",
+  "task_text": "Synthetic binary classification population has 10,000 items, prevalence=0.01, sensitivity=0.9 and specificity=0.95, treated as exact population rates. Return expected_true_positives, expected_false_positives, positive_predictive_value, accuracy, always_negative_accuracy. Under ONLY a prevalence shift to 0.10 with unchanged conditional sensitivity/specificity, return shifted_positive_predictive_value. Separately, a calibrated posterior p is available: a false positive costs1, a false negative costs10, correct classifications cost0. Return positive_decision_threshold (positive if p exceeds it). Return accuracy_alone_proves_usefulness (boolean). Numeric probabilities in [0,1], not percentages.",
+  "difficulty_prior": "medium",
+  "response": {
+    "answer": {
+      "expected_true_positives": 90,
+      "expected_false_positives": 495,
+      "positive_predictive_value": 0.1538461538,
+      "accuracy": 0.9495,
+      "always_negative_accuracy": 0.99,
+      "shifted_positive_predictive_value": 0.6666666667,
+      "positive_decision_threshold": 0.0909090909,
+      "accuracy_alone_proves_usefulness": false
+    },
+    "concise_method_summary": "Applied sensitivity and specificity to the exact positive (100) and negative (9,900) population counts. Recomputed PPV using Bayes' rule after changing prevalence only. Compared expected costs of positive and negative decisions using calibrated posterior p.",
+    "assumptions": [
+      "Sensitivity and specificity remain unchanged under the stated prevalence shift.",
+      "Positive is selected only when its expected cost is strictly lower, consistent with 'p exceeds it'."
+    ],
+    "confidence": 1.0,
+    "proposed_verification": [
+      "Check TP = 10,000 \u00d7 0.01 \u00d7 0.9 = 90.",
+      "Check FP = 10,000 \u00d7 0.99 \u00d7 0.05 = 495.",
+      "Check PPV = 90 / (90 + 495).",
+      "Check shifted PPV = (0.9 \u00d7 0.10) / ((0.9 \u00d7 0.10) + (0.05 \u00d7 0.90)).",
+      "Check decision boundary: 1 \u2212 p = 10p, giving p = 1/11."
+    ],
+    "files": []
+  },
+  "response_text": "{\"answer\":{\"expected_true_positives\":90,\"expected_false_positives\":495,\"positive_predictive_value\":0.1538461538,\"accuracy\":0.9495,\"always_negative_accuracy\":0.99,\"shifted_positive_predictive_value\":0.6666666667,\"positive_decision_threshold\":0.0909090909,\"accuracy_alone_proves_usefulness\":false},\"concise_method_summary\":\"Applied sensitivity and specificity to the exact positive (100) and negative (9,900) population counts. Recomputed PPV using Bayes' rule after changing prevalence only. Compared expected costs of positive and negative decisions using calibrated posterior p.\",\"assumptions\":[\"Sensitivity and specificity remain unchanged under the stated prevalence shift.\",\"Positive is selected only when its expected cost is strictly lower, consistent with 'p exceeds it'.\"],\"confidence\":1.0,\"proposed_verification\":[\"Check TP = 10,000 \u00d7 0.01 \u00d7 0.9 = 90.\",\"Check FP = 10,000 \u00d7 0.99 \u00d7 0.05 = 495.\",\"Check PPV = 90 / (90 + 495).\",\"Check shifted PPV = (0.9 \u00d7 0.10) / ((0.9 \u00d7 0.10) + (0.05 \u00d7 0.90)).\",\"Check decision boundary: 1 \u2212 p = 10p, giving p = 1/11.\"],\"files\":[]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 8,
+  "tests_total": 8,
+  "verification_details": [
+    {
+      "check": "expected_true_positives",
+      "passed": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "check": "expected_false_positives",
+      "passed": true,
+      "actual": 495,
+      "expected": 495
+    },
+    {
+      "check": "positive_predictive_value",
+      "passed": true,
+      "actual": 0.1538461538,
+      "expected": 0.15384615384615385
+    },
+    {
+      "check": "accuracy",
+      "passed": true,
+      "actual": 0.9495,
+      "expected": 0.9495
+    },
+    {
+      "check": "always_negative_accuracy",
+      "passed": true,
+      "actual": 0.99,
+      "expected": 0.99
+    },
+    {
+      "check": "shifted_positive_predictive_value",
+      "passed": true,
+      "actual": 0.6666666667,
+      "expected": 0.6666666666666666
+    },
+    {
+      "check": "positive_decision_threshold",
+      "passed": true,
+      "actual": 0.0909090909,
+      "expected": 0.09090909090909091
+    },
+    {
+      "check": "accuracy_alone_proves_usefulness",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    }
+  ],
+  "latency_seconds": 12.909,
+  "input_tokens": 11400,
+  "output_tokens": 431,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11400,
+      "cached_input_tokens": 7936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 431,
+      "reasoning_output_tokens": 126
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789436344.23552,
+  "ended_at": 1789436357.144286,
+  "repairs": 0,
+  "model_call_attempted": true
+}

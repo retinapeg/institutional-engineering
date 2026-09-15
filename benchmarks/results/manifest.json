@@ -1,0 +1,788 @@
+{
+  "run_id": "20260915-023138",
+  "created_at": 1789435898.486845,
+  "deadline": 1789445803.0,
+  "max_calls": 112,
+  "protocol_hash": "119af9ab89a24ddee3e323132757e59f4ffe20ded2b4c0d60350d8785100e8f5",
+  "seed": 20260915,
+  "reservations": {
+    "4b78f67880d547a1f049470a": {
+      "task_id": "software_escaped_fields",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "b558e51bffaf37d5491d1b68": {
+      "task_id": "software_merge_intervals",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "0795ec9abd234fd30c7256f9": {
+      "task_id": "math_cancellation",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "fec9fe3aec346688984ddfdb": {
+      "task_id": "software_escaped_fields",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "2d076190bad38f04cdd951e6": {
+      "task_id": "software_merge_intervals",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "c77493825fdec3cbc843711f": {
+      "task_id": "software_merge_intervals",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "47cbfe66dab956fc72be501a": {
+      "task_id": "physics_lorentz",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "3dbfd445092cb8caf437cb2b": {
+      "task_id": "software_escaped_fields",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "201788f740047f6c5f3cfc7c": {
+      "task_id": "stats_leakage",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "d18b17009d44a9d2f5cdcc3d": {
+      "task_id": "software_merge_intervals",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "4063951252318ba7ccde4963": {
+      "task_id": "physics_symplectic",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "39fc5a77870b75d613b44949": {
+      "task_id": "software_escaped_fields",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "2cb96e592e32aac463ee7388": {
+      "task_id": "physics_symplectic",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "a46ce6651ad2b06a701b50ee": {
+      "task_id": "software_merge_intervals",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "e894409a897390656994a93a": {
+      "task_id": "stats_base_rate",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "77a3a1843df4c32f667c9e29": {
+      "task_id": "math_cancellation",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "fae6f3093309ce9502ff0177": {
+      "task_id": "physics_lorentz",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "9e16a5649cfefb84e20625a1": {
+      "task_id": "stats_base_rate",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "935bccc63776164d860a9ae2": {
+      "task_id": "software_merge_intervals",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "49de3614854ca5fce8b109c4": {
+      "task_id": "physics_lorentz",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "afa31c75a6afa446927fdb2d": {
+      "task_id": "software_escaped_fields",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "03cbc6657010d3393751fb81": {
+      "task_id": "math_independent_set",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "11ac8fd292ed7c7b17f14673": {
+      "task_id": "math_independent_set",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "3dacdf138d2df84e3ea110a1": {
+      "task_id": "stats_base_rate",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "8c98ab6fd091670c40db4678": {
+      "task_id": "math_cancellation",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "a4d2e2e365d54fcdda67c4e7": {
+      "task_id": "math_cancellation",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "9e2aa1f327def0b961cadcb4": {
+      "task_id": "stats_leakage",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "202c71d9a65ca354fabca4cf": {
+      "task_id": "math_cancellation",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "6605eeda492ee3dd2ca773f4": {
+      "task_id": "physics_lorentz",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "dd05a86fb5ef93eabdc66e03": {
+      "task_id": "math_independent_set",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "6ed84618a2e5c7e20aa044e4": {
+      "task_id": "math_independent_set",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "4fa96ea189bd565cd240f602": {
+      "task_id": "physics_symplectic",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "936aca1527197582b32152d0": {
+      "task_id": "math_cancellation",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "0c6d1f42867a97715a9a838f": {
+      "task_id": "stats_leakage",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "4f6677821509a37b892afb9a": {
+      "task_id": "physics_symplectic",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "ac7a376cb35c04675876daf8": {
+      "task_id": "stats_base_rate",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "16964fac23347e320698c33b": {
+      "task_id": "stats_leakage",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "f89e692a3de3d863e3b3aaf4": {
+      "task_id": "stats_leakage",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "8648b7c4852960e40ca91f3a": {
+      "task_id": "stats_base_rate",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "d52a3d5198d8cdf1adb1f9e0": {
+      "task_id": "math_independent_set",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "a5495b1f64ffdc827b7a83cc": {
+      "task_id": "math_independent_set",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "eaa42a1a35267932493ed74a": {
+      "task_id": "math_cancellation",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "f74bd83faba9c2c8f47754fc": {
+      "task_id": "physics_lorentz",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "bd90efd736d081bb57ed221a": {
+      "task_id": "math_independent_set",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "86c6649efb5b2b7dcba0a9b5": {
+      "task_id": "math_independent_set",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "6a669903a82d803ddae26e6f": {
+      "task_id": "software_escaped_fields",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "b72ec4d7311eb45261ebf068": {
+      "task_id": "software_merge_intervals",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "21c0150f68970c4a5e481297": {
+      "task_id": "stats_base_rate",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "9c7c1d0cd650f9e458f87bf5": {
+      "task_id": "stats_base_rate",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "121c061db8951cc4f02e4c20": {
+      "task_id": "stats_base_rate",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "78051555865bb0ddb15c6df1": {
+      "task_id": "software_merge_intervals",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "e61b05193b034de9b09c84a3": {
+      "task_id": "stats_leakage",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "7bb0a902bc4eb781a17a99e0": {
+      "task_id": "physics_lorentz",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "c0fde2adb65709cc5f6199ac": {
+      "task_id": "physics_lorentz",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "7170de5524929c687e8ceb6c": {
+      "task_id": "stats_leakage",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "fe91ca322110e03c2413a43e": {
+      "task_id": "software_escaped_fields",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "215ec8c99b705520cd224327": {
+      "task_id": "physics_lorentz",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "cdc54998fdaaa1f171beea31": {
+      "task_id": "math_cancellation",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "496f7509dcc661f780cae747": {
+      "task_id": "stats_base_rate",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "9bca637a33419f8406c69639": {
+      "task_id": "software_merge_intervals",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "061530dd2439e35234c3956b": {
+      "task_id": "stats_leakage",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "872aeb66c139ab971ca4fcb5": {
+      "task_id": "software_escaped_fields",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "14eb120f137ba7a0b9fafe3a": {
+      "task_id": "software_escaped_fields",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "6f86b8548d578b53d74396ad": {
+      "task_id": "physics_symplectic",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "0b128ed7c435d6a8e5a15d66": {
+      "task_id": "software_escaped_fields",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "857e73c6c50e9ee53f1f5386": {
+      "task_id": "math_independent_set",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "b1f37cb51ba6924089305f69": {
+      "task_id": "software_merge_intervals",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "8cb14e7af6d6b54a66c37876": {
+      "task_id": "math_independent_set",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "ea8bc0ad4c54835ac1b378e6": {
+      "task_id": "stats_leakage",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "5309fd3efe66d863a3d97573": {
+      "task_id": "physics_symplectic",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "72ef90a58e39b2306b05b764": {
+      "task_id": "stats_base_rate",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "1a100971574e4898f161b12c": {
+      "task_id": "physics_symplectic",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "081a0519c6d3403c3e3cbc24": {
+      "task_id": "stats_leakage",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "5d4a493a650fa4941db368d3": {
+      "task_id": "stats_base_rate",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "740940adfa93b5a651d97c99": {
+      "task_id": "math_cancellation",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "e65bcad01a033a9174900cbb": {
+      "task_id": "physics_lorentz",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "10925ffe8628ceb53561af72": {
+      "task_id": "math_cancellation",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "09a4c2e393b38d4922bf5639": {
+      "task_id": "math_cancellation",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "a034968f972cce393430f877": {
+      "task_id": "physics_symplectic",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "8a99987dbc3a4ed8b516454f": {
+      "task_id": "physics_symplectic",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "04238322f463caa7c2c8e073": {
+      "task_id": "physics_lorentz",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "fae551922b3d0f3a4b3c82ea": {
+      "task_id": "physics_lorentz",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "177d64d81ba79433728634df": {
+      "task_id": "physics_symplectic",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "b3f9d372b04fb7c71e3055f3": {
+      "task_id": "stats_leakage",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "6ce24f05c774e120b5aa65b5": {
+      "task_id": "stats_base_rate",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "bc17027fabad52fd6ee5e892": {
+      "task_id": "physics_symplectic",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "983d6896238f4697fbe1e91b": {
+      "task_id": "math_independent_set",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "c59add473b8d718246fb0b13": {
+      "task_id": "stats_leakage",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "ff744f0f65d202d1005824f4": {
+      "task_id": "physics_lorentz",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "4b3b451a40ed6c7fd2ac1cfd": {
+      "task_id": "math_independent_set",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "baseline",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "9e55b1b10378d39ce0e8ce98": {
+      "task_id": "software_merge_intervals",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "a538cd54b99f5adc7c5a3f97": {
+      "task_id": "math_cancellation",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "matched",
+      "repeat": 1,
+      "sweep": "primary"
+    },
+    "5e6765ead1dc78a4e90e1e9b": {
+      "task_id": "physics_symplectic",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "86f89c06407c9a92305269ef": {
+      "task_id": "software_merge_intervals",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "c811d531c0da9b2a9f32c726": {
+      "task_id": "software_escaped_fields",
+      "provider": "claude",
+      "model": "sonnet",
+      "condition": "baseline",
+      "repeat": 2,
+      "sweep": "primary"
+    },
+    "5215163f14ffc6af13cd56d6": {
+      "task_id": "software_escaped_fields",
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sweep": "primary"
+    }
+  },
+  "unavailable_providers": [],
+  "status": "FINISHED",
+  "secondary_tasks": [],
+  "secondary_gate": {
+    "primary_rows": 96,
+    "protocol_failure_rate": 0.34375,
+    "remaining_seconds": 5973.352102994919,
+    "eligible": false
+  },
+  "finished_at": 1789439829.648741
+}

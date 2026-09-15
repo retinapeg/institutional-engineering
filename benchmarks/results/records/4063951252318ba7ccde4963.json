@@ -1,0 +1,116 @@
+{
+  "key": "4063951252318ba7ccde4963",
+  "run_id": "20260915-023138",
+  "task_id": "physics_symplectic",
+  "domain": "physics",
+  "condition": "baseline",
+  "role": "None",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 1,
+  "sweep": "primary",
+  "task_text": "For unit harmonic oscillator xdot=v, vdot=-x, integrate velocity-first symplectic Euler: v_next=v-h*x; x_next=x+h*v_next. Start x=1,v=0,h=0.6. Return x1, v1, physical_energy1=(x1^2+v1^2)/2; invariant_cross_coefficient a in Q=x^2+v^2+a*x*v exactly preserved by the map for this h; Q1; positive_h_stability_upper (the OPEN upper endpoint for bounded motion of ALL initial states); all_initial_states_bounded_at_h2 (boolean); bounded_at_h2_1 (boolean). Reason about discrete dynamics, not just the continuous oscillator. Numeric values, not expressions.",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "x1": 0.64,
+      "v1": -0.6,
+      "physical_energy1": 0.3848,
+      "invariant_cross_coefficient": -0.6,
+      "Q1": 1.0,
+      "positive_h_stability_upper": 2.0,
+      "all_initial_states_bounded_at_h2": false,
+      "bounded_at_h2_1": false
+    },
+    "concise_method_summary": "Applied the velocity-first symplectic Euler update and checked the map\u2019s exact quadratic invariant. Discrete stability is bounded for all initial states only when 0<h<2; h=2 is a defective boundary case with unbounded generic trajectories.",
+    "assumptions": [
+      "bounded_at_h2_1 refers to the supplied initial state x=1, v=0 evaluated at h=2.",
+      "\u2018Positive_h_stability_upper\u2019 requests the open upper endpoint for all-state boundedness."
+    ],
+    "confidence": 1.0,
+    "proposed_verification": [
+      "Substitute x1=0.64 and v1=-0.6 into Q=x^2+v^2-0.6*x*v to obtain 1.",
+      "At h=2, iterate from (1,0): (-3,-2), then (5,8), demonstrating unbounded growth.",
+      "Check the update matrix trace is 2-h^2; its elliptic all-state-bounded regime is -2<trace<2, hence 0<h<2."
+    ],
+    "files": []
+  },
+  "response_text": "{\"answer\":{\"x1\":0.64,\"v1\":-0.6,\"physical_energy1\":0.3848,\"invariant_cross_coefficient\":-0.6,\"Q1\":1.0,\"positive_h_stability_upper\":2.0,\"all_initial_states_bounded_at_h2\":false,\"bounded_at_h2_1\":false},\"concise_method_summary\":\"Applied the velocity-first symplectic Euler update and checked the map\u2019s exact quadratic invariant. Discrete stability is bounded for all initial states only when 0<h<2; h=2 is a defective boundary case with unbounded generic trajectories.\",\"assumptions\":[\"bounded_at_h2_1 refers to the supplied initial state x=1, v=0 evaluated at h=2.\",\"\u2018Positive_h_stability_upper\u2019 requests the open upper endpoint for all-state boundedness.\"],\"confidence\":1.0,\"proposed_verification\":[\"Substitute x1=0.64 and v1=-0.6 into Q=x^2+v^2-0.6*x*v to obtain 1.\",\"At h=2, iterate from (1,0): (-3,-2), then (5,8), demonstrating unbounded growth.\",\"Check the update matrix trace is 2-h^2; its elliptic all-state-bounded regime is -2<trace<2, hence 0<h<2.\"],\"files\":[]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 8,
+  "tests_total": 8,
+  "verification_details": [
+    {
+      "check": "x1",
+      "passed": true,
+      "actual": 0.64,
+      "expected": 0.64
+    },
+    {
+      "check": "v1",
+      "passed": true,
+      "actual": -0.6,
+      "expected": -0.6
+    },
+    {
+      "check": "physical_energy1",
+      "passed": true,
+      "actual": 0.3848,
+      "expected": 0.3848
+    },
+    {
+      "check": "invariant_cross_coefficient",
+      "passed": true,
+      "actual": -0.6,
+      "expected": -0.6
+    },
+    {
+      "check": "Q1",
+      "passed": true,
+      "actual": 1.0,
+      "expected": 1
+    },
+    {
+      "check": "positive_h_stability_upper",
+      "passed": true,
+      "actual": 2.0,
+      "expected": 2
+    },
+    {
+      "check": "all_initial_states_bounded_at_h2",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "check": "bounded_at_h2_1",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    }
+  ],
+  "latency_seconds": 13.04,
+  "input_tokens": 11405,
+  "output_tokens": 523,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11405,
+      "cached_input_tokens": 7936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 523,
+      "reasoning_output_tokens": 227
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789436184.009409,
+  "ended_at": 1789436197.049945,
+  "repairs": 0,
+  "model_call_attempted": true
+}

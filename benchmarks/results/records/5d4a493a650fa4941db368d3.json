@@ -1,0 +1,157 @@
+{
+  "key": "5d4a493a650fa4941db368d3",
+  "run_id": "20260915-023138",
+  "task_id": "stats_base_rate",
+  "domain": "statistics",
+  "condition": "matched",
+  "role": "Statistician",
+  "provider": "claude",
+  "model": "sonnet",
+  "repeat": 2,
+  "sweep": "primary",
+  "task_text": "Synthetic binary classification population has 10,000 items, prevalence=0.01, sensitivity=0.9 and specificity=0.95, treated as exact population rates. Return expected_true_positives, expected_false_positives, positive_predictive_value, accuracy, always_negative_accuracy. Under ONLY a prevalence shift to 0.10 with unchanged conditional sensitivity/specificity, return shifted_positive_predictive_value. Separately, a calibrated posterior p is available: a false positive costs1, a false negative costs10, correct classifications cost0. Return positive_decision_threshold (positive if p exceeds it). Return accuracy_alone_proves_usefulness (boolean). Numeric probabilities in [0,1], not percentages.",
+  "difficulty_prior": "medium",
+  "response": {
+    "answer": {
+      "expected_true_positives": 90,
+      "expected_false_positives": 495,
+      "positive_predictive_value": 0.15384615384615385,
+      "accuracy": 0.9495,
+      "always_negative_accuracy": 0.99,
+      "shifted_positive_predictive_value": 0.6666666666666666,
+      "positive_decision_threshold": 0.09090909090909091,
+      "accuracy_alone_proves_usefulness": false
+    },
+    "concise_method_summary": "Counts derived from N\u00b7prevalence: positives=100, negatives=9900. TP=positives\u00b7sensitivity=90; FN=positives\u2212TP=10. TN=negatives\u00b7specificity=9405; FP=negatives\u2212TN=495. PPV=TP/(TP+FP). Accuracy=(TP+TN)/N. Always-negative accuracy=negatives/N=1\u2212prevalence. For the prevalence shift to 0.10, sensitivity/specificity held fixed, PPV recomputed via Bayes: PPV=(prevalence\u00b7sens)/(prevalence\u00b7sens+(1\u2212prevalence)\u00b7(1\u2212spec))=2/3. Decision threshold from expected-cost minimization: predict positive when (1\u2212p)\u00b7C_FP < p\u00b7C_FN, i.e., p > C_FP/(C_FP+C_FN)=1/11. Accuracy alone does not prove usefulness because the classifier's 0.9495 accuracy is below the trivial always-negative baseline of 0.99 under 1% prevalence, illustrating the accuracy paradox in imbalanced classification.",
+    "assumptions": [
+      "Given prevalence, sensitivity, and specificity are treated as exact population rates, not sample estimates subject to sampling variance",
+      "The posterior probability p is well-calibrated, so expected-cost minimization using p directly is valid",
+      "At the exact threshold p=1/11, both decisions have equal expected cost; 'positive if p exceeds it' resolves this tie toward negative",
+      "Sensitivity and specificity are invariant properties of the classifier and do not change when prevalence shifts",
+      "Cost structure is symmetric per error type across the population (no per-individual cost variation)",
+      "The 10,000-item population size does not affect the shifted PPV since it is computed from rates only"
+    ],
+    "confidence": 0.97,
+    "proposed_verification": [
+      "Recompute shifted PPV via direct Bayes formula: (0.10\u00b70.90)/(0.10\u00b70.90+0.90\u00b70.05)=2/3",
+      "Confirm TP+FN=100 (total positives) and FP+TN=9900 (total negatives) in the base scenario",
+      "Verify expected cost equality at p=1/11: (1\u2212p)\u00b71 = p\u00b710 at that exact point",
+      "Compare model accuracy (0.9495) against majority-class baseline (0.99) to confirm accuracy alone is misleading here",
+      "Check PPV=90/585 simplifies to 0.15384615...(6/39=2/13)",
+      "Sanity check specificity=0.95 implies false positive rate=0.05, so FP=9900\u00b70.05=495"
+    ],
+    "files": []
+  },
+  "response_text": "{\"answer\":{\"expected_true_positives\":90,\"expected_false_positives\":495,\"positive_predictive_value\":0.15384615384615385,\"accuracy\":0.9495,\"always_negative_accuracy\":0.99,\"shifted_positive_predictive_value\":0.6666666666666666,\"positive_decision_threshold\":0.09090909090909091,\"accuracy_alone_proves_usefulness\":false},\"concise_method_summary\":\"Counts derived from N\u00b7prevalence: positives=100, negatives=9900. TP=positives\u00b7sensitivity=90; FN=positives\u2212TP=10. TN=negatives\u00b7specificity=9405; FP=negatives\u2212TN=495. PPV=TP/(TP+FP). Accuracy=(TP+TN)/N. Always-negative accuracy=negatives/N=1\u2212prevalence. For the prevalence shift to 0.10, sensitivity/specificity held fixed, PPV recomputed via Bayes: PPV=(prevalence\u00b7sens)/(prevalence\u00b7sens+(1\u2212prevalence)\u00b7(1\u2212spec))=2/3. Decision threshold from expected-cost minimization: predict positive when (1\u2212p)\u00b7C_FP < p\u00b7C_FN, i.e., p > C_FP/(C_FP+C_FN)=1/11. Accuracy alone does not prove usefulness because the classifier's 0.9495 accuracy is below the trivial always-negative baseline of 0.99 under 1% prevalence, illustrating the accuracy paradox in imbalanced classification.\",\"assumptions\":[\"Given prevalence, sensitivity, and specificity are treated as exact population rates, not sample estimates subject to sampling variance\",\"The posterior probability p is well-calibrated, so expected-cost minimization using p directly is valid\",\"At the exact threshold p=1/11, both decisions have equal expected cost; 'positive if p exceeds it' resolves this tie toward negative\",\"Sensitivity and specificity are invariant properties of the classifier and do not change when prevalence shifts\",\"Cost structure is symmetric per error type across the population (no per-individual cost variation)\",\"The 10,000-item population size does not affect the shifted PPV since it is computed from rates only\"],\"confidence\":0.97,\"proposed_verification\":[\"Recompute shifted PPV via direct Bayes formula: (0.10\u00b70.90)/(0.10\u00b70.90+0.90\u00b70.05)=2/3\",\"Confirm TP+FN=100 (total positives) and FP+TN=9900 (total negatives) in the base scenario\",\"Verify expected cost equality at p=1/11: (1\u2212p)\u00b71 = p\u00b710 at that exact point\",\"Compare model accuracy (0.9495) against majority-class baseline (0.99) to confirm accuracy alone is misleading here\",\"Check PPV=90/585 simplifies to 0.15384615...(6/39=2/13)\",\"Sanity check specificity=0.95 implies false positive rate=0.05, so FP=9900\u00b70.05=495\"],\"files\":[]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 8,
+  "tests_total": 8,
+  "verification_details": [
+    {
+      "check": "expected_true_positives",
+      "passed": true,
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "check": "expected_false_positives",
+      "passed": true,
+      "actual": 495,
+      "expected": 495
+    },
+    {
+      "check": "positive_predictive_value",
+      "passed": true,
+      "actual": 0.15384615384615385,
+      "expected": 0.15384615384615385
+    },
+    {
+      "check": "accuracy",
+      "passed": true,
+      "actual": 0.9495,
+      "expected": 0.9495
+    },
+    {
+      "check": "always_negative_accuracy",
+      "passed": true,
+      "actual": 0.99,
+      "expected": 0.99
+    },
+    {
+      "check": "shifted_positive_predictive_value",
+      "passed": true,
+      "actual": 0.6666666666666666,
+      "expected": 0.6666666666666666
+    },
+    {
+      "check": "positive_decision_threshold",
+      "passed": true,
+      "actual": 0.09090909090909091,
+      "expected": 0.09090909090909091
+    },
+    {
+      "check": "accuracy_alone_proves_usefulness",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    }
+  ],
+  "latency_seconds": 41.06,
+  "input_tokens": 4,
+  "output_tokens": 1759,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 3816,
+      "cache_read_input_tokens": 13152,
+      "output_tokens": 1759
+    },
+    "models": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 1611,
+        "outputTokens": 14,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.001681,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0
+      },
+      "claude-sonnet-5": {
+        "inputTokens": 4,
+        "outputTokens": 1759,
+        "cacheReadInputTokens": 13152,
+        "cacheCreationInputTokens": 3816,
+        "webSearchRequests": 0,
+        "costUSD": 0.0330714,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 718
+      },
+      "claude-fable-5-1": {
+        "inputTokens": 9663,
+        "outputTokens": 1851,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "webSearchRequests": 0,
+        "costUSD": 0.18918,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 0
+      }
+    },
+    "reported_cost_usd": 0.22393239999999998
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789438712.6658182,
+  "ended_at": 1789438753.726015,
+  "repairs": 0,
+  "model_call_attempted": true
+}

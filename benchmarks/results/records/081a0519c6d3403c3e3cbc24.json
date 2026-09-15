@@ -1,0 +1,119 @@
+{
+  "key": "081a0519c6d3403c3e3cbc24",
+  "run_id": "20260915-023138",
+  "task_id": "stats_leakage",
+  "domain": "statistics",
+  "condition": "mismatched",
+  "role": "Physicist",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 1,
+  "sweep": "primary",
+  "task_text": "Goal: estimate a classifier's performance on NEW patients. Each patient has five highly correlated visits. Which pipelines are valid estimates of this goal? A: random visit split, train-only scaling, tune only on train. B: patient-group train/validation/test split, train-only fit of preprocessing and model, tune on validation, locked test once. C: patient-group split but supervised feature selection on all labels before splitting. D: patient-group split, fit on train but use test results to choose best of 20 variants and report that test. E: nested patient-group CV, preprocessing/selection/tuning all inside each outer training fold, evaluate each outer test once, no post-hoc variant choice. F: train on visits before June and test on later visits from the SAME patients. Return valid_pipeline_ids as a list, A_issue/C_issue/D_issue/F_issue chosen from patient_overlap, supervised_leakage, test_selection_bias, temporal_drift_only, none. Conditional on one visit in test in an independent 80% train /20% test visit split, return probability_patient_also_in_train using its other four visits. Is a reported increase after choosing the best of 20 test-set variants alone evidence of a genuine improvement? Return genuine_improvement_established (boolean).",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "valid_pipeline_ids": [
+        "B",
+        "E"
+      ],
+      "A_issue": "patient_overlap",
+      "C_issue": "supervised_leakage",
+      "D_issue": "test_selection_bias",
+      "F_issue": "patient_overlap",
+      "probability_patient_also_in_train": 0.9984,
+      "genuine_improvement_established": false
+    },
+    "concise_method_summary": "Valid estimates must hold out entire patients and prevent preprocessing, feature selection, tuning, and model selection from accessing held-out outcomes. For the visit-level split probability, calculate 1 - 0.2^4.",
+    "assumptions": [
+      "Each of the other four visits is independently assigned to the 80% training split.",
+      "The evaluation target is generalisation to entirely new patients, not future visits of known patients."
+    ],
+    "confidence": 0.99,
+    "proposed_verification": [
+      "Confirm all visits for each patient are assigned to one group in patient-group splits.",
+      "Audit that every supervised transformation is fitted only within the relevant training partition.",
+      "Keep the final test set locked until one pre-specified evaluation.",
+      "Use 1 - (0.2)^4 to verify the overlap probability."
+    ],
+    "files": []
+  },
+  "response_text": "{\"answer\":{\"valid_pipeline_ids\":[\"B\",\"E\"],\"A_issue\":\"patient_overlap\",\"C_issue\":\"supervised_leakage\",\"D_issue\":\"test_selection_bias\",\"F_issue\":\"patient_overlap\",\"probability_patient_also_in_train\":0.9984,\"genuine_improvement_established\":false},\"concise_method_summary\":\"Valid estimates must hold out entire patients and prevent preprocessing, feature selection, tuning, and model selection from accessing held-out outcomes. For the visit-level split probability, calculate 1 - 0.2^4.\",\"assumptions\":[\"Each of the other four visits is independently assigned to the 80% training split.\",\"The evaluation target is generalisation to entirely new patients, not future visits of known patients.\"],\"confidence\":0.99,\"proposed_verification\":[\"Confirm all visits for each patient are assigned to one group in patient-group splits.\",\"Audit that every supervised transformation is fitted only within the relevant training partition.\",\"Keep the final test set locked until one pre-specified evaluation.\",\"Use 1 - (0.2)^4 to verify the overlap probability.\"],\"files\":[]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 7,
+  "tests_total": 7,
+  "verification_details": [
+    {
+      "check": "valid_pipeline_ids",
+      "passed": true,
+      "actual": [
+        "B",
+        "E"
+      ],
+      "expected": [
+        "B",
+        "E"
+      ]
+    },
+    {
+      "check": "A_issue",
+      "passed": true,
+      "actual": "patient_overlap",
+      "expected": "patient_overlap"
+    },
+    {
+      "check": "C_issue",
+      "passed": true,
+      "actual": "supervised_leakage",
+      "expected": "supervised_leakage"
+    },
+    {
+      "check": "D_issue",
+      "passed": true,
+      "actual": "test_selection_bias",
+      "expected": "test_selection_bias"
+    },
+    {
+      "check": "F_issue",
+      "passed": true,
+      "actual": "patient_overlap",
+      "expected": "patient_overlap"
+    },
+    {
+      "check": "probability_patient_also_in_train",
+      "passed": true,
+      "actual": 0.9984,
+      "expected": 0.9984
+    },
+    {
+      "check": "genuine_improvement_established",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    }
+  ],
+  "latency_seconds": 10.463,
+  "input_tokens": 11589,
+  "output_tokens": 339,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11589,
+      "cached_input_tokens": 7936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 339,
+      "reasoning_output_tokens": 111
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789438702.1773949,
+  "ended_at": 1789438712.640333,
+  "repairs": 0,
+  "model_call_attempted": true
+}

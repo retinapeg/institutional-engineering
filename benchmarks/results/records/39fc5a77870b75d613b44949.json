@@ -1,0 +1,125 @@
+{
+  "key": "39fc5a77870b75d613b44949",
+  "run_id": "20260915-023138",
+  "task_id": "software_escaped_fields",
+  "domain": "software",
+  "condition": "matched",
+  "role": "Software Engineer",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 2,
+  "sweep": "primary",
+  "task_text": "Fix split_fields(text) in solution.py. Unescaped commas split fields; backslash escapes ONLY comma or backslash; preserve empty fields including trailing ones. Empty input returns ['']. Invalid escape or dangling backslash raises ValueError. No imports or external dependencies. Return full solution.py in files, with only pure functions; allowed built-ins len/range/enumerate/zip/sorted/list/tuple/str/int/float/bool/abs/min/max/sum/round/ValueError; the only allowed method call is list.append. Do not include grading tests. answer may briefly identify the implementation. Host checks run separately. Inputs are strings, at most80 characters.",
+  "difficulty_prior": "medium",
+  "response": {
+    "answer": {
+      "implementation": "Implemented strict comma/backslash field splitting."
+    },
+    "concise_method_summary": "Scans characters once, splitting only unescaped commas. A backslash accepts only comma or backslash, preserves empty/trailing fields, and raises ValueError for invalid or dangling escapes.",
+    "assumptions": [],
+    "confidence": 0.99,
+    "proposed_verification": [
+      "split_fields('a,b,') returns ['a', 'b', '']",
+      "split_fields('a\\\\,b,c') returns ['a,b', 'c']",
+      "split_fields('a\\\\\\\\b') returns ['a\\\\b']",
+      "split_fields('') returns ['']",
+      "Invalid escapes such as 'a\\\\x' and dangling 'a\\\\' raise ValueError"
+    ],
+    "files": [
+      {
+        "path": "solution.py",
+        "content": "def split_fields(text: str) -> list[str]:\n    fields = []\n    field = \"\"\n    escaped = False\n    for index in range(len(text)):\n        character = text[index]\n        if escaped:\n            if character == \",\" or character == \"\\\\\":\n                field = field + character\n                escaped = False\n            else:\n                raise ValueError(\"invalid escape\")\n        elif character == \"\\\\\":\n            escaped = True\n        elif character == \",\":\n            fields.append(field)\n            field = \"\"\n        else:\n            field = field + character\n    if escaped:\n        raise ValueError(\"dangling escape\")\n    fields.append(field)\n    return fields\n"
+      }
+    ]
+  },
+  "response_text": "{\"answer\":{\"implementation\":\"Implemented strict comma/backslash field splitting.\"},\"concise_method_summary\":\"Scans characters once, splitting only unescaped commas. A backslash accepts only comma or backslash, preserves empty/trailing fields, and raises ValueError for invalid or dangling escapes.\",\"assumptions\":[],\"confidence\":0.99,\"proposed_verification\":[\"split_fields('a,b,') returns ['a', 'b', '']\",\"split_fields('a\\\\\\\\,b,c') returns ['a,b', 'c']\",\"split_fields('a\\\\\\\\\\\\\\\\b') returns ['a\\\\\\\\b']\",\"split_fields('') returns ['']\",\"Invalid escapes such as 'a\\\\\\\\x' and dangling 'a\\\\\\\\' raise ValueError\"],\"files\":[{\"path\":\"solution.py\",\"content\":\"def split_fields(text: str) -> list[str]:\\n    fields = []\\n    field = \\\"\\\"\\n    escaped = False\\n    for index in range(len(text)):\\n        character = text[index]\\n        if escaped:\\n            if character == \\\",\\\" or character == \\\"\\\\\\\\\\\":\\n                field = field + character\\n                escaped = False\\n            else:\\n                raise ValueError(\\\"invalid escape\\\")\\n        elif character == \\\"\\\\\\\\\\\":\\n            escaped = True\\n        elif character == \\\",\\\":\\n            fields.append(field)\\n            field = \\\"\\\"\\n        else:\\n            field = field + character\\n    if escaped:\\n        raise ValueError(\\\"dangling escape\\\")\\n    fields.append(field)\\n    return fields\\n\"}]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 12,
+  "tests_total": 12,
+  "verification_details": [
+    {
+      "case": "empty",
+      "passed": true,
+      "actual": "['']"
+    },
+    {
+      "case": "single",
+      "passed": true,
+      "actual": "['abc']"
+    },
+    {
+      "case": "split",
+      "passed": true,
+      "actual": "['a', 'b', 'c']"
+    },
+    {
+      "case": "empty_fields",
+      "passed": true,
+      "actual": "['', 'a', '', '']"
+    },
+    {
+      "case": "escaped_comma",
+      "passed": true,
+      "actual": "['a,b', 'c']"
+    },
+    {
+      "case": "escaped_slash",
+      "passed": true,
+      "actual": "['a\\\\', 'b']"
+    },
+    {
+      "case": "combined",
+      "passed": true,
+      "actual": "[',\\\\,', '']"
+    },
+    {
+      "case": "invalid_escape",
+      "passed": true,
+      "actual": "ValueError"
+    },
+    {
+      "case": "dangling",
+      "passed": true,
+      "actual": "ValueError"
+    },
+    {
+      "case": "slash_only",
+      "passed": true,
+      "actual": "ValueError"
+    },
+    {
+      "case": "spaces",
+      "passed": true,
+      "actual": "[' a ', ' b ']"
+    },
+    {
+      "case": "unicode",
+      "passed": true,
+      "actual": "['\u03b1', '\u03b2,\u03b3']"
+    }
+  ],
+  "latency_seconds": 11.436,
+  "input_tokens": 11492,
+  "output_tokens": 494,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11492,
+      "cached_input_tokens": 5888,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 494,
+      "reasoning_output_tokens": 161
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789436197.059521,
+  "ended_at": 1789436208.5781891,
+  "repairs": 0,
+  "model_call_attempted": true
+}

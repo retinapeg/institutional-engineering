@@ -1,0 +1,66 @@
+[
+  {
+    "model": "gpt-5.6-terra",
+    "domain": "mathematics",
+    "observed_score": 0.9833333333333334,
+    "observed_latency": 16.445083333333333,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  },
+  {
+    "model": "gpt-5.6-terra",
+    "domain": "physics",
+    "observed_score": 0.9791666666666666,
+    "observed_latency": 11.9275,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  },
+  {
+    "model": "gpt-5.6-terra",
+    "domain": "software",
+    "observed_score": 0.9166666666666666,
+    "observed_latency": 12.6755,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  },
+  {
+    "model": "gpt-5.6-terra",
+    "domain": "statistics",
+    "observed_score": 1.0,
+    "observed_latency": 10.587416666666666,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  },
+  {
+    "model": "sonnet",
+    "domain": "mathematics",
+    "observed_score": 0,
+    "observed_latency": 88.18166666666667,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  },
+  {
+    "model": "sonnet",
+    "domain": "physics",
+    "observed_score": 0.4895833333333333,
+    "observed_latency": 66.42241666666666,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  },
+  {
+    "model": "sonnet",
+    "domain": "software",
+    "observed_score": 0.3333333333333333,
+    "observed_latency": 82.83533333333334,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  },
+  {
+    "model": "sonnet",
+    "domain": "statistics",
+    "observed_score": 0.4166666666666667,
+    "observed_latency": 53.939416666666666,
+    "sample_count": 12,
+    "suggested_direction": "Insufficient evidence; retain current priors. Compare on a larger held-out task set before any upgrade/downgrade."
+  }
+]

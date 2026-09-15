@@ -1,0 +1,173 @@
+{
+  "key": "dd05a86fb5ef93eabdc66e03",
+  "run_id": "20260915-023138",
+  "task_id": "math_independent_set",
+  "domain": "mathematics",
+  "condition": "mismatched",
+  "role": "Product Engineer",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 1,
+  "sweep": "primary",
+  "task_text": "Find a maximum-weight set of nonadjacent indices on a PATH (not a cycle). Empty selection is allowed. Return answer objects case1..case4, each with weight and indices (0-based, ascending). Ties: choose lexicographically smallest ascending index list under ordinary list ordering (a prefix is smaller). Cases: case1=[5,1,1,5]; case2=[4,5,4,5,4]; case3=[-3,0,-2,0]; case4=[2,2,2,2,2,2]. Also return time_complexity for computing ONLY the optimum value using dynamic programming as O(n), O(n^2), or O(2^n), and auxiliary_space_for_value as O(1) or O(n). Reconstruction tie-breaking must be justified, not confused with choosing the largest individual weights.",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "case1": {
+        "weight": 10,
+        "indices": [
+          0,
+          3
+        ]
+      },
+      "case2": {
+        "weight": 12,
+        "indices": [
+          0,
+          2,
+          4
+        ]
+      },
+      "case3": {
+        "weight": 0,
+        "indices": []
+      },
+      "case4": {
+        "weight": 6,
+        "indices": [
+          0,
+          2,
+          4
+        ]
+      },
+      "time_complexity": "O(n)",
+      "auxiliary_space_for_value": "O(1)"
+    },
+    "concise_method_summary": "Use path dynamic programming: each position either contributes no more than the previous optimum or is selected with the optimum through two positions earlier. Clamp the initial optimum to zero for the allowed empty selection. For reconstruction ties, compare complete ascending candidate index lists lexicographically and retain the smaller list; this is independent of selecting individually largest weights.",
+    "assumptions": [
+      "Nonadjacent means selected indices cannot differ by 1.",
+      "Lexicographic ordering treats a proper prefix as smaller, so [] is preferred among zero-weight ties.",
+      "Weights and index positions are exactly as supplied."
+    ],
+    "confidence": 1.0,
+    "proposed_verification": [
+      "Check each returned list contains no consecutive indices.",
+      "Sum the listed weights for each case.",
+      "Enumerate all subsets for these short paths and compare feasible weights and lexicographic tie outcomes.",
+      "Confirm value-only DP retains only the prior two scalar values, giving O(1) auxiliary space."
+    ],
+    "files": []
+  },
+  "response_text": "{\"answer\":{\"case1\":{\"weight\":10,\"indices\":[0,3]},\"case2\":{\"weight\":12,\"indices\":[0,2,4]},\"case3\":{\"weight\":0,\"indices\":[]},\"case4\":{\"weight\":6,\"indices\":[0,2,4]},\"time_complexity\":\"O(n)\",\"auxiliary_space_for_value\":\"O(1)\"},\"concise_method_summary\":\"Use path dynamic programming: each position either contributes no more than the previous optimum or is selected with the optimum through two positions earlier. Clamp the initial optimum to zero for the allowed empty selection. For reconstruction ties, compare complete ascending candidate index lists lexicographically and retain the smaller list; this is independent of selecting individually largest weights.\",\"assumptions\":[\"Nonadjacent means selected indices cannot differ by 1.\",\"Lexicographic ordering treats a proper prefix as smaller, so [] is preferred among zero-weight ties.\",\"Weights and index positions are exactly as supplied.\"],\"confidence\":1.0,\"proposed_verification\":[\"Check each returned list contains no consecutive indices.\",\"Sum the listed weights for each case.\",\"Enumerate all subsets for these short paths and compare feasible weights and lexicographic tie outcomes.\",\"Confirm value-only DP retains only the prior two scalar values, giving O(1) auxiliary space.\"],\"files\":[]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 10,
+  "tests_total": 10,
+  "verification_details": [
+    {
+      "check": "case1.weight",
+      "passed": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "check": "case1.indices",
+      "passed": true,
+      "actual": [
+        0,
+        3
+      ],
+      "expected": [
+        0,
+        3
+      ]
+    },
+    {
+      "check": "case2.weight",
+      "passed": true,
+      "actual": 12,
+      "expected": 12
+    },
+    {
+      "check": "case2.indices",
+      "passed": true,
+      "actual": [
+        0,
+        2,
+        4
+      ],
+      "expected": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "check": "case3.weight",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "check": "case3.indices",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "case4.weight",
+      "passed": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "check": "case4.indices",
+      "passed": true,
+      "actual": [
+        0,
+        2,
+        4
+      ],
+      "expected": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "check": "time_complexity",
+      "passed": true,
+      "actual": "O(n)",
+      "expected": "O(n)"
+    },
+    {
+      "check": "auxiliary_space_for_value",
+      "passed": true,
+      "actual": "O(1)",
+      "expected": "O(1)"
+    }
+  ],
+  "latency_seconds": 13.914,
+  "input_tokens": 11497,
+  "output_tokens": 443,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11497,
+      "cached_input_tokens": 7936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 443,
+      "reasoning_output_tokens": 170
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789436841.5164008,
+  "ended_at": 1789436855.430601,
+  "repairs": 0,
+  "model_call_attempted": true
+}

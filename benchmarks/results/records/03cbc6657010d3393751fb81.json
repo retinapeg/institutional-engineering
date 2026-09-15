@@ -1,0 +1,175 @@
+{
+  "key": "03cbc6657010d3393751fb81",
+  "run_id": "20260915-023138",
+  "task_id": "math_independent_set",
+  "domain": "mathematics",
+  "condition": "mismatched",
+  "role": "Product Engineer",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 2,
+  "sweep": "primary",
+  "task_text": "Find a maximum-weight set of nonadjacent indices on a PATH (not a cycle). Empty selection is allowed. Return answer objects case1..case4, each with weight and indices (0-based, ascending). Ties: choose lexicographically smallest ascending index list under ordinary list ordering (a prefix is smaller). Cases: case1=[5,1,1,5]; case2=[4,5,4,5,4]; case3=[-3,0,-2,0]; case4=[2,2,2,2,2,2]. Also return time_complexity for computing ONLY the optimum value using dynamic programming as O(n), O(n^2), or O(2^n), and auxiliary_space_for_value as O(1) or O(n). Reconstruction tie-breaking must be justified, not confused with choosing the largest individual weights.",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "case1": {
+        "weight": 10,
+        "indices": [
+          0,
+          3
+        ]
+      },
+      "case2": {
+        "weight": 12,
+        "indices": [
+          0,
+          2,
+          4
+        ]
+      },
+      "case3": {
+        "weight": 0,
+        "indices": []
+      },
+      "case4": {
+        "weight": 6,
+        "indices": [
+          0,
+          2,
+          4
+        ]
+      },
+      "time_complexity": "O(n)",
+      "auxiliary_space_for_value": "O(1)",
+      "tie_breaking": "Among equal-weight valid selections, choose the lexicographically smallest ascending index list; therefore the empty list wins any zero-weight tie."
+    },
+    "concise_method_summary": "Used path dynamic programming: at each position, compare excluding it with including its weight plus the optimum through two positions earlier. Value-only computation retains only the previous two DP values. Reconstruction compares equal-optimal candidates by their full ascending index lists, not by individual item weights.",
+    "assumptions": [
+      "Indices are 0-based.",
+      "Nonadjacent means no two selected indices differ by 1.",
+      "The empty selection is permitted and has weight 0.",
+      "Lexicographic list ordering treats a prefix as smaller than a longer list."
+    ],
+    "confidence": 1.0,
+    "proposed_verification": [
+      "Check each returned index list contains no adjacent indices.",
+      "Sum the selected case weights and compare against all valid path selections for these small inputs.",
+      "Confirm case3 chooses [] over [1] and [3] because all have weight 0.",
+      "Confirm case4 tie resolution selects [0,2,4] as the lexicographically smallest maximum-weight list."
+    ],
+    "files": []
+  },
+  "response_text": "{\"answer\":{\"case1\":{\"weight\":10,\"indices\":[0,3]},\"case2\":{\"weight\":12,\"indices\":[0,2,4]},\"case3\":{\"weight\":0,\"indices\":[]},\"case4\":{\"weight\":6,\"indices\":[0,2,4]},\"time_complexity\":\"O(n)\",\"auxiliary_space_for_value\":\"O(1)\",\"tie_breaking\":\"Among equal-weight valid selections, choose the lexicographically smallest ascending index list; therefore the empty list wins any zero-weight tie.\"},\"concise_method_summary\":\"Used path dynamic programming: at each position, compare excluding it with including its weight plus the optimum through two positions earlier. Value-only computation retains only the previous two DP values. Reconstruction compares equal-optimal candidates by their full ascending index lists, not by individual item weights.\",\"assumptions\":[\"Indices are 0-based.\",\"Nonadjacent means no two selected indices differ by 1.\",\"The empty selection is permitted and has weight 0.\",\"Lexicographic list ordering treats a prefix as smaller than a longer list.\"],\"confidence\":1.0,\"proposed_verification\":[\"Check each returned index list contains no adjacent indices.\",\"Sum the selected case weights and compare against all valid path selections for these small inputs.\",\"Confirm case3 chooses [] over [1] and [3] because all have weight 0.\",\"Confirm case4 tie resolution selects [0,2,4] as the lexicographically smallest maximum-weight list.\"],\"files\":[]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 10,
+  "tests_total": 10,
+  "verification_details": [
+    {
+      "check": "case1.weight",
+      "passed": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "check": "case1.indices",
+      "passed": true,
+      "actual": [
+        0,
+        3
+      ],
+      "expected": [
+        0,
+        3
+      ]
+    },
+    {
+      "check": "case2.weight",
+      "passed": true,
+      "actual": 12,
+      "expected": 12
+    },
+    {
+      "check": "case2.indices",
+      "passed": true,
+      "actual": [
+        0,
+        2,
+        4
+      ],
+      "expected": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "check": "case3.weight",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "check": "case3.indices",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "case4.weight",
+      "passed": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "check": "case4.indices",
+      "passed": true,
+      "actual": [
+        0,
+        2,
+        4
+      ],
+      "expected": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "check": "time_complexity",
+      "passed": true,
+      "actual": "O(n)",
+      "expected": "O(n)"
+    },
+    {
+      "check": "auxiliary_space_for_value",
+      "passed": true,
+      "actual": "O(1)",
+      "expected": "O(1)"
+    }
+  ],
+  "latency_seconds": 12.601,
+  "input_tokens": 11501,
+  "output_tokens": 497,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11501,
+      "cached_input_tokens": 5888,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 497,
+      "reasoning_output_tokens": 191
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789436498.452706,
+  "ended_at": 1789436511.053975,
+  "repairs": 0,
+  "model_call_attempted": true
+}

@@ -1,0 +1,511 @@
+{
+  "interpretation": "Exploratory descriptive evidence, not significance or causal generalisation. Protocol failures score zero; valid-only scores are also shown. Conditions are paired by task/model/repeat, not identical stochastic seeds.",
+  "total_calls": 96,
+  "successful_calls": 63,
+  "failed_calls": 33,
+  "unavailable_without_call": 0,
+  "failure_rate": 0.34375,
+  "objective_passes": 58,
+  "total_rows": 96,
+  "wall_seconds": 3931.14,
+  "primary": {
+    "overall": {
+      "n": 96,
+      "mean_score": 0.63984375,
+      "mean_score_schema_valid_only": 0.975,
+      "mean_latency_seconds": 42.87679166666667,
+      "input_tokens_reported": 557168,
+      "output_tokens_reported": 113811,
+      "token_observations": 79,
+      "protocol_failures": 33,
+      "objective_passes": 58
+    },
+    "by_model": {
+      "gpt-5.6-terra": {
+        "n": 48,
+        "mean_score": 0.9697916666666667,
+        "mean_score_schema_valid_only": 0.9697916666666667,
+        "mean_latency_seconds": 12.908875,
+        "input_tokens_reported": 551100,
+        "output_tokens_reported": 24290,
+        "token_observations": 48,
+        "protocol_failures": 0,
+        "objective_passes": 44
+      },
+      "sonnet": {
+        "n": 48,
+        "mean_score": 0.3098958333333333,
+        "mean_score_schema_valid_only": 0.9916666666666667,
+        "mean_latency_seconds": 72.84470833333333,
+        "input_tokens_reported": 6068,
+        "output_tokens_reported": 89521,
+        "token_observations": 31,
+        "protocol_failures": 33,
+        "objective_passes": 14
+      }
+    },
+    "by_condition": {
+      "baseline": {
+        "n": 32,
+        "mean_score": 0.5875,
+        "mean_score_schema_valid_only": 0.94,
+        "mean_latency_seconds": 43.609531249999996,
+        "input_tokens_reported": 182932,
+        "output_tokens_reported": 31821,
+        "token_observations": 25,
+        "protocol_failures": 12,
+        "objective_passes": 18
+      },
+      "matched": {
+        "n": 32,
+        "mean_score": 0.71484375,
+        "mean_score_schema_valid_only": 0.9945652173913043,
+        "mean_latency_seconds": 41.8000625,
+        "input_tokens_reported": 184180,
+        "output_tokens_reported": 41161,
+        "token_observations": 28,
+        "protocol_failures": 9,
+        "objective_passes": 22
+      },
+      "mismatched": {
+        "n": 32,
+        "mean_score": 0.6171875,
+        "mean_score_schema_valid_only": 0.9875,
+        "mean_latency_seconds": 43.22078125,
+        "input_tokens_reported": 190056,
+        "output_tokens_reported": 40829,
+        "token_observations": 26,
+        "protocol_failures": 12,
+        "objective_passes": 18
+      }
+    },
+    "by_domain": {
+      "mathematics": {
+        "n": 24,
+        "mean_score": 0.4916666666666667,
+        "mean_score_schema_valid_only": 0.9833333333333334,
+        "mean_latency_seconds": 52.313375,
+        "input_tokens_reported": 141997,
+        "output_tokens_reported": 13882,
+        "token_observations": 13,
+        "protocol_failures": 12,
+        "objective_passes": 11
+      },
+      "physics": {
+        "n": 24,
+        "mean_score": 0.734375,
+        "mean_score_schema_valid_only": 0.9791666666666666,
+        "mean_latency_seconds": 39.174958333333336,
+        "input_tokens_reported": 138911,
+        "output_tokens_reported": 47841,
+        "token_observations": 24,
+        "protocol_failures": 6,
+        "objective_passes": 15
+      },
+      "software": {
+        "n": 24,
+        "mean_score": 0.625,
+        "mean_score_schema_valid_only": 0.9375,
+        "mean_latency_seconds": 47.75541666666667,
+        "input_tokens_reported": 138138,
+        "output_tokens_reported": 20641,
+        "token_observations": 18,
+        "protocol_failures": 8,
+        "objective_passes": 15
+      },
+      "statistics": {
+        "n": 24,
+        "mean_score": 0.7083333333333334,
+        "mean_score_schema_valid_only": 1.0,
+        "mean_latency_seconds": 32.263416666666664,
+        "input_tokens_reported": 138122,
+        "output_tokens_reported": 31447,
+        "token_observations": 24,
+        "protocol_failures": 7,
+        "objective_passes": 17
+      }
+    },
+    "by_role": {
+      "Mathematician": {
+        "n": 8,
+        "mean_score": 0.5,
+        "mean_score_schema_valid_only": 1.0,
+        "mean_latency_seconds": 53.876374999999996,
+        "input_tokens_reported": 45970,
+        "output_tokens_reported": 2924,
+        "token_observations": 4,
+        "protocol_failures": 4,
+        "objective_passes": 4
+      },
+      "None": {
+        "n": 32,
+        "mean_score": 0.5875,
+        "mean_score_schema_valid_only": 0.94,
+        "mean_latency_seconds": 43.609531249999996,
+        "input_tokens_reported": 182932,
+        "output_tokens_reported": 31821,
+        "token_observations": 25,
+        "protocol_failures": 12,
+        "objective_passes": 18
+      },
+      "Physicist": {
+        "n": 24,
+        "mean_score": 0.6614583333333334,
+        "mean_score_schema_valid_only": 0.9921875,
+        "mean_latency_seconds": 40.50841666666667,
+        "input_tokens_reported": 138206,
+        "output_tokens_reported": 31148,
+        "token_observations": 21,
+        "protocol_failures": 8,
+        "objective_passes": 15
+      },
+      "Product Engineer": {
+        "n": 8,
+        "mean_score": 0.5,
+        "mean_score_schema_valid_only": 1.0,
+        "mean_latency_seconds": 49.26475,
+        "input_tokens_reported": 50379,
+        "output_tokens_reported": 8113,
+        "token_observations": 5,
+        "protocol_failures": 4,
+        "objective_passes": 4
+      },
+      "Software Engineer": {
+        "n": 8,
+        "mean_score": 0.875,
+        "mean_score_schema_valid_only": 1.0,
+        "mean_latency_seconds": 44.0855,
+        "input_tokens_reported": 46150,
+        "output_tokens_reported": 12371,
+        "token_observations": 8,
+        "protocol_failures": 1,
+        "objective_passes": 7
+      },
+      "Statistician": {
+        "n": 16,
+        "mean_score": 0.734375,
+        "mean_score_schema_valid_only": 0.9791666666666666,
+        "mean_latency_seconds": 35.66575,
+        "input_tokens_reported": 93531,
+        "output_tokens_reported": 27434,
+        "token_observations": 16,
+        "protocol_failures": 4,
+        "objective_passes": 10
+      }
+    }
+  },
+  "secondary": {
+    "n": 0,
+    "mean_score": null,
+    "mean_score_schema_valid_only": null,
+    "mean_latency_seconds": 0,
+    "input_tokens_reported": 0,
+    "output_tokens_reported": 0,
+    "token_observations": 0,
+    "protocol_failures": 0,
+    "objective_passes": 0
+  },
+  "matched_minus_baseline": 0.12734375,
+  "mismatched_minus_baseline": 0.0296875,
+  "matched_pair_count": 32,
+  "mismatched_pair_count": 32,
+  "model_effect_sonnet_minus_terra": -0.6598958333333333,
+  "task_matched_effects": [
+    {
+      "task_id": "software_merge_intervals",
+      "difference": 0.5,
+      "n": 4
+    },
+    {
+      "task_id": "software_escaped_fields",
+      "difference": 0.5,
+      "n": 4
+    },
+    {
+      "task_id": "physics_lorentz",
+      "difference": 0.21875,
+      "n": 4
+    },
+    {
+      "task_id": "math_independent_set",
+      "difference": 0.04999999999999999,
+      "n": 4
+    },
+    {
+      "task_id": "math_cancellation",
+      "difference": 0.0,
+      "n": 4
+    },
+    {
+      "task_id": "stats_base_rate",
+      "difference": 0.0,
+      "n": 4
+    },
+    {
+      "task_id": "stats_leakage",
+      "difference": 0.0,
+      "n": 4
+    },
+    {
+      "task_id": "physics_symplectic",
+      "difference": -0.25,
+      "n": 4
+    }
+  ],
+  "strong_model_disagreements": [
+    {
+      "task_id": "math_cancellation",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "software_merge_intervals",
+      "condition": "baseline",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "software_merge_intervals",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_cancellation",
+      "condition": "baseline",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "stats_leakage",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_cancellation",
+      "condition": "matched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "physics_symplectic",
+      "condition": "baseline",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "stats_base_rate",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "stats_leakage",
+      "condition": "baseline",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "stats_leakage",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_independent_set",
+      "condition": "baseline",
+      "repeat": 1,
+      "sonnet_minus_terra": -0.8
+    },
+    {
+      "task_id": "physics_lorentz",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_independent_set",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_independent_set",
+      "condition": "matched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "software_escaped_fields",
+      "condition": "matched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "stats_base_rate",
+      "condition": "baseline",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "software_merge_intervals",
+      "condition": "baseline",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "software_escaped_fields",
+      "condition": "baseline",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_cancellation",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "physics_symplectic",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sonnet_minus_terra": -0.875
+    },
+    {
+      "task_id": "software_escaped_fields",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_independent_set",
+      "condition": "mismatched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_independent_set",
+      "condition": "matched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "physics_symplectic",
+      "condition": "matched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "stats_base_rate",
+      "condition": "matched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "physics_lorentz",
+      "condition": "baseline",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_cancellation",
+      "condition": "baseline",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "physics_symplectic",
+      "condition": "matched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_independent_set",
+      "condition": "baseline",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "stats_leakage",
+      "condition": "matched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "math_cancellation",
+      "condition": "matched",
+      "repeat": 1,
+      "sonnet_minus_terra": -1.0
+    },
+    {
+      "task_id": "software_merge_intervals",
+      "condition": "mismatched",
+      "repeat": 2,
+      "sonnet_minus_terra": -1.0
+    }
+  ],
+  "lexical_role_consistency": [
+    {
+      "task_id": "math_cancellation",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.4,
+      "matched_to_baseline_jaccard": 0.496656014721782,
+      "difference": -0.09665601472178198
+    },
+    {
+      "task_id": "math_independent_set",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.5040650406504065,
+      "matched_to_baseline_jaccard": 0.5202514464802315,
+      "difference": -0.016186405829825
+    },
+    {
+      "task_id": "physics_lorentz",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.6533333333333333,
+      "matched_to_baseline_jaccard": 0.6478646908894719,
+      "difference": 0.005468642443861471
+    },
+    {
+      "task_id": "physics_symplectic",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.5612244897959183,
+      "matched_to_baseline_jaccard": 0.557813667148925,
+      "difference": 0.003410822646993328
+    },
+    {
+      "task_id": "software_escaped_fields",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.6547619047619048,
+      "matched_to_baseline_jaccard": 0.6073349529680072,
+      "difference": 0.047426951793897554
+    },
+    {
+      "task_id": "software_merge_intervals",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.5398230088495575,
+      "matched_to_baseline_jaccard": 0.5956245977024569,
+      "difference": -0.05580158885289943
+    },
+    {
+      "task_id": "stats_base_rate",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.5581395348837209,
+      "matched_to_baseline_jaccard": 0.5995221327967807,
+      "difference": -0.04138259791305976
+    },
+    {
+      "task_id": "stats_leakage",
+      "model": "gpt-5.6-terra",
+      "within_matched_jaccard": 0.5408805031446541,
+      "matched_to_baseline_jaccard": 0.5519745801800673,
+      "difference": -0.011094077035413208
+    }
+  ],
+  "lexical_warning": "Token-set Jaccard is only a lexical proxy, not an embedding or proof of changed reasoning. Full responses support later analysis.",
+  "actual_marginal_cost": "UNKNOWN",
+  "repairs": 0,
+  "production_router_modified": false
+}

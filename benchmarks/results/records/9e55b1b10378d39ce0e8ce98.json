@@ -1,0 +1,124 @@
+{
+  "key": "9e55b1b10378d39ce0e8ce98",
+  "run_id": "20260915-023138",
+  "task_id": "software_merge_intervals",
+  "domain": "software",
+  "condition": "matched",
+  "role": "Software Engineer",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 1,
+  "sweep": "primary",
+  "task_text": "Fix merge_intervals(intervals) in solution.py. Inputs are lists of [start,end] integer CLOSED intervals. Merge overlaps AND touching endpoints, sort by start, return fresh list-of-lists, never mutate input (including inner lists). Empty list returns[]. Reversed interval start>end raises ValueError before producing a result. Degenerate [x,x] is valid. No imports or dependencies. Return full solution.py in files, with only pure functions; allowed built-ins len/range/enumerate/zip/sorted/list/tuple/str/int/float/bool/abs/min/max/sum/round/ValueError; the only allowed method call is list.append. Do not include tests. Inputs have at most12 intervals with coordinates -20..20.",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "status": "implemented"
+    },
+    "concise_method_summary": "Validates all intervals before sorting, uses a sorted outer copy to preserve input, and merges intervals when the next start is less than or equal to the current end. Output intervals are newly created lists.",
+    "assumptions": [
+      "Touching closed intervals means an endpoint equality such as [1,2] and [2,3].",
+      "Inputs are structurally valid two-element integer lists as specified."
+    ],
+    "confidence": 0.99,
+    "proposed_verification": [
+      "Verify [] returns [].",
+      "Verify [[1,2],[2,3]] returns [[1,3]].",
+      "Verify unsorted [[5,6],[1,4]] returns [[1,4],[5,6]].",
+      "Verify input and its inner lists remain unchanged after the call.",
+      "Verify [[3,2]] raises ValueError.",
+      "Verify degenerate [[1,1],[1,2]] returns [[1,2]]."
+    ],
+    "files": [
+      {
+        "path": "solution.py",
+        "content": "def merge_intervals(intervals):\n    for interval in intervals:\n        if interval[0] > interval[1]:\n            raise ValueError(\"interval start must not exceed end\")\n\n    ordered = sorted(intervals)\n    merged = []\n\n    for interval in ordered:\n        start = interval[0]\n        end = interval[1]\n        if len(merged) > 0 and start <= merged[-1][1]:\n            if end > merged[-1][1]:\n                merged[-1][1] = end\n        else:\n            merged.append([start, end])\n\n    return merged\n"
+      }
+    ]
+  },
+  "response_text": "{\"answer\":{\"status\":\"implemented\"},\"concise_method_summary\":\"Validates all intervals before sorting, uses a sorted outer copy to preserve input, and merges intervals when the next start is less than or equal to the current end. Output intervals are newly created lists.\",\"assumptions\":[\"Touching closed intervals means an endpoint equality such as [1,2] and [2,3].\",\"Inputs are structurally valid two-element integer lists as specified.\"],\"confidence\":0.99,\"proposed_verification\":[\"Verify [] returns [].\",\"Verify [[1,2],[2,3]] returns [[1,3]].\",\"Verify unsorted [[5,6],[1,4]] returns [[1,4],[5,6]].\",\"Verify input and its inner lists remain unchanged after the call.\",\"Verify [[3,2]] raises ValueError.\",\"Verify degenerate [[1,1],[1,2]] returns [[1,2]].\"],\"files\":[{\"path\":\"solution.py\",\"content\":\"def merge_intervals(intervals):\\n    for interval in intervals:\\n        if interval[0] > interval[1]:\\n            raise ValueError(\\\"interval start must not exceed end\\\")\\n\\n    ordered = sorted(intervals)\\n    merged = []\\n\\n    for interval in ordered:\\n        start = interval[0]\\n        end = interval[1]\\n        if len(merged) > 0 and start <= merged[-1][1]:\\n            if end > merged[-1][1]:\\n                merged[-1][1] = end\\n        else:\\n            merged.append([start, end])\\n\\n    return merged\\n\"}]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 11,
+  "tests_total": 11,
+  "verification_details": [
+    {
+      "case": "empty",
+      "passed": true,
+      "actual": "[]"
+    },
+    {
+      "case": "single_fresh",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "unsorted",
+      "passed": true,
+      "actual": "[[1, 6], [8, 9]]"
+    },
+    {
+      "case": "touching",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "containment",
+      "passed": true,
+      "actual": "[[1, 10]]"
+    },
+    {
+      "case": "duplicate",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "points",
+      "passed": true,
+      "actual": "[[1, 1], [2, 2]]"
+    },
+    {
+      "case": "negative",
+      "passed": true,
+      "actual": "[[-5, 1]]"
+    },
+    {
+      "case": "bridge",
+      "passed": true,
+      "actual": "[[1, 5]]"
+    },
+    {
+      "case": "reversed",
+      "passed": true,
+      "actual": "ValueError"
+    },
+    {
+      "case": "reversed_later",
+      "passed": true,
+      "actual": "ValueError"
+    }
+  ],
+  "latency_seconds": 15.345,
+  "input_tokens": 11573,
+  "output_tokens": 703,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11573,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 703,
+      "reasoning_output_tokens": 352
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789439443.564714,
+  "ended_at": 1789439458.9692118,
+  "repairs": 0,
+  "model_call_attempted": true
+}

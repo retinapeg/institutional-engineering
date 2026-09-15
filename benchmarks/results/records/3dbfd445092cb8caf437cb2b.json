@@ -1,0 +1,71 @@
+{
+  "key": "3dbfd445092cb8caf437cb2b",
+  "run_id": "20260915-023138",
+  "task_id": "software_escaped_fields",
+  "domain": "software",
+  "condition": "baseline",
+  "role": "None",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 2,
+  "sweep": "primary",
+  "task_text": "Fix split_fields(text) in solution.py. Unescaped commas split fields; backslash escapes ONLY comma or backslash; preserve empty fields including trailing ones. Empty input returns ['']. Invalid escape or dangling backslash raises ValueError. No imports or external dependencies. Return full solution.py in files, with only pure functions; allowed built-ins len/range/enumerate/zip/sorted/list/tuple/str/int/float/bool/abs/min/max/sum/round/ValueError; the only allowed method call is list.append. Do not include grading tests. answer may briefly identify the implementation. Host checks run separately. Inputs are strings, at most80 characters.",
+  "difficulty_prior": "medium",
+  "response": {
+    "answer": {
+      "implementation": "Implemented split_fields with strict comma/backslash escaping and empty-field preservation."
+    },
+    "concise_method_summary": "Scans characters once, splitting only on unescaped commas. A backslash consumes the next character only when it is a comma or backslash; otherwise raises ValueError. Appends the final field to preserve trailing empties.",
+    "assumptions": [
+      "Backslash escaping is interpreted literally: \\, produces comma and \\\\ produces one backslash.",
+      "All inputs are strings as specified."
+    ],
+    "confidence": 0.99,
+    "proposed_verification": [
+      "split_fields('a,b,,') returns ['a', 'b', '', ''].",
+      "split_fields('a\\\\,b,c') returns ['a,b', 'c'].",
+      "split_fields('a\\\\\\\\b') returns ['a\\\\b'].",
+      "split_fields('') returns [''].",
+      "Invalid inputs such as 'a\\\\x' and 'a\\\\' raise ValueError."
+    ],
+    "files": [
+      {
+        "path": "solution.py",
+        "content": "def split_fields(text: str) -> list[str]:\n    fields = []\n    field = []\n    index = 0\n    while index < len(text):\n        character = text[index]\n        if character == \",\":\n            fields.append(\"\".join(field))\n            field = []\n        elif character == \"\\\\\":\n            index += 1\n            if index >= len(text):\n                raise ValueError(\"dangling escape\")\n            character = text[index]\n            if character != \",\" and character != \"\\\\\":\n                raise ValueError(\"invalid escape\")\n            field.append(character)\n        else:\n            field.append(character)\n        index += 1\n    fields.append(\"\".join(field))\n    return fields\n"
+      }
+    ]
+  },
+  "response_text": "{\"answer\":{\"implementation\":\"Implemented split_fields with strict comma/backslash escaping and empty-field preservation.\"},\"concise_method_summary\":\"Scans characters once, splitting only on unescaped commas. A backslash consumes the next character only when it is a comma or backslash; otherwise raises ValueError. Appends the final field to preserve trailing empties.\",\"assumptions\":[\"Backslash escaping is interpreted literally: \\\\, produces comma and \\\\\\\\ produces one backslash.\",\"All inputs are strings as specified.\"],\"confidence\":0.99,\"proposed_verification\":[\"split_fields('a,b,,') returns ['a', 'b', '', ''].\",\"split_fields('a\\\\\\\\,b,c') returns ['a,b', 'c'].\",\"split_fields('a\\\\\\\\\\\\\\\\b') returns ['a\\\\\\\\b'].\",\"split_fields('') returns [''].\",\"Invalid inputs such as 'a\\\\\\\\x' and 'a\\\\\\\\' raise ValueError.\"],\"files\":[{\"path\":\"solution.py\",\"content\":\"def split_fields(text: str) -> list[str]:\\n    fields = []\\n    field = []\\n    index = 0\\n    while index < len(text):\\n        character = text[index]\\n        if character == \\\",\\\":\\n            fields.append(\\\"\\\".join(field))\\n            field = []\\n        elif character == \\\"\\\\\\\\\\\":\\n            index += 1\\n            if index >= len(text):\\n                raise ValueError(\\\"dangling escape\\\")\\n            character = text[index]\\n            if character != \\\",\\\" and character != \\\"\\\\\\\\\\\":\\n                raise ValueError(\\\"invalid escape\\\")\\n            field.append(character)\\n        else:\\n            field.append(character)\\n        index += 1\\n    fields.append(\\\"\\\".join(field))\\n    return fields\\n\"}]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": false,
+  "objective_score": 0.0,
+  "tests_passed": 0,
+  "tests_total": 12,
+  "verification_details": [
+    {
+      "error": "ValueError: Call outside pure-function allowlist"
+    }
+  ],
+  "latency_seconds": 10.126,
+  "input_tokens": 11420,
+  "output_tokens": 384,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11420,
+      "cached_input_tokens": 7936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 384,
+      "reasoning_output_tokens": 0
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789436020.58064,
+  "ended_at": 1789436030.779505,
+  "repairs": 0,
+  "model_call_attempted": true
+}

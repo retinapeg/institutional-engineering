@@ -1,0 +1,174 @@
+{
+  "key": "6ed84618a2e5c7e20aa044e4",
+  "run_id": "20260915-023138",
+  "task_id": "math_independent_set",
+  "domain": "mathematics",
+  "condition": "matched",
+  "role": "Mathematician",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 2,
+  "sweep": "primary",
+  "task_text": "Find a maximum-weight set of nonadjacent indices on a PATH (not a cycle). Empty selection is allowed. Return answer objects case1..case4, each with weight and indices (0-based, ascending). Ties: choose lexicographically smallest ascending index list under ordinary list ordering (a prefix is smaller). Cases: case1=[5,1,1,5]; case2=[4,5,4,5,4]; case3=[-3,0,-2,0]; case4=[2,2,2,2,2,2]. Also return time_complexity for computing ONLY the optimum value using dynamic programming as O(n), O(n^2), or O(2^n), and auxiliary_space_for_value as O(1) or O(n). Reconstruction tie-breaking must be justified, not confused with choosing the largest individual weights.",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "case1": {
+        "weight": 10,
+        "indices": [
+          0,
+          3
+        ]
+      },
+      "case2": {
+        "weight": 12,
+        "indices": [
+          0,
+          2,
+          4
+        ]
+      },
+      "case3": {
+        "weight": 0,
+        "indices": []
+      },
+      "case4": {
+        "weight": 6,
+        "indices": [
+          0,
+          2,
+          4
+        ]
+      },
+      "time_complexity": "O(n)",
+      "auxiliary_space_for_value": "O(1)"
+    },
+    "concise_method_summary": "Use path DP: each optimum is the better of excluding the current index or including it plus the optimum through i-2; retain only two values for value computation. For reconstruction, compare complete equal-weight index lists lexicographically, choosing the smaller list (so [] wins zero-weight ties).",
+    "assumptions": [
+      "Indices are zero-based.",
+      "Nonadjacent means no two selected indices differ by 1.",
+      "The empty set has weight 0 and is permitted.",
+      "Lexicographic ordering treats a proper prefix as smaller."
+    ],
+    "confidence": 1.0,
+    "proposed_verification": [
+      "Check every returned index set contains no adjacent indices.",
+      "Sum the selected case weights.",
+      "For small inputs, compare against exhaustive enumeration of all subsets.",
+      "Test equal-weight ties, including zero-valued and empty selections."
+    ],
+    "files": []
+  },
+  "response_text": "{\"answer\":{\"case1\":{\"weight\":10,\"indices\":[0,3]},\"case2\":{\"weight\":12,\"indices\":[0,2,4]},\"case3\":{\"weight\":0,\"indices\":[]},\"case4\":{\"weight\":6,\"indices\":[0,2,4]},\"time_complexity\":\"O(n)\",\"auxiliary_space_for_value\":\"O(1)\"},\"concise_method_summary\":\"Use path DP: each optimum is the better of excluding the current index or including it plus the optimum through i-2; retain only two values for value computation. For reconstruction, compare complete equal-weight index lists lexicographically, choosing the smaller list (so [] wins zero-weight ties).\",\"assumptions\":[\"Indices are zero-based.\",\"Nonadjacent means no two selected indices differ by 1.\",\"The empty set has weight 0 and is permitted.\",\"Lexicographic ordering treats a proper prefix as smaller.\"],\"confidence\":1.0,\"proposed_verification\":[\"Check every returned index set contains no adjacent indices.\",\"Sum the selected case weights.\",\"For small inputs, compare against exhaustive enumeration of all subsets.\",\"Test equal-weight ties, including zero-valued and empty selections.\"],\"files\":[]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 10,
+  "tests_total": 10,
+  "verification_details": [
+    {
+      "check": "case1.weight",
+      "passed": true,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "check": "case1.indices",
+      "passed": true,
+      "actual": [
+        0,
+        3
+      ],
+      "expected": [
+        0,
+        3
+      ]
+    },
+    {
+      "check": "case2.weight",
+      "passed": true,
+      "actual": 12,
+      "expected": 12
+    },
+    {
+      "check": "case2.indices",
+      "passed": true,
+      "actual": [
+        0,
+        2,
+        4
+      ],
+      "expected": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "check": "case3.weight",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "check": "case3.indices",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "case4.weight",
+      "passed": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "check": "case4.indices",
+      "passed": true,
+      "actual": [
+        0,
+        2,
+        4
+      ],
+      "expected": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "check": "time_complexity",
+      "passed": true,
+      "actual": "O(n)",
+      "expected": "O(n)"
+    },
+    {
+      "check": "auxiliary_space_for_value",
+      "passed": true,
+      "actual": "O(1)",
+      "expected": "O(1)"
+    }
+  ],
+  "latency_seconds": 11.998,
+  "input_tokens": 11508,
+  "output_tokens": 459,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11508,
+      "cached_input_tokens": 5888,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 459,
+      "reasoning_output_tokens": 212
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789436855.4376268,
+  "ended_at": 1789436867.435461,
+  "repairs": 0,
+  "model_call_attempted": true
+}

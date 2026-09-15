@@ -1,0 +1,122 @@
+{
+  "key": "b558e51bffaf37d5491d1b68",
+  "run_id": "20260915-023138",
+  "task_id": "software_merge_intervals",
+  "domain": "software",
+  "condition": "mismatched",
+  "role": "Physicist",
+  "provider": "codex",
+  "model": "gpt-5.6-terra",
+  "repeat": 2,
+  "sweep": "primary",
+  "task_text": "Fix merge_intervals(intervals) in solution.py. Inputs are lists of [start,end] integer CLOSED intervals. Merge overlaps AND touching endpoints, sort by start, return fresh list-of-lists, never mutate input (including inner lists). Empty list returns[]. Reversed interval start>end raises ValueError before producing a result. Degenerate [x,x] is valid. No imports or dependencies. Return full solution.py in files, with only pure functions; allowed built-ins len/range/enumerate/zip/sorted/list/tuple/str/int/float/bool/abs/min/max/sum/round/ValueError; the only allowed method call is list.append. Do not include tests. Inputs have at most12 intervals with coordinates -20..20.",
+  "difficulty_prior": "high",
+  "response": {
+    "answer": {
+      "status": "implemented"
+    },
+    "concise_method_summary": "Sort a copied set of validated interval values, then merge whenever the next start is at most the current end (closed intervals, so touching endpoints merge). Construct all output lists freshly.",
+    "assumptions": [
+      "Each input interval contains exactly two integer endpoints, as specified."
+    ],
+    "confidence": 0.99,
+    "proposed_verification": [
+      "Check [] returns [].",
+      "Check [[1,2],[2,3]] returns [[1,3]].",
+      "Check unordered, nested intervals merge correctly.",
+      "Check [[3,1]] raises ValueError.",
+      "Confirm input outer and inner lists remain unchanged."
+    ],
+    "files": [
+      {
+        "path": "solution.py",
+        "content": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    copied = []\n    for interval in intervals:\n        start = interval[0]\n        end = interval[1]\n        if start > end:\n            raise ValueError(\"interval start must not exceed end\")\n        copied.append([start, end])\n\n    ordered = sorted(copied)\n    merged = []\n    for start, end in ordered:\n        if len(merged) == 0 or start > merged[-1][1]:\n            merged.append([start, end])\n        elif end > merged[-1][1]:\n            merged[-1][1] = end\n    return merged\n"
+      }
+    ]
+  },
+  "response_text": "{\"answer\":{\"status\":\"implemented\"},\"concise_method_summary\":\"Sort a copied set of validated interval values, then merge whenever the next start is at most the current end (closed intervals, so touching endpoints merge). Construct all output lists freshly.\",\"assumptions\":[\"Each input interval contains exactly two integer endpoints, as specified.\"],\"confidence\":0.99,\"proposed_verification\":[\"Check [] returns [].\",\"Check [[1,2],[2,3]] returns [[1,3]].\",\"Check unordered, nested intervals merge correctly.\",\"Check [[3,1]] raises ValueError.\",\"Confirm input outer and inner lists remain unchanged.\"],\"files\":[{\"path\":\"solution.py\",\"content\":\"def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\\n    copied = []\\n    for interval in intervals:\\n        start = interval[0]\\n        end = interval[1]\\n        if start > end:\\n            raise ValueError(\\\"interval start must not exceed end\\\")\\n        copied.append([start, end])\\n\\n    ordered = sorted(copied)\\n    merged = []\\n    for start, end in ordered:\\n        if len(merged) == 0 or start > merged[-1][1]:\\n            merged.append([start, end])\\n        elif end > merged[-1][1]:\\n            merged[-1][1] = end\\n    return merged\\n\"}]}",
+  "schema_success": true,
+  "call_success": true,
+  "success": true,
+  "objective_score": 1.0,
+  "tests_passed": 11,
+  "tests_total": 11,
+  "verification_details": [
+    {
+      "case": "empty",
+      "passed": true,
+      "actual": "[]"
+    },
+    {
+      "case": "single_fresh",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "unsorted",
+      "passed": true,
+      "actual": "[[1, 6], [8, 9]]"
+    },
+    {
+      "case": "touching",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "containment",
+      "passed": true,
+      "actual": "[[1, 10]]"
+    },
+    {
+      "case": "duplicate",
+      "passed": true,
+      "actual": "[[1, 3]]"
+    },
+    {
+      "case": "points",
+      "passed": true,
+      "actual": "[[1, 1], [2, 2]]"
+    },
+    {
+      "case": "negative",
+      "passed": true,
+      "actual": "[[-5, 1]]"
+    },
+    {
+      "case": "bridge",
+      "passed": true,
+      "actual": "[[1, 5]]"
+    },
+    {
+      "case": "reversed",
+      "passed": true,
+      "actual": "ValueError"
+    },
+    {
+      "case": "reversed_later",
+      "passed": true,
+      "actual": "ValueError"
+    }
+  ],
+  "latency_seconds": 9.254,
+  "input_tokens": 11575,
+  "output_tokens": 302,
+  "reported_usage_metadata": {
+    "usage": {
+      "input_tokens": 11575,
+      "cached_input_tokens": 5888,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 302,
+      "reasoning_output_tokens": 0
+    },
+    "models": {}
+  },
+  "relative_cost_class": "medium",
+  "actual_marginal_cost": "UNKNOWN",
+  "error_category": null,
+  "error": null,
+  "started_at": 1789435898.490474,
+  "ended_at": 1789435907.8058538,
+  "repairs": 0,
+  "model_call_attempted": true
+}
