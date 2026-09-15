@@ -1,6 +1,11 @@
 # Single-task role intervention study
 
-Status: PENDING_OR_PARTIAL. 0/1000 terminal observations.
+Status: BLOCKED_CALIBRATION_INFRASTRUCTURE. 0/1000 full-study observations.
+
+Calibration: 60 failed local CLI attempts, zero model responses. Unsupported retry-control
+configuration caused bootstrap rejection. This is not evidence about model performance.
+No task qualified; task.txt and the full 1000-call schedule are intentionally not frozen.
+See CALIBRATION_FAILURE.md. A new calibration requires an approved protocol amendment.
 
 No role-specific conclusion is asserted from pending or preliminary data.
 

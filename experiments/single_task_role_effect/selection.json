@@ -1,0 +1,30 @@
+{
+  "selected": null,
+  "calibration": [
+    {
+      "task_id": "independent_set",
+      "n": 20,
+      "protocol_valid": 0,
+      "baseline_rate": 0.0,
+      "eligible": false,
+      "distance": 13
+    },
+    {
+      "task_id": "two_resource_knapsack",
+      "n": 20,
+      "protocol_valid": 0,
+      "baseline_rate": 0.0,
+      "eligible": false,
+      "distance": 13
+    },
+    {
+      "task_id": "constrained_assignment",
+      "n": 20,
+      "protocol_valid": 0,
+      "baseline_rate": 0.0,
+      "eligible": false,
+      "distance": 13
+    }
+  ],
+  "status": "NO_ELIGIBLE_TASK"
+}

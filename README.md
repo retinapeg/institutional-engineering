@@ -29,3 +29,9 @@ Historical verification notes are provenance, not this repository's product offe
 (gpt-5.6-terra), four role interventions, randomized blocks. Baseline-only calibration
 selects a non-ceiling task using a rule committed before inference. Results pending.
 See [REPRODUCE.md](REPRODUCE.md) and `paper/main.tex`. No UI, routing changes or extra models.
+
+**Current study status: blocked at calibration.** Sixty local CLI bootstrap failures,
+zero model responses, no task selected and no full-study calls. This is a harness failure,
+not a model-performance result. See
+[the failure report](experiments/single_task_role_effect/CALIBRATION_FAILURE.md).
+Do not restart this batch or silently amend the protocol.

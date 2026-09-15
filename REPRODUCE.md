@@ -1,5 +1,10 @@
 # Reproduce
 
+**Current single-task calibration is blocked by an unsupported CLI configuration.**
+The frozen v1 code deliberately preserves that failure for reproducibility. Do not run another
+calibration until a distinct amended protocol is approved; see the study's CALIBRATION_FAILURE.md.
+The commands below describe the intended workflow, not a currently validated live study.
+
 Python 3.11+, uv, and authenticated local Codex CLI for live calls.
 Checks require no models:
 

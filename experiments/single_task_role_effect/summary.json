@@ -2,7 +2,12 @@
   "planned_calls": 1000,
   "completed_calls": 0,
   "remaining_calls": 1000,
-  "status": "PENDING_OR_PARTIAL",
+  "status": "BLOCKED_CALIBRATION_INFRASTRUCTURE",
+  "calibration_cli_attempts": 60,
+  "calibration_model_responses": 0,
+  "calibration_failures": 60,
+  "selected_task": null,
+  "failure_report": "CALIBRATION_FAILURE.md",
   "runtime_failures": 0,
   "protocol_failures": 0,
   "conditions": {
