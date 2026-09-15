@@ -1,0 +1,66 @@
+[
+  {
+    "task_id": "physics_lorentz",
+    "domain": "physics",
+    "task": "In units c=1, event B minus event A in frame S has delta_t=3 and delta_x=5. Frame S' moves at v=+0.8 along x relative to S. Use t'=gamma(t-vx), x'=gamma(x-vt). A separate particle has velocity u=+0.6 in S. Return answer keys gamma, delta_t_prime, delta_x_prime, interval_t2_minus_x2, particle_velocity_prime, separation_type (timelike/spacelike/null), reversed_order (boolean), simultaneous_frame_velocity. Give numeric values, not expressions. Distinguish the event-pair displacement from the separate particle velocity.",
+    "ground_truth_or_acceptance": {"gamma": 1.6666666666666667, "delta_t_prime": -1.6666666666666667, "delta_x_prime": 4.333333333333333, "interval_t2_minus_x2": -16, "particle_velocity_prime": -0.38461538461538464, "separation_type": "spacelike", "reversed_order": true, "simultaneous_frame_velocity": 0.6},
+    "matched_role": "Physicist", "mismatched_role": "Statistician",
+    "verification_method": "Eight predeclared scalar/label checks; numeric rel_tol=1e-6, abs_tol=1e-10.", "difficulty_prior": "medium"
+  },
+  {
+    "task_id": "physics_symplectic",
+    "domain": "physics",
+    "task": "For unit harmonic oscillator xdot=v, vdot=-x, integrate velocity-first symplectic Euler: v_next=v-h*x; x_next=x+h*v_next. Start x=1,v=0,h=0.6. Return x1, v1, physical_energy1=(x1^2+v1^2)/2; invariant_cross_coefficient a in Q=x^2+v^2+a*x*v exactly preserved by the map for this h; Q1; positive_h_stability_upper (the OPEN upper endpoint for bounded motion of ALL initial states); all_initial_states_bounded_at_h2 (boolean); bounded_at_h2_1 (boolean). Reason about discrete dynamics, not just the continuous oscillator. Numeric values, not expressions.",
+    "ground_truth_or_acceptance": {"x1": 0.64, "v1": -0.6, "physical_energy1": 0.3848, "invariant_cross_coefficient": -0.6, "Q1": 1, "positive_h_stability_upper": 2, "all_initial_states_bounded_at_h2": false, "bounded_at_h2_1": false},
+    "matched_role": "Physicist", "mismatched_role": "Statistician",
+    "verification_method": "Eight numeric/boolean checks; invariant independently verified by matrix algebra in grader tests.", "difficulty_prior": "high"
+  },
+  {
+    "task_id": "math_cancellation",
+    "domain": "mathematics",
+    "task": "Compute the positive root of x^2+b*x-1=0 using binary64. Return positive_root_b1e16, positive_root_b1e8, positive_root_b0, negative_root_b1e16. Choose stable_formula from A=(-b+sqrt(b*b+4))/2, B=2/(b+sqrt(b*b+4)), C=(b+sqrt(b*b+4))/2, D=1/b for b>=0 (D is undefined at zero). Return naive_binary64_root_b1e16 for formula A, relative_error_naive_b1e16, and product_of_roots. Use numeric answers, not expressions; assess cancellation instead of equating algebraic forms numerically.",
+    "ground_truth_or_acceptance": {"positive_root_b1e16": 1e-16, "positive_root_b1e8": 1e-8, "positive_root_b0": 1, "negative_root_b1e16": -1e16, "stable_formula": "B", "naive_binary64_root_b1e16": 0, "relative_error_naive_b1e16": 1, "product_of_roots": -1},
+    "matched_role": "Mathematician", "mismatched_role": "Product Engineer",
+    "verification_method": "Eight checks; root values use relative tolerance 1e-6 with absolute tolerance 1e-24 (zero cannot pass as 1e-16).", "difficulty_prior": "high"
+  },
+  {
+    "task_id": "math_independent_set",
+    "domain": "mathematics",
+    "task": "Find a maximum-weight set of nonadjacent indices on a PATH (not a cycle). Empty selection is allowed. Return answer objects case1..case4, each with weight and indices (0-based, ascending). Ties: choose lexicographically smallest ascending index list under ordinary list ordering (a prefix is smaller). Cases: case1=[5,1,1,5]; case2=[4,5,4,5,4]; case3=[-3,0,-2,0]; case4=[2,2,2,2,2,2]. Also return time_complexity for computing ONLY the optimum value using dynamic programming as O(n), O(n^2), or O(2^n), and auxiliary_space_for_value as O(1) or O(n). Reconstruction tie-breaking must be justified, not confused with choosing the largest individual weights.",
+    "ground_truth_or_acceptance": {"case1": {"weight": 10, "indices": [0,3]}, "case2": {"weight": 12, "indices": [0,2,4]}, "case3": {"weight": 0, "indices": []}, "case4": {"weight": 6, "indices": [0,2,4]}, "time_complexity": "O(n)", "auxiliary_space_for_value": "O(1)"},
+    "matched_role": "Mathematician", "mismatched_role": "Product Engineer",
+    "verification_method": "Ten checks: weight and exact tie-broken indices for four exhaustive-enumeration cases, plus two complexity labels.", "difficulty_prior": "high"
+  },
+  {
+    "task_id": "stats_leakage",
+    "domain": "statistics",
+    "task": "Goal: estimate a classifier's performance on NEW patients. Each patient has five highly correlated visits. Which pipelines are valid estimates of this goal? A: random visit split, train-only scaling, tune only on train. B: patient-group train/validation/test split, train-only fit of preprocessing and model, tune on validation, locked test once. C: patient-group split but supervised feature selection on all labels before splitting. D: patient-group split, fit on train but use test results to choose best of 20 variants and report that test. E: nested patient-group CV, preprocessing/selection/tuning all inside each outer training fold, evaluate each outer test once, no post-hoc variant choice. F: train on visits before June and test on later visits from the SAME patients. Return valid_pipeline_ids as a list, A_issue/C_issue/D_issue/F_issue chosen from patient_overlap, supervised_leakage, test_selection_bias, temporal_drift_only, none. Conditional on one visit in test in an independent 80% train /20% test visit split, return probability_patient_also_in_train using its other four visits. Is a reported increase after choosing the best of 20 test-set variants alone evidence of a genuine improvement? Return genuine_improvement_established (boolean).",
+    "ground_truth_or_acceptance": {"valid_pipeline_ids": ["B","E"], "A_issue": "patient_overlap", "C_issue": "supervised_leakage", "D_issue": "test_selection_bias", "F_issue": "patient_overlap", "probability_patient_also_in_train": 0.9984, "genuine_improvement_established": false},
+    "matched_role": "Statistician", "mismatched_role": "Physicist",
+    "verification_method": "Seven predeclared checks against the explicit new-patient estimand and independent visit-assignment calculation.", "difficulty_prior": "high"
+  },
+  {
+    "task_id": "stats_base_rate",
+    "domain": "statistics",
+    "task": "Synthetic binary classification population has 10,000 items, prevalence=0.01, sensitivity=0.9 and specificity=0.95, treated as exact population rates. Return expected_true_positives, expected_false_positives, positive_predictive_value, accuracy, always_negative_accuracy. Under ONLY a prevalence shift to 0.10 with unchanged conditional sensitivity/specificity, return shifted_positive_predictive_value. Separately, a calibrated posterior p is available: a false positive costs1, a false negative costs10, correct classifications cost0. Return positive_decision_threshold (positive if p exceeds it). Return accuracy_alone_proves_usefulness (boolean). Numeric probabilities in [0,1], not percentages.",
+    "ground_truth_or_acceptance": {"expected_true_positives": 90, "expected_false_positives": 495, "positive_predictive_value": 0.15384615384615385, "accuracy": 0.9495, "always_negative_accuracy": 0.99, "shifted_positive_predictive_value": 0.6666666666666666, "positive_decision_threshold": 0.09090909090909091, "accuracy_alone_proves_usefulness": false},
+    "matched_role": "Statistician", "mismatched_role": "Physicist",
+    "verification_method": "Eight exact/numeric checks against synthetic confusion counts and expected-loss threshold.", "difficulty_prior": "medium"
+  },
+  {
+    "task_id": "software_escaped_fields",
+    "domain": "software",
+    "task": "Fix split_fields(text) in solution.py. Unescaped commas split fields; backslash escapes ONLY comma or backslash; preserve empty fields including trailing ones. Empty input returns ['']. Invalid escape or dangling backslash raises ValueError. No imports or external dependencies. Return full solution.py in files, with only pure functions; allowed built-ins len/range/enumerate/zip/sorted/list/tuple/str/int/float/bool/abs/min/max/sum/round/ValueError; the only allowed method call is list.append. Do not include grading tests. answer may briefly identify the implementation. Host checks run separately. Inputs are strings, at most80 characters.",
+    "ground_truth_or_acceptance": {"function": "split_fields", "properties": ["unescaped separators", "escaped comma", "escaped backslash", "empty fields", "invalid escape errors", "dangling escape errors"], "immutable_grader": true},
+    "matched_role": "Software Engineer", "mismatched_role": "Physicist",
+    "verification_method": "Twelve frozen executable input/output/error checks in a bounded, restricted-AST subprocess; no imports/reflection/file/network APIs.", "difficulty_prior": "medium", "fixture": "escaped_fields.py"
+  },
+  {
+    "task_id": "software_merge_intervals",
+    "domain": "software",
+    "task": "Fix merge_intervals(intervals) in solution.py. Inputs are lists of [start,end] integer CLOSED intervals. Merge overlaps AND touching endpoints, sort by start, return fresh list-of-lists, never mutate input (including inner lists). Empty list returns[]. Reversed interval start>end raises ValueError before producing a result. Degenerate [x,x] is valid. No imports or dependencies. Return full solution.py in files, with only pure functions; allowed built-ins len/range/enumerate/zip/sorted/list/tuple/str/int/float/bool/abs/min/max/sum/round/ValueError; the only allowed method call is list.append. Do not include tests. Inputs have at most12 intervals with coordinates -20..20.",
+    "ground_truth_or_acceptance": {"function": "merge_intervals", "properties": ["sorting", "overlap", "touching endpoints", "containment", "degenerate intervals", "reject reversed", "no mutation or aliasing"], "immutable_grader": true},
+    "matched_role": "Software Engineer", "mismatched_role": "Physicist",
+    "verification_method": "Eleven frozen executable cases plus input nonmutation/output nonaliasing checks in the restricted bounded subprocess.", "difficulty_prior": "high", "fixture": "merge_intervals.py"
+  }
+]
