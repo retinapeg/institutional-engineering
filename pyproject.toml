@@ -3,17 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "institutional-workbench"
-version = "0.2.0.dev0"
-description = "A bounded Claude and Codex engineering CLI"
+name = "institutional-engineering"
+version = "0.1.0"
+description = "Controlled role intervention experiments"
 requires-python = ">=3.11"
 dependencies = ["pydantic>=2.10,<3"]
 
-[project.scripts]
-inst = "institutional_workbench.cli:main"
-
 [tool.hatch.build.targets.wheel]
-packages = ["src/institutional_workbench"]
+packages = ["src/institutional_workbench", "benchmarks", "experiments"]
 
 [tool.ruff]
 line-length = 100
