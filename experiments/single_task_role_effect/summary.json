@@ -1,0 +1,133 @@
+{
+  "planned_calls": 1000,
+  "completed_calls": 0,
+  "remaining_calls": 1000,
+  "status": "PENDING_OR_PARTIAL",
+  "runtime_failures": 0,
+  "protocol_failures": 0,
+  "conditions": {
+    "baseline": {
+      "end_to_end": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      },
+      "parsed": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      }
+    },
+    "generic": {
+      "end_to_end": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      },
+      "parsed": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      }
+    },
+    "matched": {
+      "end_to_end": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      },
+      "parsed": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      }
+    },
+    "mismatched": {
+      "end_to_end": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      },
+      "parsed": {
+        "n": 0,
+        "successes": 0,
+        "p_hat": null,
+        "wilson_95": null
+      }
+    }
+  },
+  "comparisons": {
+    "complete_blocks": 0,
+    "bootstrap_draws": 10000,
+    "ci_method": "paired whole-block percentile bootstrap; seed 872341; descriptive, unadjusted",
+    "end_to_end:matched-baseline": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "end_to_end:generic-baseline": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "end_to_end:mismatched-baseline": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "end_to_end:matched-generic": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "end_to_end:matched-mismatched": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "parsed:matched-baseline": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "parsed:generic-baseline": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "parsed:mismatched-baseline": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "parsed:matched-generic": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    },
+    "parsed:matched-mismatched": {
+      "risk_difference": null,
+      "ci_95": null,
+      "valid_bootstrap_draws": 0
+    }
+  },
+  "mean_latency_seconds": null,
+  "actual_marginal_cost": "UNKNOWN",
+  "limitations": [
+    "Exploratory single-task study; no across-task generalisation.",
+    "Wilson intervals assume independent repetitions; temporal dependence can understate uncertainty.",
+    "Bootstrap preserves within-block pairing but treats different blocks as independent.",
+    "Conditional estimates can be selected by protocol success; report end-to-end too.",
+    "Unadjusted descriptive intervals, no p-value-based significance claims.",
+    "Calibration-selected rate is noisy; full-study baseline is a fresh estimate.",
+    "Wrappers differ in length/content; generic control does not isolate every prompt feature.",
+    "CLI/server sampling, internal retries and server model revisions may be opaque."
+  ]
+}

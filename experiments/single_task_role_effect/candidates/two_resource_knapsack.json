@@ -1,0 +1,72 @@
+{
+  "task_id": "two_resource_knapsack",
+  "kind": "knapsack",
+  "items": [
+    [
+      7,
+      4,
+      19
+    ],
+    [
+      5,
+      7,
+      18
+    ],
+    [
+      9,
+      3,
+      23
+    ],
+    [
+      4,
+      6,
+      17
+    ],
+    [
+      6,
+      5,
+      20
+    ],
+    [
+      3,
+      8,
+      16
+    ],
+    [
+      8,
+      2,
+      21
+    ],
+    [
+      5,
+      4,
+      15
+    ],
+    [
+      2,
+      5,
+      12
+    ],
+    [
+      7,
+      6,
+      24
+    ],
+    [
+      4,
+      3,
+      14
+    ],
+    [
+      6,
+      7,
+      22
+    ]
+  ],
+  "task": "Choose a subset of twelve indivisible items, each usable at most once, to maximise total value. Each tuple below is (weight, volume, value), with items numbered in list order: [(7, 4, 19), (5, 7, 18), (9, 3, 23), (4, 6, 17), (6, 5, 20), (3, 8, 16), (8, 2, 21), (5, 4, 15), (2, 5, 12), (7, 6, 24), (4, 3, 14), (6, 7, 22)]. Total weight must be at most 26 and total volume at most 25. Choose exactly five items. Items 2 and 10 cannot both be chosen. If item 6 is chosen, item 9 must also be chosen. Return the maximum total value as the final integer.\n",
+  "ground_truth": 92,
+  "difficulty_prior": "medium-high",
+  "matched_role": "Mathematician",
+  "mismatched_role": "Product Engineer",
+  "verification_method": "exhaustive finite enumeration; exact integer equality"
+}

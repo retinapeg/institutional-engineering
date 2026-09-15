@@ -37,3 +37,8 @@ BLOCKED, not an improvised task. Never run simultaneous study processes.
 Only visible final text and allowlisted counters are retained. Temperature, model seed,
 resolved model and context size are UNAVAILABLE unless reported; marginal cost UNKNOWN.
 Opaque CLI/server retries and model updates remain limitations.
+
+Method references: [NIST Wilson intervals](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm)
+and [official Codex non-interactive execution](https://learn.chatgpt.com/docs/non-interactive-mode).
+Neither establishes availability or marginal subscription pricing of the requested model;
+those are recorded from the actual local run, not inferred from documentation.
