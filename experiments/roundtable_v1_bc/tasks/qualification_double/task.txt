@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Return twice the supplied integer.

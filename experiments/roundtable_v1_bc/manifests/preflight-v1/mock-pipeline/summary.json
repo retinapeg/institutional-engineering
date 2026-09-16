@@ -1,0 +1,11 @@
+{
+  "attempted_institutions": 5,
+  "completed_institutions": 5,
+  "kind": "MOCK",
+  "model_calls": 0,
+  "not_live_qualification": true,
+  "planned_institutions": 5,
+  "repair_invocations": 5,
+  "schema_completions": 30,
+  "stage_invocations": 30
+}

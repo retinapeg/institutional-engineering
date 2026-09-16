@@ -1,0 +1,317 @@
+{
+  "task_id": "ledger_transfer",
+  "family": "ledger_state_invariant",
+  "purpose": "benchmark_candidate",
+  "reference": "def solve(x):\n    balances,ops=x\n    b=dict(balances)\n    for a,c,n in ops:\n        if a not in b or c not in b or n<0 or b[a]<n: raise ValueError(\"invalid\")\n        b[a]-=n\n        b[c]+=n\n    return b\n",
+  "hidden": [
+    {
+      "id": "transfer",
+      "requirement_id": "sequential_transfers",
+      "input": [
+        {
+          "a": 5,
+          "b": 0
+        },
+        [
+          [
+            "a",
+            "b",
+            3
+          ]
+        ]
+      ],
+      "expected": {
+        "a": 2,
+        "b": 3
+      },
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "chain",
+      "requirement_id": "sequential_transfers",
+      "input": [
+        {
+          "a": 5,
+          "b": 0,
+          "c": 0
+        },
+        [
+          [
+            "a",
+            "b",
+            3
+          ],
+          [
+            "b",
+            "c",
+            2
+          ]
+        ]
+      ],
+      "expected": {
+        "a": 2,
+        "b": 1,
+        "c": 2
+      },
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "zero",
+      "requirement_id": "sequential_transfers",
+      "input": [
+        {
+          "a": 5,
+          "b": 0
+        },
+        [
+          [
+            "a",
+            "b",
+            0
+          ]
+        ]
+      ],
+      "expected": {
+        "a": 5,
+        "b": 0
+      },
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "unknown_source",
+      "requirement_id": "invalid_transfers",
+      "input": [
+        {
+          "a": 5
+        },
+        [
+          [
+            "b",
+            "a",
+            1
+          ]
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "unknown_destination",
+      "requirement_id": "invalid_transfers",
+      "input": [
+        {
+          "a": 5
+        },
+        [
+          [
+            "a",
+            "b",
+            1
+          ]
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "negative",
+      "requirement_id": "invalid_transfers",
+      "input": [
+        {
+          "a": 5,
+          "b": 0
+        },
+        [
+          [
+            "a",
+            "b",
+            -1
+          ]
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "insufficient",
+      "requirement_id": "invalid_transfers",
+      "input": [
+        {
+          "a": 1,
+          "b": 0
+        },
+        [
+          [
+            "a",
+            "b",
+            2
+          ]
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "self_valid",
+      "requirement_id": "same_account_rules",
+      "input": [
+        {
+          "a": 2
+        },
+        [
+          [
+            "a",
+            "a",
+            2
+          ]
+        ]
+      ],
+      "expected": {
+        "a": 2
+      },
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "self_insufficient",
+      "requirement_id": "same_account_rules",
+      "input": [
+        {
+          "a": 1
+        },
+        [
+          [
+            "a",
+            "a",
+            2
+          ]
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "mutation_success",
+      "requirement_id": "input_preservation",
+      "input": [
+        {
+          "a": 5,
+          "b": 0
+        },
+        [
+          [
+            "a",
+            "b",
+            3
+          ]
+        ]
+      ],
+      "expected": {
+        "a": 2,
+        "b": 3
+      },
+      "nonmutation": true,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "mutation_before_error",
+      "requirement_id": "input_preservation",
+      "input": [
+        {
+          "a": 5,
+          "b": 0
+        },
+        [
+          [
+            "a",
+            "b",
+            3
+          ],
+          [
+            "a",
+            "b",
+            3
+          ]
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": true,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    }
+  ],
+  "requirements": {
+    "sequential_transfers": "Apply valid transfers sequentially, preserving total balances.",
+    "invalid_transfers": "Reject unknown accounts, negative amounts and insufficient funds.",
+    "same_account_rules": "Self-transfers preserve balance but still require sufficient funds.",
+    "input_preservation": "Input balances and transfer lists remain unchanged, including on failure after an earlier valid transfer."
+  },
+  "requirement_weights": {
+    "sequential_transfers": 0.25,
+    "invalid_transfers": 0.25,
+    "same_account_rules": 0.25,
+    "input_preservation": 0.25
+  },
+  "negative_controls": [
+    {
+      "id": "missing_debit",
+      "requirements": [
+        "sequential_transfers"
+      ],
+      "code": "def solve(x):\n    balances,ops=x\n    b=dict(balances)\n    for a,c,n in ops:\n        if a not in b or c not in b or n<0 or b[a]<n: raise ValueError(\"invalid\")\n        b[c]+=n\n    return b\n"
+    },
+    {
+      "id": "no_validation",
+      "requirements": [
+        "invalid_transfers"
+      ],
+      "code": "def solve(x):\n    balances,ops=x\n    b=dict(balances)\n    for a,c,n in ops:\n        b[a]-=n\n        b[c]+=n\n    return b\n"
+    },
+    {
+      "id": "self_bypasses_validation",
+      "requirements": [
+        "same_account_rules"
+      ],
+      "code": "def solve(x):\n    balances,ops=x\n    b=dict(balances)\n    for a,c,n in ops:\n        if a==c: continue\n        if a not in b or c not in b or n<0 or b[a]<n: raise ValueError(\"invalid\")\n        b[a]-=n\n        b[c]+=n\n    return b\n"
+    },
+    {
+      "id": "inplace_balances",
+      "requirements": [
+        "input_preservation"
+      ],
+      "code": "def solve(x):\n    b,ops=x\n    for a,c,n in ops:\n        if a not in b or c not in b or n<0 or b[a]<n: raise ValueError(\"invalid\")\n        b[a]-=n\n        b[c]+=n\n    return b\n"
+    }
+  ],
+  "provenance": {
+    "source_repository": "retinapeg/institutional-engineering",
+    "source_commit": "ff9353017492153706c875bab1464509e2ddb941",
+    "source_files_sha256": {
+      "experiments/roundtable_v1/tasks/ledger_transfer/solution.py": "481f02daa7b466c927a4838bdc483cf8cde0c56d5d84e54e9ea4651ee839a1a2",
+      "experiments/roundtable_v1/tasks/ledger_transfer/task.txt": "5b155fb2bec66170b920c213530cf30682d4f42b16890ae9f2a6eca7ab824fe1",
+      "experiments/roundtable_v1/tasks/ledger_transfer/visible.json": "1094e5e8235f6f46d8fbfd6acd96fb7abb5385c4758f695deaebbc42e09a301c",
+      "experiments/roundtable_v1/tasks/ledger_transfer/visible_tests.py": "b10b8423ae885095d66549beef607aa9782fdaf1dc616f516b252d8cae52a844",
+      "experiments/roundtable_v1/evaluator/ledger_transfer.json": "dd82d81c719e7e0d1fb3f38a49284c354cd621dc738bcc86cacff3b301f06fda"
+    },
+    "public_files": "Copied byte-identically; hidden requirements regrouped and specified edges added before any live inference."
+  },
+  "rubric": "Each meaningful requirement passes only if all its cases pass. The normalized score is the sum of passed requirement weights. Additional cases do not increase a requirement weight.",
+  "status": "CANDIDATE_NOT_CALIBRATED"
+}

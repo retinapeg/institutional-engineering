@@ -1,0 +1,217 @@
+{
+  "blocker": "CANDIDATE_CAN_FORGE_INPUT_AFTER",
+  "case": {
+    "abs_tol": 0.0,
+    "expected": 2,
+    "id": "nonmutation_canary",
+    "input": [
+      2
+    ],
+    "nonmutation": true,
+    "rel_tol": 0.0,
+    "requirement_id": "input_preservation"
+  },
+  "checks": {
+    "caller_globals": {
+      "result": {
+        "artifact_sha256": "eacb6c83b1f45fd2a80203283663e2e1cceb6af8f05c32c48fc3af154ec3f66c",
+        "checks": [
+          {
+            "executed": true,
+            "id": "nonmutation_canary",
+            "passed": true,
+            "process": {
+              "exit": 0,
+              "failure": null,
+              "profile_hash": "ecca873d864b298eab261450e8c2ffe300c3f289d672bac02f02d677a903dc1b",
+              "seconds": 0.03176862499094568,
+              "stderr": "",
+              "stdout": "{\"value\": 2, \"input_after\": [2]}\n"
+            },
+            "requirement_id": "input_preservation"
+          }
+        ],
+        "full_pass": true,
+        "grader_success": true,
+        "integrity_qualified": false,
+        "requirement_weights": {
+          "input_preservation": 1.0
+        },
+        "requirements": {
+          "input_preservation": 1.0
+        },
+        "score": 1.0
+      },
+      "source": "import inspect\ndef solve(x):\n    before=list(x)\n    x.append(99)\n    inspect.currentframe().f_back.f_globals['x']=before\n    return x[0]\n"
+    },
+    "counterfeit_score_only": {
+      "result": {
+        "artifact_sha256": "f1c7fcd8cc720280a1996ed18dc7497b78fd5f0741ab7d888395d3255e55f436",
+        "checks": [
+          {
+            "executed": true,
+            "id": "nonmutation_canary",
+            "passed": false,
+            "process": {
+              "exit": 0,
+              "failure": null,
+              "profile_hash": "554f4ff884b02f2332afc53b48c974d1f719f8c4278d02b63f23ebaa44742db8",
+              "seconds": 0.025784875004319474,
+              "stderr": "",
+              "stdout": "{\"score\":1}\n"
+            },
+            "requirement_id": "input_preservation"
+          }
+        ],
+        "full_pass": false,
+        "grader_success": true,
+        "integrity_qualified": false,
+        "requirement_weights": {
+          "input_preservation": 1.0
+        },
+        "requirements": {
+          "input_preservation": 0.0
+        },
+        "score": 0.0
+      },
+      "source": "import os\ndef solve(x):\n    print('{\"score\":1}',flush=True)\n    os._exit(0)\n"
+    },
+    "honest_reference": {
+      "result": {
+        "artifact_sha256": "53e6bfd45f11509fc68f0097b1701cf67adc0ad23bcbdc99ff18723364df337f",
+        "checks": [
+          {
+            "executed": true,
+            "id": "nonmutation_canary",
+            "passed": true,
+            "process": {
+              "exit": 0,
+              "failure": null,
+              "profile_hash": "303bba3ea9bdf0130d37c1d5e13e25779dfe5ca7d53311227c334ded935fc3db",
+              "seconds": 0.027408082998590544,
+              "stderr": "",
+              "stdout": "{\"value\": 2, \"input_after\": [2]}\n"
+            },
+            "requirement_id": "input_preservation"
+          }
+        ],
+        "full_pass": true,
+        "grader_success": true,
+        "integrity_qualified": false,
+        "requirement_weights": {
+          "input_preservation": 1.0
+        },
+        "requirements": {
+          "input_preservation": 1.0
+        },
+        "score": 1.0
+      },
+      "source": "def solve(x):\n    return x[0]\n"
+    },
+    "json_monkeypatch": {
+      "result": {
+        "artifact_sha256": "0639e5cb11cbf146d6d8fa3f5a08d091b3f58660e3002399b60a7cbd99159718",
+        "checks": [
+          {
+            "executed": true,
+            "id": "nonmutation_canary",
+            "passed": true,
+            "process": {
+              "exit": 0,
+              "failure": null,
+              "profile_hash": "df995e85f1517ab6a92c9549c80a3f842ea0b369c7ea26eaa3d821a5b65a9f1d",
+              "seconds": 0.027999459009151906,
+              "stderr": "",
+              "stdout": "{\"value\": 2, \"input_after\": [2]}\n"
+            },
+            "requirement_id": "input_preservation"
+          }
+        ],
+        "full_pass": true,
+        "grader_success": true,
+        "integrity_qualified": false,
+        "requirement_weights": {
+          "input_preservation": 1.0
+        },
+        "requirements": {
+          "input_preservation": 1.0
+        },
+        "score": 1.0
+      },
+      "source": "import json\nencode=json.dumps\nbefore=None\ndef forged(value,*args,**kwargs):\n    if isinstance(value,dict) and 'input_after' in value:\n        value={**value,'input_after':before}\n    return encode(value,*args,**kwargs)\njson.dumps=forged\ndef solve(x):\n    global before\n    before=list(x)\n    x.append(99)\n    return x[0]\n"
+    },
+    "ordinary_mutation": {
+      "result": {
+        "artifact_sha256": "e2d56874f01002963e531f3764b8ccf1cbd25d83ca814b9b3a9a252d52c1c268",
+        "checks": [
+          {
+            "executed": true,
+            "id": "nonmutation_canary",
+            "passed": false,
+            "process": {
+              "exit": 0,
+              "failure": null,
+              "profile_hash": "d6d2110e382adb2d7e38b1bb7e84e211bb37d4e832fd4860c067eddb1ea09484",
+              "seconds": 0.026947124977596104,
+              "stderr": "",
+              "stdout": "{\"value\": 2, \"input_after\": [2, 99]}\n"
+            },
+            "requirement_id": "input_preservation"
+          }
+        ],
+        "full_pass": false,
+        "grader_success": true,
+        "integrity_qualified": false,
+        "requirement_weights": {
+          "input_preservation": 1.0
+        },
+        "requirements": {
+          "input_preservation": 0.0
+        },
+        "score": 0.0
+      },
+      "source": "def solve(x):\n    x.append(99)\n    return x[0]\n"
+    },
+    "stdout_then_exit": {
+      "result": {
+        "artifact_sha256": "363fcc46ba5cf2b405f0da04d7a203a7b99651214014fc88be9005e941337e64",
+        "checks": [
+          {
+            "executed": true,
+            "id": "nonmutation_canary",
+            "passed": true,
+            "process": {
+              "exit": 0,
+              "failure": null,
+              "profile_hash": "6723f38b82c86c1d0b6be63d95a7b6226b0249689b99ec01e28254c1c10e92a9",
+              "seconds": 0.026184167014434934,
+              "stderr": "",
+              "stdout": "{\"value\": 2, \"input_after\": [2]}\n"
+            },
+            "requirement_id": "input_preservation"
+          }
+        ],
+        "full_pass": true,
+        "grader_success": true,
+        "integrity_qualified": false,
+        "requirement_weights": {
+          "input_preservation": 1.0
+        },
+        "requirements": {
+          "input_preservation": 1.0
+        },
+        "score": 1.0
+      },
+      "source": "import json,os\ndef solve(x):\n    before=list(x)\n    x.append(99)\n    print(json.dumps({'value':x[0],'input_after':before}),flush=True)\n    os._exit(0)\n"
+    }
+  },
+  "false_passes": [
+    "json_monkeypatch",
+    "caller_globals",
+    "stdout_then_exit"
+  ],
+  "observation_scope": "Candidate owns its interpreter, stdout and reported input_after.",
+  "oracle_scope": "Expected value and pass/fail decision remain in the parent process.",
+  "qualified": false,
+  "required_remedy": "Independently trusted mutation observation or an explicitly qualified execution contract. Python serializer prebinding, import blacklists and an additional pipe do not create a security boundary against unrestricted candidate Python."
+}

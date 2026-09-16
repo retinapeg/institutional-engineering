@@ -1,0 +1,1084 @@
+You are taking over execution of the Institutional Engineering research programme while Leo is unavailable.
+
+Your job is to move the research materially forward today and, if every scientific and infrastructure gate passes cleanly, complete the Roundtable v1 B/C experiment, analysis, and reproducibility package.
+
+Do not wait for routine approvals. This prompt authorizes the bounded work described below.
+
+However, scientific stop conditions are HARD. Never weaken a criterion merely to keep moving.
+
+==================================================
+0. FIRST: INSPECT THE REAL REPOSITORY STATE
+==================================================
+
+Repository:
+
+retinapeg/institutional-engineering
+
+Remote state last independently checked before this prompt:
+
+main HEAD:
+02aa0af04d790b3b362a39a1476793bc813ee40d
+
+message:
+Preserve failed calibration; document CLI bootstrap cause and block full study without retries
+
+Remote GitHub had only `main` and no visible Roundtable v1 implementation.
+
+DO NOT ASSUME the local repository matches remote.
+
+Before changing anything:
+
+- locate the actual local repository by its git remote
+- run git status
+- inspect staged and unstaged diffs
+- inspect untracked files
+- inspect branches
+- inspect worktrees
+- inspect recent commits
+- compare local HEAD against origin/main
+- look specifically for any existing Roundtable v1 / B-C / research-protocol work
+
+Do NOT:
+
+- hard reset
+- delete uncommitted work
+- overwrite a newer local research implementation
+- silently stash and forget work
+- mutate historical experiment outputs
+
+If relevant newer local work exists, audit it and continue from it where scientifically compatible.
+
+If the existing working tree is dirty or used for another project, create an isolated worktree.
+
+Preferred new branch:
+
+roundtable-v1-bc-20260916
+
+Preferred experiment ID:
+
+roundtable-v1-bc-20260916-v1
+
+Push checkpoints to the new branch.
+
+DO NOT merge to main.
+
+Record:
+
+- starting local commit
+- starting origin/main commit
+- worktree path
+- branch
+- dirty-state findings
+- final commits
+
+==================================================
+1. ABSOLUTE RESEARCH BOUNDARIES
+==================================================
+
+This is RESEARCH, not production Institutional Coding.
+
+Do NOT modify:
+
+- Institutional Coding production behaviour
+- institutional-workbench
+- FleetCast
+- interview tooling
+- existing Pilot 0 results
+- the failed `single_task_role_effect` calibration records
+
+Pilot 0 and the failed 60-call calibration are historical evidence and MUST remain byte-identical.
+
+The old failed calibration is NOT to be repaired or resumed.
+
+Build a NEW experiment.
+
+Do not reinterpret the 60 calibration failures as model evidence.
+
+Do not optimise for a positive result.
+
+A clean null result or negative result is completely acceptable.
+
+==================================================
+2. SCIENTIFIC QUESTION
+==================================================
+
+Working study title:
+
+Roundtable v1:
+Task-Adaptive Intellectual Jurisdictions in Coding Agents
+
+Primary question:
+
+Under a fixed model/runtime, fixed institutional topology, fixed information architecture, and fixed resource-budget policy, does task-adaptive jurisdiction prompting of two independent reviewers improve executable coding outcomes relative to two competent generic reviewers?
+
+PRIMARY COMPARISON:
+
+B versus C ONLY.
+
+Do not add:
+
+- single-agent treatment
+- mismatched roles
+- multiple models
+- Claude vs Codex
+- capability routing
+- dynamic model selection
+
+Those are later studies.
+
+==================================================
+3. FIXED MODEL / RUNTIME
+==================================================
+
+Use ONE model/runtime throughout the experiment.
+
+Preferred model:
+
+gpt-5.6-terra via Codex CLI
+
+First verify that this model/runtime is actually available and record:
+
+- requested model
+- resolved model if observable
+- Codex CLI version
+- environment
+- relevant non-secret configuration
+
+Do not invent unsupported retry settings.
+
+The previous experiment failed because the harness attempted to override reserved built-in provider settings:
+
+model_providers.openai.request_max_retries
+model_providers.openai.stream_max_retries
+
+Do NOT reproduce that mistake.
+
+Add a zero-inference configuration-loader/preflight test using the REAL CLI before any model call.
+
+Do not change model or reasoning configuration after live results begin.
+
+==================================================
+4. EXPERIMENTAL STRUCTURE
+==================================================
+
+Each run contains five scheduled model stages before optional repair.
+
+B — GENERIC INSTITUTION
+
+1. Reviewer 1
+2. Reviewer 2
+3. Challenger
+4. Decision Authority
+5. Builder
+6. Optional repair, maximum one
+
+C — TASK-ADAPTIVE INSTITUTION
+
+Exactly the same structure.
+
+The ONLY experimental manipulation is the intellectual-jurisdiction block supplied to Reviewer 1 and Reviewer 2.
+
+Everything else remains identical where technically possible.
+
+Use the same:
+
+- underlying model
+- schemas
+- correctness instructions
+- tool permissions
+- available task/repository evidence
+- context policy
+- token/time ceilings
+- challenger
+- decision authority
+- builder
+- repair policy
+- hidden evaluator
+- runtime configuration
+
+Report realised tokens, calls, latency and failures.
+
+Call this a BUDGET-CONTROLLED comparison.
+
+Do not claim exact realised compute matching unless the data demonstrate it.
+
+==================================================
+5. INFORMATION AND AUTHORITY ARCHITECTURE
+==================================================
+
+Reviewer 1 and Reviewer 2 work independently.
+
+They MUST NOT see each other's reports.
+
+The Challenger receives:
+
+- public task
+- repository snapshot
+- Reviewer 1 report
+- Reviewer 2 report
+
+The Challenger identifies:
+
+- disagreements
+- unsupported assumptions
+- missed edge cases
+- likely failure modes
+
+The Decision Authority receives:
+
+- public task
+- repository snapshot
+- both reviewer reports
+- challenge report
+
+It produces ONE frozen implementation decision/plan.
+
+The Builder receives:
+
+- public task
+- repository
+- FROZEN DECISION
+
+The Builder does NOT receive the full debate.
+
+This is intentional.
+
+The Builder executes rather than reopening governance.
+
+After the builder:
+
+- run visible verification
+- if visible verification fails, permit exactly ONE repair model call
+- repair may see visible failure information
+- repair NEVER sees hidden tests
+
+After repair or successful visible verification:
+
+FREEZE THE ARTIFACT.
+
+Hidden grading occurs only after the artifact is irrevocably frozen.
+
+No model grades its own scientific result.
+
+==================================================
+6. GENERIC CONTROL MUST BE STRONG
+==================================================
+
+Do not make B a straw man.
+
+Both B reviewers are competent senior software-engineering reviewers.
+
+They independently examine:
+
+- requirements
+- correctness
+- edge cases
+- failure modes
+- maintainability where relevant
+- verification strategy
+
+Keep generic-reviewer prompt structure and length reasonably comparable to specialist prompts.
+
+The intervention is task-specific jurisdiction guidance.
+
+Do not later claim that a positive result proves role TITLES themselves matter.
+
+==================================================
+7. FROZEN ROLE BANK
+==================================================
+
+Use this role bank:
+
+- security
+- statistics
+- numerical_methods
+- ml_data_science
+- distributed_systems_reliability
+- algorithms
+- data_integrity
+- api_protocol_engineering
+- performance_concurrency
+- general_software_engineering
+
+Definitions must be:
+
+- task-independent
+- concise
+- responsibility-based
+- solution-free
+- free of hidden-test information
+
+Hash the role definitions.
+
+==================================================
+8. ROLE ASSIGNMENT — NO LLM SELECTOR IN V1
+==================================================
+
+Do NOT use an LLM to dynamically invent or select roles in Roundtable v1.
+
+We are isolating jurisdiction effects, not evaluating a routing algorithm.
+
+Precompute exactly two distinct role IDs for each TASK DOMAIN before calibration.
+
+Default domain mappings:
+
+numerical problems:
+- numerical_methods
+- algorithms
+
+statistical pipeline:
+- statistics
+- data_integrity
+
+defensive parser/security:
+- security
+- api_protocol_engineering
+
+queue/idempotency:
+- distributed_systems_reliability
+- data_integrity
+
+ML evaluation:
+- ml_data_science
+- statistics
+
+concurrency:
+- performance_concurrency
+- distributed_systems_reliability
+
+state invariants:
+- algorithms
+- data_integrity
+
+protocol client:
+- api_protocol_engineering
+- distributed_systems_reliability
+
+Freeze and hash the mappings before treatment execution.
+
+Do not tune mappings after seeing B/C outcomes.
+
+==================================================
+9. TASK FIXTURES
+==================================================
+
+Create up to 12 candidate SMALL coding repositories.
+
+The selected benchmark must contain exactly eight tasks, one from each domain:
+
+1. numerical problem
+2. statistical pipeline
+3. defensive parser/security
+4. queue/idempotency
+5. ML evaluation
+6. concurrency
+7. state invariants
+8. protocol client
+
+Each task must contain:
+
+- public problem specification
+- frozen initial repository
+- visible tests
+- hidden behavioural tests
+- reference solution
+- intentionally defective variants
+- deterministic grader
+
+Requirements:
+
+- reference solution passes 100%
+- intentionally defective variants fail the relevant requirements
+- hidden tests test legitimate specified behaviour
+- no trick requirements
+- repositories remain small enough for manual audit
+- hidden-test weighting reflects meaningful behavioural requirements, not raw test-function count
+
+Treat generated fixtures as untrusted until verified.
+
+==================================================
+10. PRIMARY SCORE
+==================================================
+
+Primary outcome:
+
+normalised hidden behavioural score in [0,1]
+
+Each task has equal weight in the aggregate.
+
+Within a task, meaningful behavioural requirements receive frozen weights.
+
+Do not inflate sample size by treating individual hidden tests as independent experimental observations.
+
+Secondary outcomes:
+
+- full hidden-suite pass
+- visible-test pass
+- protocol/schema success
+- model-call count
+- repair rate
+- tokens
+- latency
+- infrastructure/provider failures
+- agent/process failures
+
+If an attempted institutional run fails before producing an evaluable artifact under the frozen failure policy:
+
+primary end-to-end score = 0
+
+If an artifact exists:
+
+grade that frozen artifact.
+
+If the EVALUATOR itself malfunctions:
+
+that is not a treatment failure.
+
+The host may rerun the deterministic evaluator against the SAME frozen artifact.
+
+Do not invoke another model.
+
+==================================================
+11. DETERMINISTIC PREFLIGHT
+==================================================
+
+Before any live calls:
+
+- validate CLI configuration loading
+- validate isolation
+- validate schemas
+- validate serialization
+- validate hashing
+- validate schedules
+- validate task copying
+- validate role substitution
+- validate visible-test execution
+- validate hidden-test isolation
+- validate repair-state transition
+- validate evaluator replay
+- validate failure recording
+- validate call-budget enforcement
+
+Run:
+
+- unit tests
+- integration tests
+- lint
+- formatting check
+- strict type checking where already used
+- package/build checks
+
+Produce:
+
+GATE1_PREFLIGHT.md
+
+and machine-readable preflight output.
+
+Commit and push this checkpoint.
+
+If deterministic preflight fails, FIX implementation problems before live inference.
+
+Do not change the scientific treatment to make implementation easier.
+
+==================================================
+12. LIVE QUALIFICATION — AUTHORIZED
+==================================================
+
+If and only if deterministic preflight passes:
+
+you are AUTHORIZED to run the live qualification.
+
+Budget:
+
+30 model calls maximum.
+
+Preferred design:
+
+5 non-study synthetic pipeline scenarios × 6 stages = 30 calls.
+
+Exercise:
+
+- B reviewer prompts
+- C reviewer prompts
+- challenger
+- decision authority
+- builder
+- repair path
+
+The qualification tasks must NOT be benchmark candidates.
+
+It is acceptable to mechanically trigger the repair-state path in qualification to exercise it.
+
+Qualification pass criterion:
+
+30 / 30 protocol/schema stage completions.
+
+29 / 30 is NOT a pass.
+
+This is an operational gate, not a statistical claim that provider reliability is ≥97%.
+
+If qualification fails:
+
+STOP live scientific execution.
+
+Preserve everything.
+
+Diagnose the infrastructure problem.
+
+Fixing it requires a new qualification batch/version, not pretending failed calls succeeded.
+
+Do not move into calibration unless qualification passes.
+
+==================================================
+13. B-ONLY DIFFICULTY CALIBRATION — AUTHORIZED
+==================================================
+
+If qualification passes:
+
+run calibration using condition B ONLY.
+
+Maximum:
+
+12 candidate tasks
+× 3 B institutional repetitions
+= 36 B runs.
+
+Each institutional run uses:
+
+5 scheduled model calls
++ maximum one repair.
+
+Absolute calibration model-call maximum:
+
+216 calls.
+
+Do not exceed it.
+
+Calibration eligibility for each task:
+
+mean normalised hidden score between:
+
+0.25 and 0.75 inclusive
+
+Three repetitions are only a COARSE SCREEN.
+
+Do not describe them as precise difficulty estimates.
+
+Selection rule:
+
+- exactly one selected task per required domain
+- task must satisfy eligibility
+- if multiple candidates in a domain qualify:
+    1. choose mean score closest to 0.50
+    2. if tied, choose lexicographically smallest stable task_id
+- if any required domain has NO eligible task:
+    STOP
+    preserve calibration
+    do not relax thresholds
+    do not invent a post-hoc replacement after viewing treatment results
+
+Do not rerun an unlucky calibration observation.
+
+Do not silently replace failed calls.
+
+Freeze all calibration records.
+
+==================================================
+14. FREEZE MAIN-STUDY MANIFEST
+==================================================
+
+If and only if eight tasks qualify:
+
+freeze:
+
+- task bytes
+- hidden graders
+- reference solutions
+- role bank
+- task→role mapping
+- prompts
+- schemas
+- model/runtime
+- resource limits
+- failure taxonomy
+- analysis code
+- selected task list
+
+Create:
+
+PROTOCOL.md
+protocol.json
+TASK_MANIFEST.json
+ROLE_MANIFEST.json
+
+Generate:
+
+8 tasks
+× 8 repetition blocks
+= 64 paired blocks
+
+Each block contains exactly:
+
+B once
+C once
+
+Randomize B/C order within each block.
+
+Also randomize/interleave task-block execution order.
+
+Record RNG seed.
+
+Hash the complete schedule.
+
+Create:
+
+MAIN_SCHEDULE.json
+
+Commit and push this frozen pre-inference checkpoint.
+
+No treatment-result-driven modification is allowed after this point.
+
+==================================================
+15. MAIN EXPERIMENT — CONDITIONALLY AUTHORIZED
+==================================================
+
+If:
+
+- deterministic preflight passed
+- live qualification passed 30/30
+- calibration selected all eight domains under the frozen rule
+- protocol/task/role/schedule manifests are frozen and committed
+- no unresolved grader-integrity problem exists
+
+then THIS PROMPT AUTHORIZES THE MAIN B/C EXPERIMENT.
+
+Do not stop to ask Leo for routine confirmation.
+
+Main size:
+
+8 tasks
+× 8 paired repetitions
+× 2 conditions
+= 128 institutional runs
+
+64 B
+64 C
+
+Scheduled model calls before repair:
+
+128 × 5 = 640
+
+Absolute main-study maximum with one repair per run:
+
+768 model calls
+
+NEVER exceed 768 main-study calls.
+
+No retries.
+
+No replacement observations.
+
+No additional exploratory treatment arm.
+
+No prompt tuning.
+
+No role tuning.
+
+No task editing.
+
+No changing timeouts, parsing rules, or models mid-study.
+
+Preferred fixed cross-run concurrency:
+
+maximum 2 institutional runs concurrently
+
+Stages inside a run remain logically ordered.
+
+Use the same concurrency policy across B and C.
+
+Do not silently change concurrency mid-study because results are slow or inconvenient.
+
+==================================================
+16. MAIN-STUDY STOP CONDITIONS
+==================================================
+
+Suspend execution on:
+
+- two consecutive identical startup/configuration failures
+
+OR
+
+- infrastructure/provider failures >5% after at least 20 attempted main runs
+
+Do NOT stop because:
+
+- C appears to be winning
+- B appears to be winning
+- effect appears null
+- result looks boring
+- p-value crosses anything
+
+Preserve every attempted observation.
+
+If formally suspended:
+
+produce a complete suspension report.
+
+Do not restart under the same experiment ID after a treatment-relevant fix.
+
+==================================================
+17. RAW EVIDENCE
+==================================================
+
+Raw records are immutable.
+
+Every scheduled/attempted run should record enough provenance to reconstruct:
+
+- experiment ID
+- task ID/hash
+- block
+- condition
+- stage
+- role/jurisdiction
+- model request
+- resolved runtime if available
+- timestamps
+- latency
+- token/usage metadata when available
+- schema result
+- process result
+- visible verification
+- repair use
+- final artifact hash
+- hidden grader result
+- failure classification
+
+Keep:
+
+planned
+attempted
+completed
+evaluable
+failed
+
+counts distinct.
+
+Do not collapse protocol reliability into model correctness.
+
+==================================================
+18. PRIMARY ANALYSIS
+==================================================
+
+Primary estimate:
+
+Delta =
+mean across the eight tasks of
+
+[mean hidden score(C) - mean hidden score(B)]
+
+Primary randomization inference:
+
+- two-sided
+- respect the paired block assignment
+- swap B/C labels only within the randomized B/C blocks
+- 100,000 Monte Carlo randomization draws
+- freeze analysis RNG seed
+
+Do NOT shuffle observations across unrelated tasks.
+
+Report:
+
+- Delta
+- two-sided randomization p-value
+- uncertainty interval
+- eight individual task effects
+- B and C full-pass rates
+- B and C protocol/failure rates
+- repair rates
+- realised calls
+- realised tokens
+- latency
+
+Secondary uncertainty:
+
+paired hierarchical bootstrap preserving B/C pairing.
+
+Do not imply that eight hand-authored task families represent all coding tasks.
+
+Preregistered practical-effect threshold:
+
+absolute Delta = 0.05
+
+Interpretation rules:
+
+p > .05 DOES NOT establish equivalence.
+
+If the interval is wide, say the study is inconclusive.
+
+If effects are heterogeneous, show them.
+
+Do not hide negative task effects.
+
+Valid-output-only analysis may be shown descriptively but is post-treatment conditioning and MUST NOT be presented as the primary causal estimate.
+
+==================================================
+19. CLAIM BOUNDARY
+==================================================
+
+Even a positive B/C result does NOT prove:
+
+- expert personas generally make models smarter
+- internal reasoning changed
+- dynamic organisations outperform single agents
+- model routing works
+- Institutional Coding as a whole is superior
+- autonomous organisations are established
+- safety benefits
+
+Allowed positive interpretation, if supported:
+
+Under this fixed model, benchmark, topology and resource policy, task-specific reviewer jurisdiction guidance improved executable coding outcomes relative to otherwise comparable generic reviewers.
+
+Allowed null interpretation:
+
+The experiment did not establish a practically meaningful advantage for task-adaptive jurisdictions under this protocol.
+
+Allowed negative interpretation:
+
+Task-specific jurisdiction guidance reduced outcomes under this protocol, potentially consistent with overspecialisation or anchoring; mechanism remains unresolved.
+
+Do not oversell novelty.
+
+==================================================
+20. IF THE MAIN STUDY COMPLETES TODAY
+==================================================
+
+Immediately generate the analysis from raw evidence.
+
+No hand-edited result tables.
+
+Produce:
+
+experiments/roundtable_v1_bc/
+    PROTOCOL.md
+    protocol.json
+    roles.json
+    prompts/
+    tasks/
+    harness/
+    tests/
+    manifests/
+    data/
+        raw/
+        derived/
+    analysis/
+    figures/
+    REPORT.md
+    CLAIM_LEDGER.md
+    FRONTIER_LAB_REVIEW.md
+    REPRODUCE.md
+    CHECKPOINT.md
+
+Also produce a concise manuscript draft in a NEW Roundtable-v1-specific paper path.
+
+Do not overwrite the historical single-task-study manuscript.
+
+Target manuscript structure:
+
+1. Question and motivation
+2. Related work
+3. Institutional Engineering framework
+4. Controlled B/C experiment
+5. Results
+6. Failure analysis
+7. Limitations
+8. Reproducibility
+9. Conclusion
+
+Every numerical paper claim must trace to generated data.
+
+No invented significance.
+No invented citations.
+No invented affiliations.
+
+Pilot 0 is historical/methodological motivation only.
+
+==================================================
+21. RELATED WORK
+==================================================
+
+Verify primary sources rather than relying on vague citations.
+
+At minimum examine:
+
+- Zheng et al. 2024, "When 'A Helpful Assistant' Is Not Really Helpful: Personas in System Prompts Do Not Improve Performances of Large Language Models"
+- Zhang et al. 2026, "Dynamic Role Assignment for Multi-Agent Debate"
+- relevant original multi-agent coding/debate papers
+- compute-controlled inference/evaluation work
+
+Build a concise matrix:
+
+mechanism
+actual evidence
+overlap
+what Roundtable v1 tests differently
+
+Do not claim first-ever separation of role and model capability.
+
+==================================================
+22. VERSION CONTROL
+==================================================
+
+Commit at meaningful scientific checkpoints.
+
+At minimum:
+
+1. protocol + deterministic harness preflight
+2. qualification + calibration outputs
+3. frozen pre-main manifests/schedule
+4. immutable main raw results
+5. generated analysis/report package
+
+Push the branch after checkpoints.
+
+Do not squash away scientific history.
+
+Do not rewrite historical result commits.
+
+Do not merge to main.
+
+==================================================
+23. WHAT YOU MAY FIX AUTONOMOUSLY
+==================================================
+
+You may autonomously fix:
+
+- implementation bugs
+- test bugs discovered before live inference
+- serialization issues
+- path issues
+- reproducibility problems
+- CLI invocation bugs
+- deterministic grader implementation problems before task freeze
+- documentation inconsistencies
+
+After main-study freeze, you may fix analysis/presentation code if it does NOT alter raw evidence or frozen scoring.
+
+You may NOT autonomously change after treatment begins:
+
+- hypothesis
+- conditions
+- selected tasks
+- hidden scoring
+- role mappings
+- prompts
+- model
+- resource limits
+- stopping rule
+- primary estimator
+- practical-effect threshold
+
+A required change to one of those means:
+
+STOP,
+version the protocol,
+preserve existing data,
+report it.
+
+==================================================
+24. NO USER-BLOCKING BEHAVIOUR
+==================================================
+
+Leo is busy.
+
+Do not repeatedly ask him routine questions.
+
+Make conservative engineering decisions inside this frozen protocol.
+
+Do not stop merely because a cosmetic choice is ambiguous.
+
+Do not spend time building dashboards or generic agent-platform features.
+
+Do not expand scope.
+
+If a genuine scientific stop condition occurs, stop LIVE EXECUTION but continue useful offline work:
+
+- diagnose
+- test
+- document
+- prepare fixes for a new version
+- improve reproduction instructions
+- audit existing evidence
+
+==================================================
+25. FINAL CHECKPOINT
+==================================================
+
+Before stopping, produce:
+
+CHECKPOINT.md
+
+It must state clearly:
+
+REPOSITORY STATE
+- starting commit
+- ending commit
+- branch
+- pushed/not pushed
+
+PROTOCOL STATUS
+
+QUALIFICATION STATUS
+
+CALIBRATION STATUS
+
+MAIN EXPERIMENT STATUS
+
+EXACT COUNTS
+- planned
+- attempted
+- completed
+- evaluable
+- failures
+- calls
+- repairs
+
+RESULTS
+only if legitimately available
+
+WHAT FAILED
+including infrastructure failures
+
+FILES / HASHES
+
+TEST STATUS
+
+SCIENTIFIC INTERPRETATION BOUNDARY
+
+NEXT SINGLE ACTION
+
+If the entire experiment and analysis complete successfully, additionally state:
+
+STUDY_COMPLETE: YES
+
+Otherwise:
+
+STUDY_COMPLETE: NO
+
+and state the exact blocker.
+
+==================================================
+26. CORE PRINCIPLE
+==================================================
+
+The goal is not:
+
+"make Institutional Engineering look good."
+
+The goal is:
+
+produce the cleanest defensible evidence possible about whether task-adaptive intellectual jurisdictions add value over an otherwise comparable generic institution.
+
+A clean negative result is a successful research outcome.
+
+Start now by auditing the local repository state.

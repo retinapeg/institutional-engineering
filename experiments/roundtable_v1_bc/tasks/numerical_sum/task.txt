@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Return the accurately summed finite floating-point numbers in the input list. Empty input returns 0.0. Preserve small residuals when large terms cancel.

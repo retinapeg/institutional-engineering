@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "uv",
+    "build",
+    "--out-dir",
+    "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/roundtable-v1-bc-20260916/experiments/roundtable_v1_bc/.build/preflight-v2"
+  ],
+  "exit": 0,
+  "stderr": "Building source distribution...\nBuilding wheel from source distribution...\nSuccessfully built experiments/roundtable_v1_bc/.build/preflight-v2/institutional_engineering-0.1.0.tar.gz\nSuccessfully built experiments/roundtable_v1_bc/.build/preflight-v2/institutional_engineering-0.1.0-py3-none-any.whl\n",
+  "stdout": ""
+}

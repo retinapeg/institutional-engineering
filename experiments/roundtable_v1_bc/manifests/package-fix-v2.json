@@ -1,0 +1,14 @@
+{
+  "banned_sdist_entries": [],
+  "banned_wheel_entries": [],
+  "build_configuration_sha256": "41f1c47f3adb1d32ae55c8e5ff22543d6a42e5b28780fefb04c7c5056f668593",
+  "byte_mismatches": [],
+  "change": "Exclude only new-study local CLI scratch and local build products; original package source selection retained",
+  "changed_path": "pyproject.toml",
+  "fixture_files_verified": 87,
+  "missing": [],
+  "passed": true,
+  "previous_failed_receipt": "manifests/preflight-v1/summary.json",
+  "sdist_sha256": "6f5da15cb806d99c14f5d5a22b9dc12790e915ac442fde17bfbac1f3ec00194a",
+  "wheel_sha256": "134c7fa162e8137669f807d0743d774f45c765d44ce4af1d190aa64c61418313"
+}

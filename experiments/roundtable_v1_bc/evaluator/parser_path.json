@@ -1,0 +1,145 @@
+{
+  "task_id": "parser_path",
+  "family": "defensive_parser",
+  "purpose": "benchmark_candidate",
+  "reference": "def solve(x):\n    return bool(x) and \"\\\\\" not in x and \"\\0\" not in x and all(p not in (\"\", \".\", \"..\") for p in x.split(\"/\"))\n",
+  "hidden": [
+    {
+      "id": "relative",
+      "requirement_id": "relative_nonempty",
+      "input": "a/b",
+      "expected": true,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "absolute",
+      "requirement_id": "relative_nonempty",
+      "input": "/a",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "empty",
+      "requirement_id": "relative_nonempty",
+      "input": "",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "backslash",
+      "requirement_id": "forbidden_characters",
+      "input": "a\\b",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "nul",
+      "requirement_id": "forbidden_characters",
+      "input": "a\u0000",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "parent",
+      "requirement_id": "segment_validation",
+      "input": "a/../b",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "dot",
+      "requirement_id": "segment_validation",
+      "input": "a/./b",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "empty_segment",
+      "requirement_id": "segment_validation",
+      "input": "a//b",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "trailing",
+      "requirement_id": "segment_validation",
+      "input": "a/",
+      "expected": false,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "three_dots",
+      "requirement_id": "segment_validation",
+      "input": "...",
+      "expected": true,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    }
+  ],
+  "requirements": {
+    "relative_nonempty": "Reject empty and absolute paths; permit ordinary relative paths.",
+    "forbidden_characters": "Reject backslashes and NUL.",
+    "segment_validation": "Reject empty, dot and parent segments; permit a three-dot segment."
+  },
+  "requirement_weights": {
+    "relative_nonempty": 0.25,
+    "forbidden_characters": 0.25,
+    "segment_validation": 0.5
+  },
+  "negative_controls": [
+    {
+      "id": "empty_accepted",
+      "requirements": [
+        "relative_nonempty"
+      ],
+      "code": "def solve(x):\n    return x==\"\" or (not x.startswith(\"/\") and \"\\\\\" not in x and \"\\0\" not in x and all(p not in (\"\",\".\",\"..\") for p in x.split(\"/\")))\n"
+    },
+    {
+      "id": "omits_character_checks",
+      "requirements": [
+        "forbidden_characters"
+      ],
+      "code": "def solve(x):\n    return bool(x) and all(p not in (\"\",\".\",\"..\") for p in x.split(\"/\"))\n"
+    },
+    {
+      "id": "prefix_only",
+      "requirements": [
+        "segment_validation"
+      ],
+      "code": "def solve(x):\n    return bool(x) and not x.startswith(\"/\")\n"
+    }
+  ],
+  "provenance": {
+    "source_repository": "retinapeg/institutional-engineering",
+    "source_commit": "ff9353017492153706c875bab1464509e2ddb941",
+    "source_files_sha256": {
+      "experiments/roundtable_v1/tasks/parser_path/solution.py": "481f02daa7b466c927a4838bdc483cf8cde0c56d5d84e54e9ea4651ee839a1a2",
+      "experiments/roundtable_v1/tasks/parser_path/task.txt": "9d27bd4408450f1bd2a44c3219354398179290b17d275d3dc727c3981838aef4",
+      "experiments/roundtable_v1/tasks/parser_path/visible.json": "c261aa5c41edc6145254a3b0cd8048b3211a24cd3e0c78450f1d474bd788dee6",
+      "experiments/roundtable_v1/tasks/parser_path/visible_tests.py": "b10b8423ae885095d66549beef607aa9782fdaf1dc616f516b252d8cae52a844",
+      "experiments/roundtable_v1/evaluator/parser_path.json": "0dfa44dd5fd0d4ad3f78befb0d6977e7dbb098f09bc3b26314bc052649bb19ea"
+    },
+    "public_files": "Copied byte-identically; hidden requirements regrouped and specified edges added before any live inference."
+  },
+  "rubric": "Each meaningful requirement passes only if all its cases pass. The normalized score is the sum of passed requirement weights. Additional cases do not increase a requirement weight.",
+  "status": "CANDIDATE_NOT_CALIBRATED"
+}

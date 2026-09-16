@@ -1,0 +1,43 @@
+{
+  "artifact_sha256": "bd97c095a3a1435fa7cb15806a7f2b47786d546569c47468e5cb10c57ef5c869",
+  "checks": [
+    {
+      "executed": true,
+      "id": "contract_0",
+      "passed": true,
+      "process": {
+        "exit": 0,
+        "failure": null,
+        "profile_hash": "66684a34b8b827d0abc9e1ee15a36e0a578301cb674d98b906adcad3aecbb2ec",
+        "seconds": 0.02698237498407252,
+        "stderr": "",
+        "stdout": "{\"value\": [3, 2, 1], \"input_after\": [1, 2, 3]}\n"
+      },
+      "requirement_id": "contract"
+    },
+    {
+      "executed": true,
+      "id": "contract_1",
+      "passed": true,
+      "process": {
+        "exit": 0,
+        "failure": null,
+        "profile_hash": "8172da0d3a7a0951da99500112e0d17c78127be4b4514a6d2f2d1631e1576f36",
+        "seconds": 0.02687508298549801,
+        "stderr": "",
+        "stdout": "{\"value\": [5, 4], \"input_after\": [4, 5]}\n"
+      },
+      "requirement_id": "contract"
+    }
+  ],
+  "full_pass": true,
+  "grader_success": true,
+  "integrity_qualified": false,
+  "requirement_weights": {
+    "contract": 1.0
+  },
+  "requirements": {
+    "contract": 1.0
+  },
+  "score": 1.0
+}

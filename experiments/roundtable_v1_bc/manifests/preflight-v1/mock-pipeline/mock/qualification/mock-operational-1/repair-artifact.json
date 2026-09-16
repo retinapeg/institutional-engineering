@@ -1,0 +1,4 @@
+{
+  "code": "def solve(x):\n    return x.upper()\n",
+  "sha256": "f707c8cb5bbb051171073048f721cef845559f842bbe17502a5fde0910d1723c"
+}

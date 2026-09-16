@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Input is a list of [event_id, amount] pairs. Return sum of amounts, applying each ID once. A repeat with the same amount is ignored; a repeated ID with a different amount raises ValueError. IDs are strings, amounts integers; empty returns 0.

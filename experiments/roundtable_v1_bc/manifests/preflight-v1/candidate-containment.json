@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "credentials": true,
+    "fork": true,
+    "hidden": true,
+    "network": true,
+    "prior_attempt": true,
+    "researcher": true,
+    "symlink": true
+  },
+  "enforced": [
+    "filesystem content allowlist",
+    "network denial",
+    "fork denial",
+    "CPU seconds",
+    "file size",
+    "file descriptors",
+    "wall timeout",
+    "captured-output cap"
+  ],
+  "not_enforced": [
+    "hard resident-memory cap",
+    "read-metadata secrecy"
+  ],
+  "result": {
+    "exit": 0,
+    "failure": null,
+    "profile_hash": "423c73e21cd10a574b412034e812a072ddccb20fba93c22ce1c1b0565ce365af",
+    "seconds": 0.030625667015556246,
+    "stderr": "",
+    "stdout": "{\"hidden\": true, \"prior_attempt\": true, \"credentials\": true, \"researcher\": true, \"symlink\": true, \"network\": true, \"fork\": true}\n"
+  }
+}

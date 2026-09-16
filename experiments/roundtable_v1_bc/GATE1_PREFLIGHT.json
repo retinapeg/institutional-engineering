@@ -1,0 +1,61 @@
+{
+  "checks": {
+    "build": {
+      "passed": true,
+      "receipt_sha256": "f4af3c09b20496cbf503ac775de129e260bb07cecfca452a313a22ef45a92300"
+    },
+    "format": {
+      "passed": true,
+      "receipt_sha256": "fd394667771e3f4a3d2b156a8d1854a9ab646f9c44eb49782bf3cc431958a4ee"
+    },
+    "historical_regression_mocks": {
+      "passed": true,
+      "receipt_sha256": "47ff964626e31d28f598227ae06d41159e36b8044ee16de78dfe3005b71b7134"
+    },
+    "lint": {
+      "passed": true,
+      "receipt_sha256": "a142fad87f3e632c9a7feccca2489229c91e5596d089ed197ebeab3fe7d77d27"
+    },
+    "manifest_consistency": {
+      "passed": true
+    },
+    "mock_pipeline": {
+      "passed": true,
+      "receipt_sha256": "4a1e4bca5b1aa705d06526c5dc131178fbedc4baa030d1fbc8b7e8334fa55031"
+    },
+    "packaged_fixture_bytes": {
+      "passed": true
+    },
+    "strict_types": {
+      "passed": true,
+      "receipt_sha256": "d72b5ca2efa55e854a142c0b9a95f681d4fb75b22b3d6d3f963038e715e23e97"
+    },
+    "task_manifest_hashes": {
+      "passed": true
+    },
+    "unit_integration": {
+      "passed": true,
+      "receipt_sha256": "5f11ed52e2b977ef4358b36a2ef37f17800a6da79bdd11f1cc8462558b7db896"
+    }
+  },
+  "environment": {
+    "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+    "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]"
+  },
+  "gate1_passed": false,
+  "gates": {
+    "deterministic_checks": true,
+    "generation_ceiling": false,
+    "grader_integrity": false,
+    "single_request_bound": false,
+    "typed_config_loader": true,
+    "worker_isolation": false,
+    "zero_retries": false
+  },
+  "model_calls": 0,
+  "protocol_sha256": "4f8e391abe74b37d70a23bcc4dd476780a649c02f2ec5297bd6b4e556b2e1a7a",
+  "scientific_attempts": 0,
+  "scope": "Offline and mock checks only; reproduced grader counterexamples keep Gate1 failed.",
+  "status": "BLOCKED",
+  "study_complete": false
+}

@@ -1,0 +1,133 @@
+{
+  "analysis": {
+    "bootstrap": "tasks then paired repetitions",
+    "bootstrap_draws": 19999,
+    "bootstrap_seed": 2026091603,
+    "monte_carlo_draws": 100000,
+    "nonsignificant_is_equivalent": false,
+    "practical_effect_threshold": 0.05,
+    "primary": "equal task mean of mean(C)-mean(B)",
+    "randomization": "two-sided independent B/C swaps within paired blocks",
+    "randomization_seed": 2026091602,
+    "valid_output_only": "descriptive post-treatment conditioning only"
+  },
+  "builder_evidence": [
+    "public_snapshot",
+    "frozen_decision"
+  ],
+  "calibration": {
+    "candidate_count": 12,
+    "condition": "B",
+    "eligibility_mean_score_inclusive": [
+      0.25,
+      0.75
+    ],
+    "ineligible_domain_policy": "STOP_NO_THRESHOLD_RELAXATION_OR_REPLACEMENT",
+    "maximum_model_calls": 216,
+    "maximum_runs": 36,
+    "precision_claim": "coarse screen only",
+    "repetitions": 3,
+    "selection": "one per domain; closest mean to 0.5 then lexical stable task_id"
+  },
+  "conditions": [
+    "B",
+    "C"
+  ],
+  "experiment_id": "roundtable-v1-bc-20260916-v1",
+  "frozen_artifact_before_hidden_grade": true,
+  "live_adapter_status": "NOT_IMPLEMENTED_PENDING_QUALIFIED_BOUNDARIES",
+  "main": {
+    "maximum_calls": 768,
+    "outcome_stopping": false,
+    "paired_repetitions": 8,
+    "replacement_observations": false,
+    "required_domains": 8,
+    "runs": 128,
+    "runs_per_condition": 64,
+    "schedule_hash": null,
+    "schedule_seed": 2026091601,
+    "scheduled_calls": 640,
+    "selected_tasks": null,
+    "stop_conditions": [
+      "two consecutive identical startup/configuration failures in attempt order",
+      "infrastructure/provider failures >5% after at least 20 attempted runs"
+    ],
+    "tasks_per_domain": 1
+  },
+  "maximum_repairs": 1,
+  "model": {
+    "account_serving_availability": "UNVERIFIED",
+    "binary_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+    "cli_version": "0.154.0",
+    "reasoning_effort": "medium",
+    "requested": "gpt-5.6-terra",
+    "resolved_serving_model": null,
+    "runtime": "Codex CLI"
+  },
+  "primary_manipulation": "Two independent reviewers jurisdiction blocks only",
+  "product_dependency": null,
+  "qualification": {
+    "conditions": [
+      "B",
+      "C",
+      "B",
+      "C",
+      "C"
+    ],
+    "failure_policy": "STOP_LIVE_NEW_VERSION_REQUIRED",
+    "maximum_model_calls": 30,
+    "required_schema_completions": 30,
+    "scenarios": 5,
+    "stages_each": 6,
+    "synthetic_domain_assignments": {
+      "qualification_double": "numerical",
+      "qualification_even": "ledger_state_invariant",
+      "qualification_length": "statistics",
+      "qualification_reverse": "protocol_client",
+      "qualification_uppercase": "defensive_parser"
+    }
+  },
+  "resource_policy": {
+    "captured_response_bytes": 1048576,
+    "comparison": "BUDGET_CONTROLLED",
+    "generation_ceiling_enforced": false,
+    "institution_concurrency": 2,
+    "institution_seconds": 600,
+    "model_call_limits": {
+      "calibration": 216,
+      "main": 768,
+      "qualification": 30
+    },
+    "model_request_bound_enforced": false,
+    "model_requests_per_stage": 1,
+    "prompt_bytes": 131072,
+    "requested_generation_token_ceiling": 8192,
+    "retries": 0,
+    "stage_seconds": 90,
+    "transport_retries_enforced": false
+  },
+  "reviewers_independent": true,
+  "scheduled_stages": 5,
+  "scoring": {
+    "artifact_after_repair_failure": "grade frozen builder artifact",
+    "equal_task_weights": true,
+    "evaluator_malfunction": "unresolved score, replay same frozen artifact without model",
+    "integrity_qualified": false,
+    "no_artifact_failure": 0,
+    "range": [
+      0,
+      1
+    ],
+    "within_task": "sum frozen requirement weights; requirement passes only when all of its cases pass"
+  },
+  "stages": [
+    "REVIEW_1",
+    "REVIEW_2",
+    "CHALLENGE",
+    "DECISION",
+    "BUILD",
+    "REPAIR"
+  ],
+  "status": "IMPLEMENTED_OFFLINE_LIVE_BLOCKED",
+  "title": "Roundtable v1: Task-Adaptive Intellectual Jurisdictions in Coding Agents"
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "task_id": "numerical_sum",
+    "family": "numerical",
+    "original_task_id": "numerical_sum"
+  },
+  {
+    "task_id": "numerical_root",
+    "family": "numerical",
+    "original_task_id": "numerical_root"
+  },
+  {
+    "task_id": "statistics_missing",
+    "family": "statistics",
+    "original_task_id": "statistics_missing"
+  },
+  {
+    "task_id": "statistics_variance",
+    "family": "statistics",
+    "original_task_id": "statistics_variance"
+  },
+  {
+    "task_id": "parser_pairs",
+    "family": "defensive_parser",
+    "original_task_id": "parser_pairs"
+  },
+  {
+    "task_id": "parser_path",
+    "family": "defensive_parser",
+    "original_task_id": "parser_path"
+  },
+  {
+    "task_id": "queue_dedupe",
+    "family": "queue_idempotency",
+    "original_task_id": "queue_dedupe"
+  },
+  {
+    "task_id": "queue_lease",
+    "family": "queue_idempotency",
+    "original_task_id": "queue_lease"
+  },
+  {
+    "task_id": "ml_macro_recall",
+    "family": "ml_evaluation",
+    "original_task_id": "ml_macro_recall"
+  },
+  {
+    "task_id": "concurrency_cas",
+    "family": "concurrency",
+    "original_task_id": "concurrency_cas"
+  },
+  {
+    "task_id": "ledger_transfer",
+    "family": "ledger_state_invariant",
+    "original_task_id": "ledger_transfer"
+  },
+  {
+    "task_id": "protocol_frames",
+    "family": "protocol_client",
+    "original_task_id": "protocol_frames"
+  }
+]

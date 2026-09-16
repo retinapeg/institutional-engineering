@@ -1,0 +1,41 @@
+{
+  "definitions_sha256": "b57e1399d867b2f6d575f9c9d39c5f3c90425164997b0860fbb2a76be23bc25b",
+  "domain_roles": {
+    "concurrency": [
+      "performance_concurrency",
+      "distributed_systems_reliability"
+    ],
+    "defensive_parser": [
+      "security",
+      "api_protocol_engineering"
+    ],
+    "ledger_state_invariant": [
+      "algorithms",
+      "data_integrity"
+    ],
+    "ml_evaluation": [
+      "ml_data_science",
+      "statistics"
+    ],
+    "numerical": [
+      "numerical_methods",
+      "algorithms"
+    ],
+    "protocol_client": [
+      "api_protocol_engineering",
+      "distributed_systems_reliability"
+    ],
+    "queue_idempotency": [
+      "distributed_systems_reliability",
+      "data_integrity"
+    ],
+    "statistics": [
+      "statistics",
+      "data_integrity"
+    ]
+  },
+  "domain_roles_sha256": "c939926dd51dca0259b4a31c7c825da7c558106500a195f24bd44985449e476b",
+  "experiment_id": "roundtable-v1-bc-20260916-v1",
+  "selector_model_calls": 0,
+  "status": "PRECALIBRATION_FIXED"
+}

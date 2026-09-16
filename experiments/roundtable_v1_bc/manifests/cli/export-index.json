@@ -1,0 +1,41 @@
+{
+  "captured_at_utc": "2026-09-16T13:00:58.925017+00:00",
+  "files": {
+    "CLI_PREFLIGHT.md": "01a5bad5d7fd662ce3f9bc8a7ad573bae51ff67436fb575e9c76029c5186641f",
+    "manifests/cli/capabilities.json": "3e19523bfefad338793689088692c79885507a8fd9c74dbc1c2342ea0b28e696",
+    "manifests/cli/containment.sb.in": "e4821305e3f84501ab2eea4946aa88550426ffab9c6d95f4c3b5526263e3845d",
+    "manifests/cli/doctor-invalid-type.json": "2178a38b13dda0388250a7b43ee2c74da5a768dd2a91080a4cb5f1163affe630",
+    "manifests/cli/doctor-valid.json": "cf984ece5ad081ec44e0500f79ef0105cce3a6d9a11c6ccae194d45046fffb2e",
+    "manifests/cli/reproduce_doctor.py": "67ee32b3045b2bc56cf6dabd4df8bb7c29582eb4eaec823f5e15e9a703c795af",
+    "manifests/cli/runtime.json": "061567c12656d6f563c64f595b57f4f2ea0adbcca10121d9f93cb8c9859e4e79",
+    "manifests/cli/schema-excerpt.json": "9c6038f638bb280f56768fff98bcabe6c1e2f92f4ae0b436d6cf875ea9a4a24f"
+  },
+  "configuration_loader_passed": true,
+  "complete_live_preflight_passed": false,
+  "provider_model_calls": 0,
+  "verification": {
+    "standalone_reproduction": {
+      "configuration_loader_passed": true,
+      "live_preflight_passed": false
+    },
+    "standalone_reproduction_receipt_hashes": {
+      "valid.json": "827b475c12ee4afbd59b498d647a3a9b9608a55f5732e53943bb72f0c4b4f9df",
+      "invalid_type.json": "0fcbe4359f9c743d3eee727db89c5587dcca8b58fae6797c6e6f2f75d44ba4aa",
+      "conclusion.json": "3ead76a9ef12342579d8f9dc1b3d91d261191d3f7a8b6aff68d1665904e16f08"
+    },
+    "safe_output_self_test": "PASS",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "mypy_strict": "PASS"
+  },
+  "publication_review": {
+    "selected_facts_only": true,
+    "whole_config_exported": false,
+    "authentication_state_exported": false,
+    "full_model_catalog_exported": false,
+    "full_schema_exported": false,
+    "unrelated_personal_paths_found": 0,
+    "credential_pattern_findings": 0,
+    "allowed_absolute_paths": "Exact owned study scratch paths and audited CLI binary path only"
+  }
+}

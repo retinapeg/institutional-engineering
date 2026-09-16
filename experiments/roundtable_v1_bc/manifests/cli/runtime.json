@@ -1,0 +1,56 @@
+{
+  "cli_version": "0.154.0",
+  "binary_path": "/Users/leonardaarons-ditson/.codex/packages/standalone/releases/0.154.0-aarch64-apple-darwin/bin/codex",
+  "binary_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+  "platform": "macos-aarch64",
+  "requested_model": "gpt-5.6-terra",
+  "requested_reasoning_effort": "medium",
+  "bundled_catalog_command": [
+    "codex",
+    "debug",
+    "models",
+    "--bundled"
+  ],
+  "bundled_catalog_returncode": 0,
+  "bundled_catalog_stdout_sha256": "44b4b18ae234973ced984e707e8bc3d7e958df5a5070d950a2c630b67fe64710",
+  "bundled_target_model": {
+    "slug": "gpt-5.6-terra",
+    "display_name": "GPT-5.6-Terra",
+    "description": "Balanced agentic coding model for everyday work.",
+    "default_reasoning_level": "medium",
+    "supported_reasoning_levels": [
+      {
+        "effort": "low",
+        "description": "Fast responses with lighter reasoning"
+      },
+      {
+        "effort": "medium",
+        "description": "Balances speed and reasoning depth for everyday tasks"
+      },
+      {
+        "effort": "high",
+        "description": "Greater reasoning depth for complex problems"
+      },
+      {
+        "effort": "xhigh",
+        "description": "Extra high reasoning depth for complex problems"
+      },
+      {
+        "effort": "max",
+        "description": "Maximum reasoning depth for the hardest problems"
+      },
+      {
+        "effort": "ultra",
+        "description": "Maximum reasoning with automatic task delegation"
+      }
+    ],
+    "context_window": 272000,
+    "effective_context_window_percent": 95,
+    "shell_type": "unified_exec",
+    "visibility": "list",
+    "supported_in_api": true
+  },
+  "served_model": null,
+  "account_serving_availability": "NOT_TESTED",
+  "provider_model_calls": 0
+}

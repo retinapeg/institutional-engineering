@@ -1,0 +1,166 @@
+{
+  "task_id": "queue_dedupe",
+  "family": "queue_idempotency",
+  "purpose": "benchmark_candidate",
+  "reference": "def solve(x):\n    seen={}\n    for k,v in x:\n        if k in seen and seen[k]!=v: raise ValueError(\"conflict\")\n        seen[k]=v\n    return sum(seen.values())\n",
+  "hidden": [
+    {
+      "id": "unique",
+      "requirement_id": "unique_events",
+      "input": [
+        [
+          "a",
+          2
+        ],
+        [
+          "b",
+          -1
+        ],
+        [
+          "c",
+          0
+        ]
+      ],
+      "expected": 1,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "empty",
+      "requirement_id": "unique_events",
+      "input": [],
+      "expected": 0,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "repeat",
+      "requirement_id": "idempotent_repeats",
+      "input": [
+        [
+          "a",
+          2
+        ],
+        [
+          "a",
+          2
+        ],
+        [
+          "b",
+          3
+        ]
+      ],
+      "expected": 5,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "nonadjacent",
+      "requirement_id": "idempotent_repeats",
+      "input": [
+        [
+          "a",
+          2
+        ],
+        [
+          "b",
+          1
+        ],
+        [
+          "a",
+          2
+        ]
+      ],
+      "expected": 3,
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "conflict",
+      "requirement_id": "conflicting_repeats",
+      "input": [
+        [
+          "a",
+          2
+        ],
+        [
+          "a",
+          3
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "zero_conflict",
+      "requirement_id": "conflicting_repeats",
+      "input": [
+        [
+          "a",
+          0
+        ],
+        [
+          "a",
+          1
+        ]
+      ],
+      "error": "ValueError",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    }
+  ],
+  "requirements": {
+    "unique_events": "Accumulate amounts for distinct IDs, including zero, negative and empty inputs.",
+    "idempotent_repeats": "Repeated identical ID/amount pairs apply only once.",
+    "conflicting_repeats": "A repeated ID with a different amount raises ValueError."
+  },
+  "requirement_weights": {
+    "unique_events": 0.25,
+    "idempotent_repeats": 0.25,
+    "conflicting_repeats": 0.5
+  },
+  "negative_controls": [
+    {
+      "id": "drops_negative",
+      "requirements": [
+        "unique_events"
+      ],
+      "code": "def solve(x):\n    d={}\n    for k,v in x:\n        if k in d and d[k]!=v: raise ValueError(\"conflict\")\n        d[k]=v\n    return sum(v for v in d.values() if v>0)\n"
+    },
+    {
+      "id": "double_application",
+      "requirements": [
+        "idempotent_repeats"
+      ],
+      "code": "def solve(x):\n    d={}\n    for k,v in x:\n        if k in d and d[k]!=v: raise ValueError(\"conflict\")\n        d[k]=v\n    return sum(v for k,v in x)\n"
+    },
+    {
+      "id": "last_amount_wins",
+      "requirements": [
+        "conflicting_repeats"
+      ],
+      "code": "def solve(x):\n    return sum(dict(x).values())\n"
+    }
+  ],
+  "provenance": {
+    "source_repository": "retinapeg/institutional-engineering",
+    "source_commit": "ff9353017492153706c875bab1464509e2ddb941",
+    "source_files_sha256": {
+      "experiments/roundtable_v1/tasks/queue_dedupe/solution.py": "481f02daa7b466c927a4838bdc483cf8cde0c56d5d84e54e9ea4651ee839a1a2",
+      "experiments/roundtable_v1/tasks/queue_dedupe/task.txt": "76101225f69cb61e4e893872afe9cd6f141014963650a76696e8b64b9fa0a79f",
+      "experiments/roundtable_v1/tasks/queue_dedupe/visible.json": "24e4355604a1297f1460fed96f721a17f51ad75403f8c354b2526b3dbc1d83b0",
+      "experiments/roundtable_v1/tasks/queue_dedupe/visible_tests.py": "b10b8423ae885095d66549beef607aa9782fdaf1dc616f516b252d8cae52a844",
+      "experiments/roundtable_v1/evaluator/queue_dedupe.json": "3d62745958d5adb92c7c7196b6b2b0590f061916057d0eb83c1a597a66251cce"
+    },
+    "public_files": "Copied byte-identically; hidden requirements regrouped and specified edges added before any live inference."
+  },
+  "rubric": "Each meaningful requirement passes only if all its cases pass. The normalized score is the sum of passed requirement weights. Additional cases do not increase a requirement weight.",
+  "status": "CANDIDATE_NOT_CALIBRATED"
+}

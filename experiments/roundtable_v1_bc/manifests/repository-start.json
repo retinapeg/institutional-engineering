@@ -1,0 +1,14 @@
+{
+  "source_repository": "retinapeg/institutional-engineering",
+  "starting_local_commit": "ff9353017492153706c875bab1464509e2ddb941",
+  "starting_origin_main": "02aa0af04d790b3b362a39a1476793bc813ee40d",
+  "remote_main_live_verified": "02aa0af04d790b3b362a39a1476793bc813ee40d",
+  "branch": "roundtable-v1-bc-20260916",
+  "worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/roundtable-v1-bc-20260916",
+  "source_clean": true,
+  "preserved_source_files": 1056,
+  "other_dirty_worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH/institutional-engineering",
+  "dirty_findings": "modified README.md; untracked older Roundtable and research export work. Preserved, no staged diff.",
+  "source_ahead_of_origin_main": 3,
+  "product_repository_touched": "NO"
+}

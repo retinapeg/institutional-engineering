@@ -1,0 +1,20 @@
+{
+  "calls_dispatched": 0,
+  "checks": [
+    {
+      "exit": 1,
+      "message": "GATE1_PREFLIGHT_FAILED; NO LIVE MODEL CALL DISPATCHED",
+      "phase": "qualification"
+    },
+    {
+      "exit": 1,
+      "message": "GATE1_PREFLIGHT_FAILED; NO LIVE MODEL CALL DISPATCHED",
+      "phase": "calibration"
+    },
+    {
+      "exit": 1,
+      "message": "GATE1_PREFLIGHT_FAILED; NO LIVE MODEL CALL DISPATCHED",
+      "phase": "main"
+    }
+  ]
+}

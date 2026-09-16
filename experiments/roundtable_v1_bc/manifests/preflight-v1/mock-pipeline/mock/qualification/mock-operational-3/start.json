@@ -1,0 +1,26 @@
+{
+  "artifact_sha256": null,
+  "condition": "C",
+  "evaluable": false,
+  "experiment_id": "roundtable-v1-bc-20260916-v1",
+  "failure": null,
+  "institution_completed": false,
+  "kind": "MOCK",
+  "model_calls": 0,
+  "phase": "qualification",
+  "repair_count": 0,
+  "resolved_model": null,
+  "roles": [
+    "statistics",
+    "data_integrity"
+  ],
+  "run_id": "mock-operational-3",
+  "score": 0.0,
+  "snapshot_sha256": "b25b872f241a9f702e2cff90f4f433f92b37664c02664c60ffff77cbee2d62d9",
+  "stage_invocations": 0,
+  "stages": [],
+  "started_at": "2026-09-16T13:02:36.717894+00:00",
+  "state": "STARTED",
+  "task_id": "qualification_length",
+  "tokens": null
+}

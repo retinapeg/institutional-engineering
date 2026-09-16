@@ -1,0 +1,13 @@
+[
+  {
+    "id": "behaviour_1",
+    "input": "3:abc",
+    "expected": [
+      [
+        "abc"
+      ],
+      ""
+    ],
+    "nonmutation": false
+  }
+]

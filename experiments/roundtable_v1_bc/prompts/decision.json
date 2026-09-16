@@ -1,0 +1,17 @@
+{
+  "instruction": "Produce one frozen implementable decision. Resolve the evidence into one plan.",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "text": {
+        "minLength": 1,
+        "type": "string"
+      }
+    },
+    "required": [
+      "text"
+    ],
+    "type": "object"
+  },
+  "stage": "DECISION"
+}

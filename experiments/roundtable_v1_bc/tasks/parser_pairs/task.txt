@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Parse semicolon-separated key=value entries to a dict. Empty text returns {}. Keys must be nonempty and unique. Split each entry on its first equals sign; values may be empty or contain equals signs. Missing equals, empty entries and duplicate keys raise ValueError. Preserve whitespace literally.

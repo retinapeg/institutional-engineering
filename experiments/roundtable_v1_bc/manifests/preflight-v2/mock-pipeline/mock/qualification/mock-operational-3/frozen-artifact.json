@@ -1,0 +1,4 @@
+{
+  "code": "def solve(x):\n    return len(x)\n",
+  "sha256": "90459be5d2065011c08142758c54afc998f2ae4cd3c4bf7154ff2c23b047852b"
+}

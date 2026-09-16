@@ -1,0 +1,18 @@
+{
+  "failure": null,
+  "index": 0,
+  "request": {
+    "instruction": "You are a competent senior software-engineering reviewer. Independently examine requirements, correctness, edge cases, failure modes, maintainability where relevant, and verification strategy. Use only the supplied public evidence. Return actionable guidance.",
+    "jurisdiction": "Senior software engineering: review requirements, correctness, edge cases, failure modes, maintainability and verification strategy.",
+    "snapshot": {
+      "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+      "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return twice the supplied integer.\n",
+      "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": 2,\n    \"expected\": 4,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": -3,\n    \"expected\": -6,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+      "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+    },
+    "stage": "REVIEW_1"
+  },
+  "request_sha256": "25e79970bd953d98f7d01f9ac9ae7ed4ae7ff29c29e8cc8f240c8090ba40d569",
+  "schema_success": false,
+  "stage": "REVIEW_1"
+}

@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Return unbiased sample variance of a finite numeric list, dividing squared deviations from its mean by n-1. Fewer than two numbers raises ValueError.

@@ -1,0 +1,4 @@
+{
+  "code": "def solve(x):\n    return list(reversed(x))\n",
+  "sha256": "bd97c095a3a1435fa7cb15806a7f2b47786d546569c47468e5cb10c57ef5c869"
+}

@@ -1,0 +1,17 @@
+{
+  "instruction": "You are a competent senior software-engineering reviewer. Independently examine requirements, correctness, edge cases, failure modes, maintainability where relevant, and verification strategy. Use only the supplied public evidence. Return actionable guidance.",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "text": {
+        "minLength": 1,
+        "type": "string"
+      }
+    },
+    "required": [
+      "text"
+    ],
+    "type": "object"
+  },
+  "stage": "REVIEW_1"
+}

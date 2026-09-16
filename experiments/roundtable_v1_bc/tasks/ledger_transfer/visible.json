@@ -1,0 +1,17 @@
+[
+  {
+    "id": "behaviour_1",
+    "input": [
+      {
+        "a": 5,
+        "b": 0
+      },
+      []
+    ],
+    "expected": {
+      "a": 5,
+      "b": 0
+    },
+    "nonmutation": true
+  }
+]

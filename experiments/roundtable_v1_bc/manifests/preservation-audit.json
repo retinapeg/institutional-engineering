@@ -1,0 +1,52 @@
+{
+  "historical_preservation_passed": true,
+  "product_repository_touched": "NO",
+  "source_byte_mismatches": [],
+  "source_commit": "ff9353017492153706c875bab1464509e2ddb941",
+  "source_file_count": 1056,
+  "source_worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/domain-jurisdiction-v2",
+  "worktrees": [
+    {
+      "HEAD": "02aa0af04d790b3b362a39a1476793bc813ee40d",
+      "branch": "refs/heads/main",
+      "dirty_status": "",
+      "touched_by_this_task": false,
+      "worktree": "/Users/leonardaarons-ditson/Documents/Codex/institutional-engineering"
+    },
+    {
+      "HEAD": "0505e699c19826c4d783b5d3445ec82309ed4938",
+      "branch": "refs/heads/research/domain-jurisdiction-benchmark-v1",
+      "dirty_status": "",
+      "touched_by_this_task": false,
+      "worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/domain-jurisdiction-v1"
+    },
+    {
+      "HEAD": "ff9353017492153706c875bab1464509e2ddb941",
+      "branch": "refs/heads/research/domain-jurisdiction-programme-v2",
+      "dirty_status": "",
+      "touched_by_this_task": false,
+      "worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/domain-jurisdiction-v2"
+    },
+    {
+      "HEAD": "9d4140afc76b4dcbcdb639a588f5d6d1721db2c5",
+      "branch": "refs/heads/codex/roundtable-bc-protocol-ready",
+      "dirty_status": "",
+      "touched_by_this_task": false,
+      "worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/institutional-engineering"
+    },
+    {
+      "HEAD": "02aa0af04d790b3b362a39a1476793bc813ee40d",
+      "branch": "refs/heads/roundtable-v1-bc-20260916-execution",
+      "dirty_status": "?? experiments/roundtable_v1_bc/\n",
+      "touched_by_this_task": true,
+      "worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/roundtable-v1-bc-20260916"
+    },
+    {
+      "HEAD": "02aa0af04d790b3b362a39a1476793bc813ee40d",
+      "branch": "refs/heads/codex/roundtable-v1",
+      "dirty_status": " M README.md\n?? experiments/roundtable_v1/\n?? scripts/\n?? tests/test_export_research_outputs.py\n",
+      "touched_by_this_task": false,
+      "worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH/institutional-engineering"
+    }
+  ]
+}

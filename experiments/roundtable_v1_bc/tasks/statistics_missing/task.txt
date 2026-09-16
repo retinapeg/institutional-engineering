@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Return the arithmetic mean of finite numbers after excluding only null values. Zero is a value. If there are no numbers, raise ValueError. Inputs are lists of numbers or null.

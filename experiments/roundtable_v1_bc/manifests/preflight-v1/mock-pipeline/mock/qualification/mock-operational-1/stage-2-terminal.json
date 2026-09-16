@@ -1,0 +1,33 @@
+{
+  "failure": null,
+  "index": 2,
+  "request": {
+    "instruction": "Identify disagreements, unsupported assumptions, missed edge cases and likely failure modes.",
+    "reports": [
+      {
+        "text": "MOCK REVIEW_1"
+      },
+      {
+        "text": "MOCK REVIEW_2"
+      }
+    ],
+    "snapshot": {
+      "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+      "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return the uppercase version of the supplied ASCII string.\n",
+      "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": \"aBc\",\n    \"expected\": \"ABC\",\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": \"hello\",\n    \"expected\": \"HELLO\",\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+      "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+    },
+    "stage": "CHALLENGE"
+  },
+  "request_sha256": "c1eb2915ce2ee0386f4d2844d231bf2c89736847ea8755485ca29c424bf204be",
+  "response": {
+    "kind": "MOCK",
+    "process_exit": 0,
+    "resolved_model": null,
+    "text": "{\"text\": \"MOCK CHALLENGE\"}",
+    "tokens": null
+  },
+  "schema_success": true,
+  "seconds": 6.874994141981006e-06,
+  "stage": "CHALLENGE"
+}

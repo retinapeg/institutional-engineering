@@ -1,0 +1,299 @@
+{
+  "artifact_sha256": "4159c0d2e56f9980c7f45e637a5dade813de88dec925c67aa7f09293b3c7fb71",
+  "condition": "C",
+  "evaluable": true,
+  "evaluator_sha256": "8a332cef76187f1d42e8d5739d324c61f1ea51a71fa5a39c8e8b1eb5ac5fb6fd",
+  "experiment_id": "roundtable-v1-bc-20260916-v1",
+  "failure": null,
+  "fixture_sha256": "27dc8c950c88d3bcc8d7fd299af1183530a8cb868af4707e2ce9967c755bb6a9",
+  "full_pass": true,
+  "institution_completed": true,
+  "kind": "MOCK",
+  "model_calls": 0,
+  "phase": "qualification",
+  "repair_count": 1,
+  "resolved_model": null,
+  "roles": [
+    "algorithms",
+    "data_integrity"
+  ],
+  "run_id": "mock-operational-4",
+  "schema_success": true,
+  "score": 1.0,
+  "seconds": 0.19025691598653793,
+  "snapshot_sha256": "344d20e8e5f7bcb736343aef516aa1af90759c8db024c3bbc9581d51f11d0d03",
+  "stage_invocations": 6,
+  "stages": [
+    {
+      "failure": null,
+      "index": 0,
+      "request": {
+        "instruction": "You are a competent senior software-engineering reviewer. Independently examine requirements, correctness, edge cases, failure modes, maintainability where relevant, and verification strategy. Use only the supplied public evidence. Return actionable guidance.",
+        "jurisdiction": "Algorithms: review invariants, boundary cases, complexity, termination and correctness of state transitions.",
+        "snapshot": {
+          "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+          "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return true exactly when the supplied integer is even.\n",
+          "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": 2,\n    \"expected\": true,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": 3,\n    \"expected\": false,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+          "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+        },
+        "stage": "REVIEW_1"
+      },
+      "request_sha256": "0973b18ec610c12879e162aa080b913757c60e4b6896888308e579e125dc4fd6",
+      "response": {
+        "kind": "MOCK",
+        "process_exit": 0,
+        "resolved_model": null,
+        "text": "{\"text\": \"MOCK REVIEW_1\"}",
+        "tokens": null
+      },
+      "schema_success": true,
+      "seconds": 1.300001167692244e-05,
+      "stage": "REVIEW_1"
+    },
+    {
+      "failure": null,
+      "index": 1,
+      "request": {
+        "instruction": "You are a competent senior software-engineering reviewer. Independently examine requirements, correctness, edge cases, failure modes, maintainability where relevant, and verification strategy. Use only the supplied public evidence. Return actionable guidance.",
+        "jurisdiction": "Data integrity: review consistency, mutation, conservation, validation and atomic changes to records.",
+        "snapshot": {
+          "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+          "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return true exactly when the supplied integer is even.\n",
+          "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": 2,\n    \"expected\": true,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": 3,\n    \"expected\": false,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+          "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+        },
+        "stage": "REVIEW_2"
+      },
+      "request_sha256": "fbc95c595a57931c29e28be1e0844a0c71bfeb7e3063a47f573bcd1ee7bc83a7",
+      "response": {
+        "kind": "MOCK",
+        "process_exit": 0,
+        "resolved_model": null,
+        "text": "{\"text\": \"MOCK REVIEW_2\"}",
+        "tokens": null
+      },
+      "schema_success": true,
+      "seconds": 7.916009053587914e-06,
+      "stage": "REVIEW_2"
+    },
+    {
+      "failure": null,
+      "index": 2,
+      "request": {
+        "instruction": "Identify disagreements, unsupported assumptions, missed edge cases and likely failure modes.",
+        "reports": [
+          {
+            "text": "MOCK REVIEW_1"
+          },
+          {
+            "text": "MOCK REVIEW_2"
+          }
+        ],
+        "snapshot": {
+          "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+          "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return true exactly when the supplied integer is even.\n",
+          "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": 2,\n    \"expected\": true,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": 3,\n    \"expected\": false,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+          "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+        },
+        "stage": "CHALLENGE"
+      },
+      "request_sha256": "7972b67b1246892c0b35618b33d799b210f3f16825fbea02f5db7210e52f8f88",
+      "response": {
+        "kind": "MOCK",
+        "process_exit": 0,
+        "resolved_model": null,
+        "text": "{\"text\": \"MOCK CHALLENGE\"}",
+        "tokens": null
+      },
+      "schema_success": true,
+      "seconds": 7.374997949227691e-06,
+      "stage": "CHALLENGE"
+    },
+    {
+      "failure": null,
+      "index": 3,
+      "request": {
+        "challenge": {
+          "text": "MOCK CHALLENGE"
+        },
+        "instruction": "Produce one frozen implementable decision. Resolve the evidence into one plan.",
+        "reports": [
+          {
+            "text": "MOCK REVIEW_1"
+          },
+          {
+            "text": "MOCK REVIEW_2"
+          }
+        ],
+        "snapshot": {
+          "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+          "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return true exactly when the supplied integer is even.\n",
+          "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": 2,\n    \"expected\": true,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": 3,\n    \"expected\": false,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+          "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+        },
+        "stage": "DECISION"
+      },
+      "request_sha256": "19503abe4e3c2825a2edc1d5aed3e22eb7305d4039ee731fba0b0ec5972a85f3",
+      "response": {
+        "kind": "MOCK",
+        "process_exit": 0,
+        "resolved_model": null,
+        "text": "{\"text\": \"MOCK DECISION\"}",
+        "tokens": null
+      },
+      "schema_success": true,
+      "seconds": 6.916990969330072e-06,
+      "stage": "DECISION"
+    },
+    {
+      "failure": null,
+      "index": 4,
+      "request": {
+        "decision": {
+          "text": "MOCK DECISION"
+        },
+        "instruction": "Implement the frozen decision in solution.py. Execute the plan; do not reopen governance.",
+        "snapshot": {
+          "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+          "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return true exactly when the supplied integer is even.\n",
+          "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": 2,\n    \"expected\": true,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": 3,\n    \"expected\": false,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+          "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+        },
+        "stage": "BUILD"
+      },
+      "request_sha256": "e4b727f57170c52091dc06a82372bb721f0df48c8936fc9488cca91f85b467d7",
+      "response": {
+        "kind": "MOCK",
+        "process_exit": 0,
+        "resolved_model": null,
+        "text": "{\"code\": \"def solve(x):\\n    return x%2==0\\n\"}",
+        "tokens": null
+      },
+      "schema_success": true,
+      "seconds": 7.499998901039362e-06,
+      "stage": "BUILD"
+    },
+    {
+      "failure": null,
+      "index": 5,
+      "request": {
+        "code": "def solve(x):\n    return x%2==0\n",
+        "decision": {
+          "text": "MOCK DECISION"
+        },
+        "instruction": "Repair once using only the supplied public failure information and frozen decision.",
+        "snapshot": {
+          "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+          "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return true exactly when the supplied integer is even.\n",
+          "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": 2,\n    \"expected\": true,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": 3,\n    \"expected\": false,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+          "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+        },
+        "stage": "REPAIR",
+        "visible_feedback": {
+          "mechanical_qualification_trigger": true
+        }
+      },
+      "request_sha256": "b3690671364b5394cf996857cf35dc38b420b3b3739c07a1ae4ac215bd1e21ce",
+      "response": {
+        "kind": "MOCK",
+        "process_exit": 0,
+        "resolved_model": null,
+        "text": "{\"code\": \"def solve(x):\\n    return x%2==0\\n\"}",
+        "tokens": null
+      },
+      "schema_success": true,
+      "seconds": 1.5124998753890395e-05,
+      "stage": "REPAIR"
+    }
+  ],
+  "started_at": "2026-09-16T13:08:15.383579+00:00",
+  "state": "COMPLETED",
+  "task_id": "qualification_even",
+  "tokens": null,
+  "visible_initial": {
+    "artifact_sha256": "4159c0d2e56f9980c7f45e637a5dade813de88dec925c67aa7f09293b3c7fb71",
+    "checks": [
+      {
+        "executed": true,
+        "id": "contract_0",
+        "passed": true,
+        "process": {
+          "exit": 0,
+          "failure": null,
+          "profile_hash": "42890127e9f28ef5416be3a1171cbce12e55689f1c8af8123745f2ce34b0a8f7",
+          "seconds": 0.027218874980462715,
+          "stderr": "",
+          "stdout": "{\"value\": true, \"input_after\": 2}\n"
+        },
+        "requirement_id": "visible"
+      },
+      {
+        "executed": true,
+        "id": "contract_1",
+        "passed": true,
+        "process": {
+          "exit": 0,
+          "failure": null,
+          "profile_hash": "e5a61d7e5300f45dc0110e4110488280c5a65b7117cca6added30566367ca0e4",
+          "seconds": 0.026630167005350813,
+          "stderr": "",
+          "stdout": "{\"value\": false, \"input_after\": 3}\n"
+        },
+        "requirement_id": "visible"
+      }
+    ],
+    "full_pass": true,
+    "grader_success": true,
+    "integrity_qualified": false,
+    "requirement_weights": {
+      "visible": 1.0
+    },
+    "requirements": {
+      "visible": 1.0
+    },
+    "score": 1.0
+  },
+  "visible_repair": {
+    "artifact_sha256": "4159c0d2e56f9980c7f45e637a5dade813de88dec925c67aa7f09293b3c7fb71",
+    "checks": [
+      {
+        "executed": true,
+        "id": "contract_0",
+        "passed": true,
+        "process": {
+          "exit": 0,
+          "failure": null,
+          "profile_hash": "1e12cdd69358f5fad2c9ca7be42cc2b263915a3240ef7d598a45d4586d88a015",
+          "seconds": 0.02665787498699501,
+          "stderr": "",
+          "stdout": "{\"value\": true, \"input_after\": 2}\n"
+        },
+        "requirement_id": "visible"
+      },
+      {
+        "executed": true,
+        "id": "contract_1",
+        "passed": true,
+        "process": {
+          "exit": 0,
+          "failure": null,
+          "profile_hash": "223c16ee78a0998b82903f53efe4b1ab8828aa7ecac9f1ec1aa5b296ae49e8dc",
+          "seconds": 0.027029457996832207,
+          "stderr": "",
+          "stdout": "{\"value\": false, \"input_after\": 3}\n"
+        },
+        "requirement_id": "visible"
+      }
+    ],
+    "full_pass": true,
+    "grader_success": true,
+    "integrity_qualified": false,
+    "requirement_weights": {
+      "visible": 1.0
+    },
+    "requirements": {
+      "visible": 1.0
+    },
+    "score": 1.0
+  }
+}

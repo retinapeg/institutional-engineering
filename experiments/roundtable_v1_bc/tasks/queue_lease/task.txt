@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Input is [now, leases], leases mapping IDs to numeric expiration times. Return sorted IDs whose expiry is <= now. Use only the supplied clock. Expiry equality is expired. Empty leases returns [].

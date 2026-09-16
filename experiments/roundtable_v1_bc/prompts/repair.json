@@ -1,0 +1,17 @@
+{
+  "instruction": "Repair once using only the supplied public failure information and frozen decision.",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "code": {
+        "minLength": 1,
+        "type": "string"
+      }
+    },
+    "required": [
+      "code"
+    ],
+    "type": "object"
+  },
+  "stage": "REPAIR"
+}

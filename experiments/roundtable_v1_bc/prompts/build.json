@@ -1,0 +1,17 @@
+{
+  "instruction": "Implement the frozen decision in solution.py. Execute the plan; do not reopen governance.",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "code": {
+        "minLength": 1,
+        "type": "string"
+      }
+    },
+    "required": [
+      "code"
+    ],
+    "type": "object"
+  },
+  "stage": "BUILD"
+}

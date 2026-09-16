@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/roundtable-v1-bc-20260916/.venv/bin/python",
+    "-m",
+    "experiments.roundtable_v1_bc.harness",
+    "mock-qualification",
+    "--output",
+    "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/roundtable-v1-bc-20260916/experiments/roundtable_v1_bc/manifests/preflight-v2/mock-pipeline"
+  ],
+  "exit": 0,
+  "stderr": "",
+  "stdout": "{'kind': 'MOCK', 'not_live_qualification': True, 'planned_institutions': 5, 'attempted_institutions': 5, 'completed_institutions': 5, 'stage_invocations': 30, 'schema_completions': 30, 'model_calls': 0, 'repair_invocations': 5}\n"
+}

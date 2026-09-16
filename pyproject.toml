@@ -12,6 +12,12 @@ dependencies = ["pydantic>=2.10,<3"]
 [tool.hatch.build.targets.wheel]
 packages = ["src/institutional_workbench", "benchmarks", "experiments"]
 
+[tool.hatch.build]
+exclude = [
+    "/experiments/roundtable_v1_bc/.scratch-cli/**",
+    "/experiments/roundtable_v1_bc/.build/**",
+]
+
 [tool.ruff]
 line-length = 100
 

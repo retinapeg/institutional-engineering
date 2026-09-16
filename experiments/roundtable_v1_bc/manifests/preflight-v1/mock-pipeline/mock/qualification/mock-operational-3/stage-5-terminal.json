@@ -1,0 +1,32 @@
+{
+  "failure": null,
+  "index": 5,
+  "request": {
+    "code": "def solve(x):\n    return len(x)\n",
+    "decision": {
+      "text": "MOCK DECISION"
+    },
+    "instruction": "Repair once using only the supplied public failure information and frozen decision.",
+    "snapshot": {
+      "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+      "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return the number of characters in the supplied ASCII string.\n",
+      "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": \"abc\",\n    \"expected\": 3,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": \"xy\",\n    \"expected\": 2,\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+      "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+    },
+    "stage": "REPAIR",
+    "visible_feedback": {
+      "mechanical_qualification_trigger": true
+    }
+  },
+  "request_sha256": "00c8049ba963284e5eeb48d77a2ff24b5cc72d96f2165b301591fd8480fe059c",
+  "response": {
+    "kind": "MOCK",
+    "process_exit": 0,
+    "resolved_model": null,
+    "text": "{\"code\": \"def solve(x):\\n    return len(x)\\n\"}",
+    "tokens": null
+  },
+  "schema_success": true,
+  "seconds": 1.5666009858250618e-05,
+  "stage": "REPAIR"
+}

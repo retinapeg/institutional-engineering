@@ -1,0 +1,32 @@
+{
+  "generator_argv": [
+    "codex",
+    "app-server",
+    "generate-json-schema",
+    "--out",
+    "<owned-scratch-directory>"
+  ],
+  "generator_version": "0.154.0",
+  "generated_file": "v2/ConfigReadResponse.json",
+  "generated_file_sha256": "bd72c94e2c7d49ead6a20bcf54afedc8db11044bf8cadb387e42135dd5d1e342",
+  "definitions": {
+    "ReasoningEffort": {
+      "description": "A non-empty reasoning effort value advertised by the model.",
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "properties": {
+    "model_reasoning_effort": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ReasoningEffort"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "meaning": "Any nonempty string parses as ReasoningEffort; supported values must separately match the actual model catalog. An integer is a valid typed-invalid control."
+}

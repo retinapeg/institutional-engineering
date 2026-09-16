@@ -1,0 +1,20 @@
+[
+  {
+    "id": "contract_0",
+    "requirement_id": "contract",
+    "input": 2,
+    "expected": true,
+    "nonmutation": false,
+    "rel_tol": 1e-12,
+    "abs_tol": 0.0
+  },
+  {
+    "id": "contract_1",
+    "requirement_id": "contract",
+    "input": 3,
+    "expected": false,
+    "nonmutation": false,
+    "rel_tol": 1e-12,
+    "abs_tol": 0.0
+  }
+]

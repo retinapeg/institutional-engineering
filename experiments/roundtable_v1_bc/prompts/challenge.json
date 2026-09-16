@@ -1,0 +1,17 @@
+{
+  "instruction": "Identify disagreements, unsupported assumptions, missed edge cases and likely failure modes.",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "text": {
+        "minLength": 1,
+        "type": "string"
+      }
+    },
+    "required": [
+      "text"
+    ],
+    "type": "object"
+  },
+  "stage": "CHALLENGE"
+}

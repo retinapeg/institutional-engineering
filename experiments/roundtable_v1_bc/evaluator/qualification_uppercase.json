@@ -1,0 +1,50 @@
+{
+  "task_id": "qualification_uppercase",
+  "family": "qualification",
+  "purpose": "qualification_only",
+  "reference": "def solve(x):\n    return x.upper()\n",
+  "hidden": [
+    {
+      "id": "contract_0",
+      "requirement_id": "contract",
+      "input": "aBc",
+      "expected": "ABC",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    },
+    {
+      "id": "contract_1",
+      "requirement_id": "contract",
+      "input": "hello",
+      "expected": "HELLO",
+      "nonmutation": false,
+      "rel_tol": 1e-12,
+      "abs_tol": 0.0
+    }
+  ],
+  "requirements": {
+    "contract": "Return the uppercase version of the supplied ASCII string."
+  },
+  "requirement_weights": {
+    "contract": 1.0
+  },
+  "negative_controls": [
+    {
+      "id": "incorrect_contract",
+      "requirements": [
+        "contract"
+      ],
+      "code": "def solve(x):\n    return x.lower()\n"
+    }
+  ],
+  "provenance": {
+    "source_repository": "retinapeg/institutional-engineering",
+    "source_commit": null,
+    "source_files_sha256": {},
+    "authorship": "New non-study synthetic operational scenario authored before any live inference."
+  },
+  "rubric": "Single operational contract; never included in calibration or main task selection.",
+  "status": "QUALIFICATION_ONLY",
+  "mechanical_repair_allowed": true
+}

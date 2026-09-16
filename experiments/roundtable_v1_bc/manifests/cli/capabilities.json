@@ -1,0 +1,43 @@
+{
+  "binary_sha256": "4f85982624b3898c8991cb80c0981b2aa71070e3537046c9a95950318a95afcc",
+  "exec_help_command": [
+    "codex",
+    "exec",
+    "--help"
+  ],
+  "exec_help_returncode": 0,
+  "exec_help_sha256": "0e82cfde0122715250e93dc65866caa956b2ac5b9d0b20ec4ad4f9e81486509e",
+  "observed_supported_flags": [
+    "--model",
+    "--config",
+    "--strict-config",
+    "--sandbox",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--output-schema",
+    "--json",
+    "--output-last-message"
+  ],
+  "qualified_loader_command": [
+    "codex",
+    "doctor",
+    "--json"
+  ],
+  "qualified_loader_assertion": "checks[\"config.load\"].status == \"ok\" for valid requested configuration; == \"fail\" for integer reasoning control",
+  "live_preflight_qualified": false,
+  "unresolved": [
+    "One provider model request per stage and aggregate request-count enforcement",
+    "Zero implicit transport retries; disabling unbounded_connection_retries is insufficient evidence",
+    "Hard model-generated output-token ceiling",
+    "Complete model-visible tool suppression and hidden-file isolation",
+    "Actual account-serving availability and resolved served model"
+  ],
+  "no_reserved_builtin_provider_retry_overrides_used": true,
+  "official_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+    "https://developers.openai.com/codex/config-schema.json",
+    "https://learn.chatgpt.com/docs/config-file/config-reference"
+  ],
+  "earlier_probe_correction": "The nonempty arbitrary-string reasoning sentinel was schema-valid and cannot establish that features list or bundled models bypass typed configuration. The integer control is schema-invalid."
+}

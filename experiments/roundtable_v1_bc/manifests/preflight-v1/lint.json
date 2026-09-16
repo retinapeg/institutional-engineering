@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "uvx",
+    "--from",
+    "ruff==0.16.7",
+    "ruff",
+    "check",
+    "experiments/roundtable_v1_bc/harness",
+    "experiments/roundtable_v1_bc/analysis",
+    "experiments/roundtable_v1_bc/tests",
+    "experiments/roundtable_v1_bc/taskpack.py",
+    "experiments/roundtable_v1_bc/test_taskpack.py",
+    "experiments/roundtable_v1_bc/verify.py"
+  ],
+  "exit": 0,
+  "stderr": "",
+  "stdout": "All checks passed!\n"
+}

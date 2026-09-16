@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Input [truth, predictions] contains equal-length nonempty integer label lists. Return macro recall: average class recall over classes PRESENT IN TRUTH. Predicted-only labels do not add classes. Unequal lengths or empty lists raise ValueError.

@@ -1,0 +1,12 @@
+{
+  "algorithms": "Algorithms: review invariants, boundary cases, complexity, termination and correctness of state transitions.",
+  "api_protocol_engineering": "API and protocol engineering: review framing, partial inputs, interface contracts, state and error semantics.",
+  "data_integrity": "Data integrity: review consistency, mutation, conservation, validation and atomic changes to records.",
+  "distributed_systems_reliability": "Distributed systems and reliability: review identity, ordering, retries, recovery and duplicate operations.",
+  "general_software_engineering": "Senior software engineering: review requirements, correctness, edge cases, failure modes, maintainability and verification strategy.",
+  "ml_data_science": "ML and data science: review dataset separation, label semantics, evaluation metrics and information leakage.",
+  "numerical_methods": "Numerical methods: review conditioning, finite precision, stability, limiting behavior and approximation error.",
+  "performance_concurrency": "Performance and concurrency: review interleavings, atomicity, stale state, contention and progress conditions.",
+  "security": "Security engineering: review trust boundaries, input validity, access assumptions and safe failure behavior.",
+  "statistics": "Statistics: review estimands, denominators, sampling assumptions, missing values and interpretation of summaries."
+}

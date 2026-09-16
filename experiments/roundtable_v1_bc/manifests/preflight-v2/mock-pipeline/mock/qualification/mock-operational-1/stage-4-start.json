@@ -1,0 +1,20 @@
+{
+  "failure": null,
+  "index": 4,
+  "request": {
+    "decision": {
+      "text": "MOCK DECISION"
+    },
+    "instruction": "Implement the frozen decision in solution.py. Execute the plan; do not reopen governance.",
+    "snapshot": {
+      "solution.py": "def solve(x):\n    raise NotImplementedError\n",
+      "task.txt": "Implement solve(x) in solution.py using only Python standard library. Return the uppercase version of the supplied ASCII string.\n",
+      "visible.json": "[\n  {\n    \"id\": \"contract_0\",\n    \"requirement_id\": \"contract\",\n    \"input\": \"aBc\",\n    \"expected\": \"ABC\",\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  },\n  {\n    \"id\": \"contract_1\",\n    \"requirement_id\": \"contract\",\n    \"input\": \"hello\",\n    \"expected\": \"HELLO\",\n    \"nonmutation\": false,\n    \"rel_tol\": 1e-12,\n    \"abs_tol\": 0.0\n  }\n]\n",
+      "visible_tests.py": "\"\"\"Public deterministic operational scenario, never a benchmark candidate.\"\"\"\nimport json\nfrom pathlib import Path\nfrom solution import solve\nfor case in json.loads(Path(__file__).with_name(\"visible.json\").read_text()):\n    actual=solve(case[\"input\"])\n    assert type(actual) is type(case[\"expected\"]) and actual==case[\"expected\"]\nprint(\"VISIBLE_PASS\")\n"
+    },
+    "stage": "BUILD"
+  },
+  "request_sha256": "6768b0108afba8f81d55399320ca8715428536d327afa423c0444f614a743324",
+  "schema_success": false,
+  "stage": "BUILD"
+}

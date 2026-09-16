@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. For finite b >= 0 up to 1e150, return the positive root of x*x + b*x - 1 = 0. Negative b raises ValueError. Relative error must be at most 1e-12, including cancellation-prone large b.

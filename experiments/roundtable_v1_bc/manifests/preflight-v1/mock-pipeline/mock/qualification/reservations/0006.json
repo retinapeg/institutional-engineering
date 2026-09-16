@@ -1,0 +1,9 @@
+{
+  "experiment_id": "roundtable-v1-bc-20260916-v1",
+  "index": 6,
+  "kind": "MOCK",
+  "model_calls": 0,
+  "phase": "qualification",
+  "run_id": "mock-operational-1",
+  "stage": "REVIEW_1"
+}

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/roundtable-v1-bc-20260916/.venv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-q"
+  ],
+  "exit": 0,
+  "stderr": "----------------------------------------------------------------------\nRan 27 tests in 0.465s\n\nOK\n",
+  "stdout": "START 1/120 software_escaped_fields gpt-5.6-terra mismatched r2\nSTART 2/120 software_merge_intervals gpt-5.6-terra mismatched r2\nDONE 1 software_escaped_fields gpt-5.6-terra mismatched score=0.000 0.0s MALFORMED\nSTART 3/120 math_cancellation sonnet mismatched r1\nDONE 2 software_merge_intervals gpt-5.6-terra mismatched score=0.000 0.0s MALFORMED\nSTART 4/120 software_escaped_fields sonnet mismatched r2\nDONE 3 math_cancellation sonnet mismatched score=0.000 0.0s MALFORMED\nSTART 5/120 software_merge_intervals sonnet baseline r2\nDONE 4 software_escaped_fields sonnet mismatched score=0.000 0.0s MALFORMED\nSTART 6/120 software_merge_intervals gpt-5.6-terra matched r2\nDONE 5 software_merge_intervals sonnet baseline score=0.000 0.0s MALFORMED\nDONE 6 software_merge_intervals gpt-5.6-terra matched score=0.000 0.0s MALFORMED\n{\n  \"task_id\": \"constrained_assignment\",\n  \"task_sha256\": \"f46def99a8230fac98320b4cc8b28694ddd6df705c0e8ecd30fdb25426910764\",\n  \"calibration\": [\n    {\n      \"task_id\": \"independent_set\",\n      \"n\": 20,\n      \"protocol_valid\": 20,\n      \"baseline_rate\": 0.65,\n      \"eligible\": true,\n      \"distance\": 0\n    },\n    {\n      \"task_id\": \"two_resource_knapsack\",\n      \"n\": 20,\n      \"protocol_valid\": 20,\n      \"baseline_rate\": 0.65,\n      \"eligible\": true,\n      \"distance\": 0\n    },\n    {\n      \"task_id\": \"constrained_assignment\",\n      \"n\": 20,\n      \"protocol_valid\": 20,\n      \"baseline_rate\": 0.65,\n      \"eligible\": true,\n      \"distance\": 0\n    }\n  ]\n}\nSTART calibration 1/60 two_resource_knapsack baseline\nDONE correct=False parsed=False error=RATE_LIMITED seconds=0.1\nSTART calibration 2/60 constrained_assignment baseline\nDONE correct=False parsed=False error=RATE_LIMITED seconds=0.1\nSTART calibration 3/60 independent_set baseline\nDONE correct=False parsed=False error=RATE_LIMITED seconds=0.1\n"
+}

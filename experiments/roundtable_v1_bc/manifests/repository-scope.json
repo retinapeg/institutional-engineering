@@ -1,0 +1,15 @@
+{
+  "audited_source_commit": "ff9353017492153706c875bab1464509e2ddb941",
+  "copied_task_source_commit": "9d4140afc76b4dcbcdb639a588f5d6d1721db2c5",
+  "initial_branch_preserved": "roundtable-v1-bc-20260916",
+  "new_branch": "roundtable-v1-bc-20260916-execution",
+  "owned_paths": [
+    "experiments/roundtable_v1_bc/"
+  ],
+  "product_repository_touched": "NO",
+  "public_remote": true,
+  "published_base_commit": "02aa0af04d790b3b362a39a1476793bc813ee40d",
+  "reason": "Publish only new study derivative from existing public main; retain three unpushed historical study commits and branches locally. No reset/stash/history rewrite.",
+  "source_repository": "retinapeg/institutional-engineering",
+  "worktree": "/Users/leonardaarons-ditson/Documents/ChatGPT/AI ENGINEERING RESEARCH 2/roundtable-v1-bc-20260916"
+}

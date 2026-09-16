@@ -1,0 +1,1 @@
+Implement solve(x) in solution.py using only Python standard library. Return true exactly when the supplied integer is even.

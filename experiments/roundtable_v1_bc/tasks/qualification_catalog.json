@@ -1,0 +1,22 @@
+[
+  {
+    "task_id": "qualification_double",
+    "family": "qualification"
+  },
+  {
+    "task_id": "qualification_uppercase",
+    "family": "qualification"
+  },
+  {
+    "task_id": "qualification_reverse",
+    "family": "qualification"
+  },
+  {
+    "task_id": "qualification_length",
+    "family": "qualification"
+  },
+  {
+    "task_id": "qualification_even",
+    "family": "qualification"
+  }
+]

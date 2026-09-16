@@ -1,0 +1,16 @@
+[
+  {
+    "id": "behaviour_1",
+    "input": [
+      10,
+      {
+        "a": 9,
+        "b": 11
+      }
+    ],
+    "expected": [
+      "a"
+    ],
+    "nonmutation": false
+  }
+]
